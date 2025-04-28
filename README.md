@@ -19,9 +19,32 @@ This is a portfolio website built with React, TypeScript, and Tailwind CSS. This
   - Supabase for database, authentication, and storage
   
 
-## Project Status
+## Features
 
-🚧 This project is currently under development. 🚧
+- Responsive design optimized for all devices
+- Dark/light mode with multiple theme options
+- Interactive CV with PDF export
+- Project showcase with filtering
+- Blog with markdown content
+- Contact form with email notifications
+- Cyberpunk-inspired UI with customizable themes
+
+## Project Structure
+
+```
+src/
+├── components/         # UI components
+│   ├── cv/             # CV-specific components
+│   └── ui/             # shadcn/ui components
+├── contexts/           # React context providers
+├── hooks/              # Custom React hooks
+├── integrations/       # Third-party integrations
+│   └── supabase/       # Supabase client and types
+├── lib/                # Utility libraries
+├── pages/              # Page components
+├── types/              # TypeScript definitions
+└── utils/              # Utility functions
+```
 
 ## Getting Started
 
@@ -36,7 +59,7 @@ This is a portfolio website built with React, TypeScript, and Tailwind CSS. This
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd Nexora-portfolio-application
+   cd developer-portfolio
    ```
 
 2. Install dependencies:
@@ -48,7 +71,12 @@ This is a portfolio website built with React, TypeScript, and Tailwind CSS. This
    pnpm install
    ```
 
-3. Start the development server:
+3. Create a `.env` file based on `.env.example` and add your Supabase credentials:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Start the development server:
    ```bash
    npm run dev
    # or
@@ -57,28 +85,69 @@ This is a portfolio website built with React, TypeScript, and Tailwind CSS. This
    pnpm dev
    ```
 
-## Project Structure
+5. Access the site at `http://localhost:5173` (or the port shown in your terminal)
 
-```
-src/
-├── components/         # UI components
-├── contexts/           # React context providers
-├── hooks/              # Custom React hooks
-├── lib/                # Utility libraries
-├── pages/              # Page components
-├── types/              # TypeScript definitions
-└── utils/              # Utility functions
-```
+## Database Setup
 
-## Development Roadmap
+This project uses Supabase as its backend. The database schema includes tables for:
 
-1. ✅ Project Initialization
-2. 🔄 Core Dependencies Setup
-3. ⏳ Basic Project Structure
-4. ⏳ Core Features Implementation
-5. ⏳ Testing and Quality Assurance
-6. ⏳ Deployment Configuration
+- `cv`: CV data including experience, education, and skills
+- `projects`: Portfolio projects
+- `blog_posts`: Blog content
+- `contact_submissions`: Contact form submissions
+
+To set up the database:
+
+1. Create a new Supabase project
+2. Run the SQL migrations in `supabase/migrations/`
+3. Update your `.env` file with the Supabase URL and anon key
+
+## Deployment
+
+This project is configured for deployment on the Lovable platform:
+
+1. Click on Share -> Publish in the Lovable interface
+2. Your site will be accessible at `<your-site-name>.lovable.app`
+
+For custom domain deployment:
+1. Navigate to Project > Settings > Domains in the Lovable interface
+2. Follow the instructions to connect your custom domain
+
+## Customization
+
+### Themes
+
+The application supports multiple themes that can be modified in `src/contexts/ThemeContext.tsx`:
+
+- Cyberpunk (default)
+- Minimal
+- Neon
+- Dark Mode
+- Light Mode
+
+### Content
+
+Update your portfolio content by:
+
+1. Modifying the Supabase `cv`, `projects`, and `blog_posts` tables
+2. Updating social media links in the `.env` file
+3. Customizing components in the `src/components` directory
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Commit changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature-name`
+5. Submit a pull request
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Credits
+
+- UI components by [shadcn/ui](https://ui.shadcn.com/)
+- Icons by [Lucide](https://lucide.dev/)
+- Supabase for backend functionality
+- Lovable for deployment platform

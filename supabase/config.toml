@@ -1,0 +1,26 @@
+
+# Project ID - don't change this!
+project_id = "bidswcansixttbhmwpkj"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage"]
+
+[db]
+port = 54322
+
+[realtime]
+enabled = true
+
+[storage]
+enabled = true
+
+[functions.api]
+verify_jwt = false
+
+[functions.python_api]
+verify_jwt = false
+
+[functions.generate-cv-pdf]
+verify_jwt = false
