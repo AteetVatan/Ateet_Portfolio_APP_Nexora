@@ -1,15 +1,21 @@
 // The top level component for the application
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { MainLayout } from './components/layout/MainLayout'
+import { Toaster } from 'sonner'
 
 function App() {
     return (
         <Router>
-            <div className="min-h-screen bg-background">
-                <main className="container mx-auto px-4 py-8">
-                    <h1 className="text-4xl font-bold text-center">Ateet Portfolio</h1>
-                    <p className="text-center mt-4">Coming soon...</p>
-                </main>
-            </div>
+            <MainLayout>
+                <Routes>
+                    <Route path="/" element={<div>Home Page</div>} />
+                    <Route path="/projects" element={<div>Projects Page</div>} />
+                    <Route path="/blog" element={<div>Blog Page</div>} />
+                    <Route path="/cv" element={<div>CV Page</div>} />
+                    <Route path="/contact" element={<div>Contact Page</div>} />
+                </Routes>
+            </MainLayout>
+            <Toaster />
         </Router>
     )
 }
