@@ -208,3 +208,3043 @@ interface Experience {
 3. Create the theme system
 4. Build the homepage
 5. Implement the projects section 
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  - Authentication
+  - Database
+  - Storage
+  - Edge Functions
+
+### Development Tools
+- ESLint for linting
+- Prettier for formatting
+- TypeScript for type safety
+- Jest for testing
+- GitHub Actions for CI/CD
+
+## Data Models
+
+### Project
+```typescript
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  technologies: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Blog Post
+```typescript
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string[];
+  published: boolean;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### CV Data
+```typescript
+interface CVData {
+  id: string;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  updatedAt: string;
+}
+
+interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+  technologies: string[];
+}
+```
+
+## Next Steps
+1. Set up the basic project structure
+2. Implement the core layout components
+3. Create the theme system
+4. Build the homepage
+5. Implement the projects section
+
+## Technical Stack Details
+
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui for components
+- React Query for data fetching
+- React Router for navigation
+
+### Backend
+- Supabase for:
+  -
