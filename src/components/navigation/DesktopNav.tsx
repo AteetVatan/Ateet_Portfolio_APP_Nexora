@@ -15,7 +15,7 @@ type DesktopNavProps = {
 const DesktopNav: React.FC<DesktopNavProps> = ({ activeItem, handleNavClick, navItems }) => {
   return (
     <nav className="hidden md:flex flex-col justify-center items-start 
-                  h-screen fixed top-0 left-0 z-50 w-60 lg:w-64">
+                  h-screen fixed top-3 left-3 z-50 w-60 lg:w-64">
       <div className="terminal-section py-3 px-4 mb-8 text-center">
         <div className="w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-[#1291c7] animate-pulse-glow">
           <Avatar className="w-full h-full">
