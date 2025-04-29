@@ -102,17 +102,6 @@ To set up the database:
 2. Run the SQL migrations in `supabase/migrations/`
 3. Update your `.env` file with the Supabase URL and anon key
 
-## Deployment
-
-This project is configured for deployment on the Lovable platform:
-
-1. Click on Share -> Publish in the Lovable interface
-2. Your site will be accessible at `<your-site-name>.lovable.app`
-
-For custom domain deployment:
-1. Navigate to Project > Settings > Domains in the Lovable interface
-2. Follow the instructions to connect your custom domain
-
 ## Customization
 
 ### Themes
@@ -150,4 +139,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - UI components by [shadcn/ui](https://ui.shadcn.com/)
 - Icons by [Lucide](https://lucide.dev/)
 - Supabase for backend functionality
-- Lovable for deployment platform
