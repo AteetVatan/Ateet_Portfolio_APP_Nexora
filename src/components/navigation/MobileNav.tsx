@@ -25,7 +25,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
         <div className="flex items-center">
           <Avatar className="w-8 h-8 mr-2 border border-[#1291c7]">
             <AvatarImage 
-              src="/lovable-uploads/df19efdd-57f7-44a2-9200-10b64b580ab3.png" 
+              src="/uploads/profile_pic.png"
               alt="Profile" 
             />
             <AvatarFallback className="text-[#00c3ff]">AT</AvatarFallback>

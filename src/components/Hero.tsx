@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
           {/* Profile image - added above the name */}
           <div className="mb-6">
             <Avatar className="w-32 h-32 mt-10 border-2 border-[#1291c7] animate-pulse-glow">
-              <AvatarImage src="/lovable-uploads/df19efdd-57f7-44a2-9200-10b64b580ab3.png" alt="Profile" />
+              <AvatarImage src="/uploads/profile_pic.png" alt="Profile" />
               <AvatarFallback className="text-[#00c3ff]">AT</AvatarFallback>
             </Avatar>
           </div>

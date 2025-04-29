@@ -38,7 +38,7 @@ const CVProfile: React.FC<CVProfileProps> = ({
         <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center gap-4">
           <Avatar className="w-24 h-24 border-2 border-[#1291c7] overflow-hidden">
             <AvatarImage 
-              src="/lovable-uploads/df19efdd-57f7-44a2-9200-10b64b580ab3.png" 
+              src="/uploads/profile_pic.png" 
               alt="Profile" 
               className="w-full h-full object-cover"
             />

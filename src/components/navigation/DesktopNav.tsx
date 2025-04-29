@@ -20,7 +20,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ activeItem, handleNavClick, nav
         <div className="w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-[#1291c7] animate-pulse-glow">
           <Avatar className="w-full h-full">
             <AvatarImage 
-              src="/lovable-uploads/df19efdd-57f7-44a2-9200-10b64b580ab3.png" 
+              src="/uploads/profile_pic.png"
               alt="Profile" 
               className="w-full h-full object-cover"
             />
