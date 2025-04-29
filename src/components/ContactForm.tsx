@@ -125,7 +125,7 @@ const ContactForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Name Field */}
       <div className="space-y-2">
-        <label htmlFor="name" className="block text-sm font-mono">
+        <label htmlFor="name" className="block text-sm font-mono text-white">
           Your Name
         </label>
         <input
@@ -146,7 +146,7 @@ const ContactForm = () => {
       
       {/* Email Field */}
       <div className="space-y-2">
-        <label htmlFor="email" className="block text-sm font-mono">
+        <label htmlFor="email" className="block text-sm font-mono text-white">
           Email Address
         </label>
         <input
@@ -167,7 +167,7 @@ const ContactForm = () => {
       
       {/* Message Field */}
       <div className="space-y-2">
-        <label htmlFor="message" className="block text-sm font-mono">
+        <label htmlFor="message" className="block text-sm font-mono text-white">
           Your Message
         </label>
         <textarea

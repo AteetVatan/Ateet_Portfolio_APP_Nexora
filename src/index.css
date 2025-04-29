@@ -246,11 +246,11 @@
   }
 
   .nav-menu-trigger-active {
-    @apply text-[#00c3ff] font-bold;
+    @apply text-[#00c3ff] font-bold hover:text-[#b9dcea] !important;
   }
 
-  .nav-menu-trigger-inactive {
-    @apply text-[#85a5b3] hover:text-[#b9dcea];
+  .nav-menu-trigger-inactive {    
+    @apply text-[#85a5b3] hover:text-[#b9dcea] !important;
   }
 
   .nav-dropdown-item {
