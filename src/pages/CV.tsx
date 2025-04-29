@@ -99,6 +99,7 @@ const CV: React.FC = () => {
                 phone={cvData.phone}
                 email={cvData.email}
                 linkedin={cvData.linkedin}
+                github={cvData.github}
                 onDownload={handleDownloadCV}
               />
 

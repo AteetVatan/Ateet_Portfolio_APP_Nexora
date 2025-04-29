@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download, Mail, Phone, MapPin, Linkedin } from 'lucide-react';
+import { Download, Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 interface CVProfileProps {
@@ -11,6 +11,7 @@ interface CVProfileProps {
   phone: string;
   email: string;
   linkedin: string;
+  github: string;
   onDownload: (e: React.MouseEvent) => void;
 }
 
@@ -24,6 +25,7 @@ const CVProfile: React.FC<CVProfileProps> = ({
   phone,
   email,
   linkedin,
+  github,
   onDownload
 }) => {
   return (
@@ -86,12 +88,21 @@ const CVProfile: React.FC<CVProfileProps> = ({
               <p className="text-[#b9dcea]">
                 <strong className="mr-2">LinkedIn:</strong> 
                 <a 
-                  href={`https://${linkedin || "linkedin.com/in/developer"}`} 
+                  href={linkedin || "linkedin.com/in/developer"} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-white hover:text-[#00c3ff] transition-colors"
                 >
                   {linkedin || "linkedin.com/in/developer"}
+                </a>
+              </p>
+            </div>
+            <div className="flex items-center">
+              <Github className="w-4 h-4 mr-2 text-[#00c3ff]" />
+              <p className="text-[#b9dcea]">
+                <strong className="mr-2">GitHub:</strong> 
+                <a href={github || "github.com/developer"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#00c3ff] transition-colors">
+                  {github || "github.com/developer"}
                 </a>
               </p>
             </div>

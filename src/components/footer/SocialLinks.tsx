@@ -15,7 +15,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ github, linkedin, twitter }) 
   return (
     <div className="flex space-x-3">
       <a 
-        href={github ? `https://${github}` : "#"} 
+        href={github ? github : "#"} 
         target="_blank" 
         rel="noopener noreferrer"
         className={`text-[#85a5b3] hover:text-[#00c3ff] transition-colors ${!github ? 'opacity-50 pointer-events-none' : ''}`}
@@ -25,7 +25,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ github, linkedin, twitter }) 
         </svg>
       </a>
       <a 
-        href={linkedin ? `https://${linkedin}` : "#"} 
+        href={linkedin ? linkedin : "#"} 
         target="_blank" 
         rel="noopener noreferrer"
         className={`text-[#85a5b3] hover:text-[#00c3ff] transition-colors ${!linkedin ? 'opacity-50 pointer-events-none' : ''}`}
@@ -35,7 +35,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ github, linkedin, twitter }) 
         </svg>
       </a>
       <a 
-        href={twitter ? `https://${twitter}` : "#"} 
+        href={twitter ? twitter : "#"} 
         target="_blank" 
         rel="noopener noreferrer"
         className={`text-[#85a5b3] hover:text-[#00c3ff] transition-colors ${!twitter ? 'opacity-50 pointer-events-none' : ''}`}

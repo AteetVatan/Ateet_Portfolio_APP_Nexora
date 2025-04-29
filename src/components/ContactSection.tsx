@@ -90,7 +90,7 @@ const ContactSection: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-6">
-              {/* Website Information */}
+              {/* Website Information
               <div className="flex items-start">
                 <div className="mr-4 text-[#00c3ff]">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +105,7 @@ const ContactSection: React.FC = () => {
                     <a href="#" className="cyber-link">Not Available</a>
                   </p>
                 </div>
-              </div>
+              </div> */}
               
               {/* Email Information */}
               <div className="flex items-start">
@@ -152,7 +152,7 @@ const ContactSection: React.FC = () => {
                 <div className="flex space-x-4">
                   {/* GitHub Link */}
                   <a 
-                    href={contactInfo.github ? `https://${contactInfo.github}` : "#"} 
+                    href={contactInfo.github ? contactInfo.github : "#"} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className={`w-10 h-10 border border-[#1e3a4a] rounded flex items-center justify-center
@@ -165,7 +165,7 @@ const ContactSection: React.FC = () => {
                   
                   {/* LinkedIn Link */}
                   <a 
-                    href={contactInfo.linkedin ? `https://${contactInfo.linkedin}` : "#"} 
+                    href={contactInfo.linkedin ? contactInfo.linkedin : "#"} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className={`w-10 h-10 border border-[#1e3a4a] rounded flex items-center justify-center
