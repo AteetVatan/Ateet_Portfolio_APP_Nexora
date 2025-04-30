@@ -29,20 +29,18 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, featured = false }) => {
   };
 
   return (
-    <Link 
+    <Link
       to={`/blog/${post.slug}`}
-      className={`cyber-card group flex flex-col overflow-hidden ${
-        featured ? 'col-span-2 row-span-2' : ''
-      }`}
+      className={`cyber-card group flex flex-col overflow-hidden ${featured ? 'col-span-2' : ''
+        }`}
     >
       {post.image_url && (
-        <div className={`relative w-full overflow-hidden rounded mb-4 ${
-          featured ? 'h-64' : 'h-48'
-        }`}>
+        <div className={`relative w-full overflow-hidden rounded mb-4 ${featured ? 'h-64' : 'h-48'
+          }`}>
           <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e14] to-transparent z-10"></div>
-          <img 
-            src={post.image_url} 
-            alt={post.title} 
+          <img
+            src={post.image_url}
+            alt={post.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           {featured && (
@@ -52,7 +50,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, featured = false }) => {
           )}
         </div>
       )}
-      
+
       <div className="flex items-center gap-2 text-xs text-[#85a5b3] mb-2">
         <div className="flex items-center gap-1">
           <CalendarClock className="w-3 h-3" />
@@ -64,19 +62,18 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, featured = false }) => {
           <span>{estimateReadTime(post.content)}</span>
         </div>
       </div>
-      
-      <h3 className={`font-mono ${
-        featured ? 'text-2xl' : 'text-xl'
-      } text-white mb-2 group-hover:text-[#00c3ff] transition-colors line-clamp-2`}>
+
+      <h3 className={`font-mono ${featured ? 'text-2xl' : 'text-xl'
+        } text-white mb-2 group-hover:text-[#00c3ff] transition-colors line-clamp-2`}>
         {post.title}
       </h3>
-      
+
       {post.summary && (
         <p className="text-[#85a5b3] mb-4 text-sm line-clamp-3">
           {post.summary}
         </p>
       )}
-      
+
       {post.tags && post.tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-4 mt-auto">
           {post.tags.slice(0, 3).map((tag, i) => (
@@ -91,7 +88,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, featured = false }) => {
           )}
         </div>
       )}
-      
+
       <div className="cyber-link mt-auto">
         Read Article
       </div>
