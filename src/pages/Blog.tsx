@@ -5,38 +5,42 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import GridBackground from '../components/GridBackground';
 import BlogCard from '../components/BlogCard';
-import { useBlogPosts, BlogPost } from '../hooks/use-blog-posts';
+import { useStaticBlogPosts, prefetchAllBlogs } from '../hooks/use-static-blog-posts';
 import { MoveRight, Search, Tag } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
-import { 
-  Pagination, 
-  PaginationContent, 
-  PaginationEllipsis, 
-  PaginationItem, 
-  PaginationLink, 
-  PaginationNext, 
-  PaginationPrevious 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
 } from '@/components/ui/pagination';
+import { BlogPost } from '@/types';
+
+// Prefetch all blogs when this file is loaded
+prefetchAllBlogs();
 
 const Blog: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data: posts, isLoading, error } = useBlogPosts();
+  const { data: posts, isLoading, error } = useStaticBlogPosts();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
-  
+
   // Pagination
   const postsPerPage = 6;
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const [totalPages, setTotalPages] = useState<number>(1);
-  
+
   // Set page title
   useEffect(() => {
     document.title = "Blog - Developer Portfolio";
   }, []);
-  
+
   // Extract all unique tags from posts
   useEffect(() => {
     if (posts) {
@@ -49,40 +53,40 @@ const Blog: React.FC = () => {
       setAllTags(Array.from(tagsSet).sort());
     }
   }, [posts]);
-  
+
   // Filter and paginate posts
   useEffect(() => {
     if (!posts) return;
-    
+
     let result = [...posts];
-    
+
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       result = result.filter(
-        post => 
-          post.title.toLowerCase().includes(query) || 
+        post =>
+          post.title.toLowerCase().includes(query) ||
           (post.summary && post.summary.toLowerCase().includes(query)) ||
           (post.content && post.content.toLowerCase().includes(query))
       );
     }
-    
+
     // Filter by tag
     if (selectedTag) {
       result = result.filter(
         post => post.tags && post.tags.includes(selectedTag)
       );
     }
-    
+
     // Calculate total pages
     setTotalPages(Math.max(1, Math.ceil(result.length / postsPerPage)));
-    
+
     // Slice for current page
     const startIndex = (currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
     setFilteredPosts(result.slice(startIndex, endIndex));
   }, [posts, searchQuery, selectedTag, currentPage]);
-  
+
   // Handle page change
   const handlePageChange = (page: number) => {
     setSearchParams(prev => {
@@ -90,7 +94,7 @@ const Blog: React.FC = () => {
       return prev;
     });
   };
-  
+
   // Handle tag selection
   const handleTagClick = (tag: string) => {
     setSelectedTag(prevTag => prevTag === tag ? null : tag);
@@ -101,23 +105,23 @@ const Blog: React.FC = () => {
       return prev;
     });
   };
-  
+
   // Generate pagination items
   const renderPaginationItems = () => {
     const items = [];
-    
+
     // First page
     items.push(
       <PaginationItem key="first">
-        <PaginationLink 
-          isActive={currentPage === 1} 
+        <PaginationLink
+          isActive={currentPage === 1}
           onClick={() => handlePageChange(1)}
         >
           1
         </PaginationLink>
       </PaginationItem>
     );
-    
+
     // Ellipsis after first page
     if (currentPage > 3) {
       items.push(
@@ -126,15 +130,15 @@ const Blog: React.FC = () => {
         </PaginationItem>
       );
     }
-    
+
     // Pages around current page
     for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
       if (i === 1 || i === totalPages) continue;
-      
+
       items.push(
         <PaginationItem key={i}>
-          <PaginationLink 
-            isActive={currentPage === i} 
+          <PaginationLink
+            isActive={currentPage === i}
             onClick={() => handlePageChange(i)}
           >
             {i}
@@ -142,7 +146,7 @@ const Blog: React.FC = () => {
         </PaginationItem>
       );
     }
-    
+
     // Ellipsis before last page
     if (currentPage < totalPages - 2) {
       items.push(
@@ -151,13 +155,13 @@ const Blog: React.FC = () => {
         </PaginationItem>
       );
     }
-    
+
     // Last page (if more than one page)
     if (totalPages > 1) {
       items.push(
         <PaginationItem key="last">
-          <PaginationLink 
-            isActive={currentPage === totalPages} 
+          <PaginationLink
+            isActive={currentPage === totalPages}
             onClick={() => handlePageChange(totalPages)}
           >
             {totalPages}
@@ -165,20 +169,20 @@ const Blog: React.FC = () => {
         </PaginationItem>
       );
     }
-    
+
     return items;
   };
-  
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Fixed position grid background */}
       <GridBackground />
-      
+
       {/* Navigation - mobile: top bar, desktop: sidebar */}
       <div className="hidden md:block md:fixed md:left-0 md:top-0 md:bottom-0 md:w-60 lg:w-64 z-20">
         <Navigation />
       </div>
-      
+
       {/* Main content - centered with adjusted padding */}
       <main className="flex-grow w-full max-w-screen-2xl mx-auto md:pl-24 lg:pl-32 pb-20">
         <section className="py-16 px-6 md:px-16 lg:px-24">
@@ -190,7 +194,7 @@ const Blog: React.FC = () => {
               Technical articles on AI development, best practices, and emerging technologies.
             </p>
           </div>
-          
+
           {/* Search and filter */}
           <div className="mb-12 space-y-6">
             <div className="relative">
@@ -203,20 +207,20 @@ const Blog: React.FC = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            
+
             {allTags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 <span className="flex items-center text-sm text-[#85a5b3] mr-1">
                   <Tag className="h-4 w-4 mr-1" /> Tags:
                 </span>
                 {allTags.map(tag => (
-                  <Badge 
-                    key={tag} 
-                    variant={selectedTag === tag ? "default" : "outline"} 
+                  <Badge
+                    key={tag}
+                    variant={selectedTag === tag ? "default" : "outline"}
                     className={`
                       cursor-pointer transition-colors
-                      ${selectedTag === tag 
-                        ? 'bg-[#00c3ff] text-black' 
+                      ${selectedTag === tag
+                        ? 'bg-[#00c3ff] text-black'
                         : 'bg-[#0c1824] text-[#4dabce] border-[#1e3a4a] hover:border-[#00c3ff]'}
                     `}
                     onClick={() => handleTagClick(tag)}
@@ -227,7 +231,7 @@ const Blog: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           {isLoading ? (
             <div className="terminal-section p-8 text-center">
               <div className="text-[#85a5b3] font-mono animate-pulse">
@@ -245,7 +249,7 @@ const Blog: React.FC = () => {
               <div className="text-[#85a5b3] font-mono">
                 No blog posts found matching your criteria.
               </div>
-              <button 
+              <button
                 className="mt-4 text-[#00c3ff] font-mono"
                 onClick={() => {
                   setSearchQuery('');
@@ -260,29 +264,29 @@ const Blog: React.FC = () => {
               {/* Blog post grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredPosts.map((post, index) => (
-                  <BlogCard 
-                    key={post.id} 
-                    post={post} 
+                  <BlogCard
+                    key={post.id}
+                    post={post}
                     featured={index === 0 && currentPage === 1}
                   />
                 ))}
               </div>
-              
+
               {/* Pagination */}
               {totalPages > 1 && (
                 <Pagination className="mt-12">
                   <PaginationContent>
                     <PaginationItem>
-                      <PaginationPrevious 
+                      <PaginationPrevious
                         onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
                         className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
                       />
                     </PaginationItem>
-                    
+
                     {renderPaginationItems()}
-                    
+
                     <PaginationItem>
-                      <PaginationNext 
+                      <PaginationNext
                         onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
                         className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
                       />
@@ -293,7 +297,7 @@ const Blog: React.FC = () => {
             </>
           )}
         </section>
-        
+
         <Footer />
       </main>
     </div>

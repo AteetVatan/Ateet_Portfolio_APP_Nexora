@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PageViewTracker from "./components/PageViewTracker";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { prefetchAllBlogs } from "./hooks/use-static-blog-posts";
 
 import Index from "./pages/Index";
 import Projects from "./pages/Projects";
@@ -18,6 +19,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import CV from "./pages/CV";
+
+// Prefetch all blogs at app startup for static-like generation
+prefetchAllBlogs().catch(err => console.error("Error prefetching blogs:", err));
 
 const queryClient = new QueryClient();
 

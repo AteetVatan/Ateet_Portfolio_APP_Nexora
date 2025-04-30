@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Badge } from './ui/badge';
 import { CalendarClock, Clock, Tag } from 'lucide-react';
-import { BlogPost } from '@/hooks/use-blog-posts';
+import { BlogPost } from '@/types';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -31,7 +31,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, featured = false }) => {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className={`cyber-card group flex flex-col overflow-hidden ${featured ? 'col-span-2' : ''
+      className={`cyber-card group flex flex-col overflow-hidden ${featured ? 'col-span-2 row-span-2' : ''
         }`}
     >
       {post.image_url && (
