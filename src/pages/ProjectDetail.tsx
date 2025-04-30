@@ -122,7 +122,7 @@ const ProjectDetail: React.FC = () => {
         
         {/* Project details */}
         {project && (
-          <div className="space-y-8 pb-12">
+          <div className="space-y-8 max-w-4xl mx-auto">
             {/* Project header */}
             <div className="cyber-card relative overflow-hidden p-6">
               <div className="flex flex-col md:flex-row justify-between items-start gap-6">
