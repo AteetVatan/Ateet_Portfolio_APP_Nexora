@@ -219,6 +219,24 @@ serve(async (req) => {
       });
       contactLeftY -= 15;
     }
+    //work_authorization
+    if (cvData.work_authorization) {
+      page.drawText('Work Authorization:', {
+        x: margins.left,
+        y: contactLeftY,
+        size: fontSizes.normal,
+        font: timesRomanBold,
+        color: colors.dark
+      });
+      page.drawText(cvData.work_authorization, {
+        x: margins.left + 100,
+        y: contactLeftY,
+        size: fontSizes.normal,
+        font: timesRoman,
+        color: colors.gray
+      });
+      contactLeftY -= 15;
+    }
     // Right column contact info
     if (cvData.location) {
       page.drawText('Location:', {
