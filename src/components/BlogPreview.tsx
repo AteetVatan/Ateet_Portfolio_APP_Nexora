@@ -53,7 +53,7 @@ const BlogPreview: React.FC = () => {
   };
   
   return (
-    <section className="py-16 px-6 md:px-16 lg:px-24 bg-[#090b10]">
+    <section className="py-16 px-6 md:px-16 lg:px-24">
       <div className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>
           <h2 className="font-mono text-3xl md:text-4xl text-white font-bold mb-4">
