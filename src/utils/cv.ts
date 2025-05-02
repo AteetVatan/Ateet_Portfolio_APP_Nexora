@@ -50,7 +50,7 @@ export const downloadCV = (e: React.MouseEvent): void => {
   e.preventDefault();
   
   // Use the full Supabase project URL
-  window.open('https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf', '_blank');
+  window.open('https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf?lang=en&user_name=ateet', '_blank');
   
   // Log the download attempt for analytics (optional)
   console.log('CV download initiated', new Date().toISOString());

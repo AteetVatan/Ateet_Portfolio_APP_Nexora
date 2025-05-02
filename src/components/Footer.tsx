@@ -31,6 +31,8 @@ const Footer: React.FC = () => {
         const { data, error } = await supabase
           .from('cv')
           .select('email, phone, linkedin, github, twitter')
+          .eq('user_name', 'ateet')
+          .eq('language', 'en')
           .single();
         
         if (error) {
@@ -59,7 +61,7 @@ const Footer: React.FC = () => {
    */
   const handleDownloadCV = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.open('https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf', '_blank');
+    window.open('https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf?lang=en&user_name=ateet', '_blank');
   };
   
   return (

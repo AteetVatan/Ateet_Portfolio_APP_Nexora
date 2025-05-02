@@ -45,6 +45,8 @@ const CV: React.FC = () => {
       const { data, error } = await supabase
         .from('cv')
         .select('*')
+        .eq('user_name', 'ateet')
+        .eq('language', 'en')
         .single();
 
       if (error) {

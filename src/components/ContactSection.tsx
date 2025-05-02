@@ -35,9 +35,21 @@ const ContactSection: React.FC = () => {
     const fetchContactInfo = async () => {
       try {
         // Query the 'cv' table to get contact information
+        type CvRow = {
+          email: string;
+          phone: string;
+          linkedin: string;
+          github: string;
+          twitter: string;
+          user_name: string;
+          language: string;
+        };
+
         const { data, error } = await supabase
-          .from('cv')
-          .select('email, phone, linkedin, github, twitter')
+          .from<CvRow>('cv')
+          .select('email, phone, linkedin, github, twitter, user_name, language')
+          .eq('user_name', 'ateet')
+          .eq('language', 'en')
           .single();
         
         if (error) {
