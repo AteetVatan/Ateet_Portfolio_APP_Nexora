@@ -66,30 +66,33 @@ serve(async (req) => {
     ]); // US Letter size
     console.log('First page added');
     // Load fonts
-    const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    // const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    // const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const timesRoman = await pdfDoc.embedFont(StandardFonts.TimesRoman);
-    const timesRomanBold = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
-    const timesRomanItalic = await pdfDoc.embedFont(StandardFonts.TimesRomanItalic);
+    const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+
+
+
     console.log('Fonts loaded successfully');
     // Define our styles and constants
     const margins = {
-      top: 50,
-      right: 50,
-      bottom: 50,
-      left: 50
+      top: 40,
+      right: 40,
+      bottom: 40,
+      left: 40
     };
     const colors = {
-      primary: rgb(0, 0.75, 1),
-      dark: rgb(0.05, 0.05, 0.15),
-      gray: rgb(0.4, 0.4, 0.45),
-      lightGray: rgb(0.7, 0.7, 0.75) // Light gray
+      primary: rgb(0.0, 0.6, 0.3),
+      dark: rgb(0.1, 0.1, 0.1),
+      gray: rgb(0.3, 0.3, 0.3),
+      lightGreen: rgb(0.5, 0.9, 0.5)
     };
     const fontSizes = {
-      title: 24,
-      subtitle: 16,
-      heading: 14,
-      subheading: 12,
+      title: 22,
+      subtitle: 14,
+      heading: 12,
+      subheading: 11,
       normal: 10,
       small: 9
     };
@@ -121,9 +124,10 @@ serve(async (req) => {
           y
         },
         thickness: 1,
-        color: colors.lightGray
+        color: colors.lightGreen
       });
       return y - 20; // Return new Y position after the divider
+      
     };
     // Function to wrap text
     const wrapText = (text, font, fontSize, maxWidth) => {
@@ -195,7 +199,7 @@ serve(async (req) => {
       x: margins.left,
       y: currentY,
       size: fontSizes.title,
-      font: timesRomanBold,
+      font: helveticaBold,
       color: colors.dark
     });
     currentY -= 25;
@@ -203,7 +207,7 @@ serve(async (req) => {
       x: margins.left,
       y: currentY,
       size: fontSizes.subtitle,
-      font: timesRomanItalic,
+      font: helvetica,
       color: colors.primary
     });
     if (cvData.sub_title) {
@@ -212,7 +216,7 @@ serve(async (req) => {
         x: margins.left,
         y: currentY,
         size: fontSizes.subtitle,
-        font: timesRomanItalic,
+        font: helvetica,
         color: colors.primary
       });
     }
@@ -227,14 +231,14 @@ serve(async (req) => {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.email, {
         x: margins.left + 60,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactLeftY -= 15;
@@ -244,14 +248,14 @@ serve(async (req) => {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.phone, {
         x: margins.left + 60,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactLeftY -= 15;
@@ -261,14 +265,14 @@ serve(async (req) => {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.website, {
         x: margins.left + 60,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactLeftY -= 15;
@@ -278,14 +282,14 @@ serve(async (req) => {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.twitter, {
         x: margins.left + 60,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactLeftY -= 15;
@@ -296,14 +300,14 @@ serve(async (req) => {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.work_authorization, {
         x: margins.left + 100,
         y: contactLeftY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactLeftY -= 15;
@@ -314,14 +318,14 @@ serve(async (req) => {
         x: margins.left + contactInfoWidth + 20,
         y: contactRightY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.location, {
         x: margins.left + contactInfoWidth + 80,
         y: contactRightY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactRightY -= 15;
@@ -331,14 +335,14 @@ serve(async (req) => {
         x: margins.left + contactInfoWidth + 20,
         y: contactRightY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.linkedin, {
         x: margins.left + contactInfoWidth + 80,
         y: contactRightY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactRightY -= 15;
@@ -348,14 +352,14 @@ serve(async (req) => {
         x: margins.left + contactInfoWidth + 20,
         y: contactRightY,
         size: fontSizes.normal,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.dark
       });
       page.drawText(cvData.github, {
         x: margins.left + contactInfoWidth + 80,
         y: contactRightY,
         size: fontSizes.normal,
-        font: timesRoman,
+        font: helvetica,
         color: colors.gray
       });
       contactRightY -= 15;
@@ -371,17 +375,17 @@ serve(async (req) => {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.primary
       });
       currentY -= 20;
-      const summaryLines = wrapText(cvData.summary, timesRoman, fontSizes.normal, pageWidth);
+      const summaryLines = wrapText(cvData.summary, helvetica, fontSizes.normal, pageWidth);
       for (const line of summaryLines) {
         page.drawText(line, {
           x: margins.left,
           y: currentY,
           size: fontSizes.normal,
-          font: timesRoman,
+          font: helvetica,
           color: colors.dark
         });
         currentY -= 15;
@@ -396,7 +400,7 @@ serve(async (req) => {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.primary
       });
       currentY -= 20;
@@ -418,20 +422,20 @@ serve(async (req) => {
             x,
             y: skillY,
             size: fontSizes.subheading,
-            font: timesRomanBold,
+            font: helveticaBold,
             color: colors.dark
           });
           skillY -= 15;
           // Draw the skills
           if (Array.isArray(skills)) {
             const skillText = skills.join(', ');
-            const skillLines = wrapText(skillText, timesRoman, fontSizes.normal, skillWidth - 10);
+            const skillLines = wrapText(skillText, helvetica, fontSizes.normal, skillWidth - 10);
             for (const line of skillLines) {
               page.drawText(line, {
                 x,
                 y: skillY,
                 size: fontSizes.normal,
-                font: timesRoman,
+                font: helvetica,
                 color: colors.gray
               });
               skillY -= 15;
@@ -454,7 +458,7 @@ serve(async (req) => {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.primary
       });
       currentY -= 25;
@@ -465,7 +469,7 @@ serve(async (req) => {
           x: margins.left,
           y: currentY,
           size: fontSizes.subheading,
-          font: timesRomanBold,
+          font: helveticaBold,
           color: colors.dark
         });
         currentY -= 15;
@@ -475,7 +479,7 @@ serve(async (req) => {
           x: margins.left,
           y: currentY,
           size: fontSizes.normal,
-          font: timesRomanItalic,
+          font: helvetica,
           color: colors.gray
         });
         currentY -= 20;
@@ -488,12 +492,12 @@ serve(async (req) => {
               x: margins.left,
               y: currentY,
               size: fontSizes.normal,
-              font: timesRoman,
+              font: helvetica,
               color: colors.dark
             });
             // Responsibility text with wrapping
             const indentedWidth = pageWidth - 15; // Account for bullet indentation
-            const respLines = wrapText(resp, timesRoman, fontSizes.normal, indentedWidth);
+            const respLines = wrapText(resp, helvetica, fontSizes.normal, indentedWidth);
             for (let i = 0; i < respLines.length; i++) {
               ensureSpace(15);
               const line = respLines[i];
@@ -502,7 +506,7 @@ serve(async (req) => {
                 x: xPos,
                 y: currentY,
                 size: fontSizes.normal,
-                font: timesRoman,
+                font: helvetica,
                 color: colors.dark
               });
               currentY -= 15;
@@ -521,7 +525,7 @@ serve(async (req) => {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
-        font: timesRomanBold,
+        font: helveticaBold,
         color: colors.primary
       });
       currentY -= 25;
@@ -531,7 +535,7 @@ serve(async (req) => {
           x: margins.left,
           y: currentY,
           size: fontSizes.subheading,
-          font: timesRomanBold,
+          font: helveticaBold,
           color: colors.dark
         });
         currentY -= 15;
@@ -540,7 +544,7 @@ serve(async (req) => {
           x: margins.left,
           y: currentY,
           size: fontSizes.normal,
-          font: timesRomanItalic,
+          font: helvetica,
           color: colors.gray
         });
         currentY -= 20;
@@ -563,12 +567,12 @@ serve(async (req) => {
           x: margins.left,
           y: leftColumnY,
           size: fontSizes.heading,
-          font: timesRomanBold,
+          font: helveticaBold,
           color: colors.primary
         });
         leftColumnY -= 20;
         for (const cert of cvData.certifications) {
-          const certLines = wrapText(cert, timesRoman, fontSizes.normal, pageWidth / 2 - 30);
+          const certLines = wrapText(cert, helvetica, fontSizes.normal, pageWidth / 2 - 30);
           for (let i = 0; i < certLines.length; i++) {
             const line = certLines[i];
             const bulletX = i === 0 ? margins.left : margins.left + 15;
@@ -578,7 +582,7 @@ serve(async (req) => {
                 x: bulletX,
                 y: leftColumnY,
                 size: fontSizes.normal,
-                font: timesRoman,
+                font: helvetica,
                 color: colors.dark
               });
             }
@@ -586,7 +590,7 @@ serve(async (req) => {
               x: textX,
               y: leftColumnY,
               size: fontSizes.normal,
-              font: timesRoman,
+              font: helvetica,
               color: colors.dark
             });
             leftColumnY -= 15;
@@ -600,7 +604,7 @@ serve(async (req) => {
           x: languageColX,
           y: rightColumnY,
           size: fontSizes.heading,
-          font: timesRomanBold,
+          font: helveticaBold,
           color: colors.primary
         });
         rightColumnY -= 20;
@@ -609,16 +613,16 @@ serve(async (req) => {
             x: languageColX,
             y: rightColumnY,
             size: fontSizes.normal,
-            font: timesRomanBold,
+            font: helveticaBold,
             color: colors.dark
           });
           // Calculate where to place the level
-          const langWidth = timesRomanBold.widthOfTextAtSize(`${language}:`, fontSizes.normal);
+          const langWidth = helveticaBold.widthOfTextAtSize(`${language}:`, fontSizes.normal);
           page.drawText(`${level}`, {
             x: languageColX + langWidth + 5,
             y: rightColumnY,
             size: fontSizes.normal,
-            font: timesRoman,
+            font: helvetica,
             color: colors.gray
           });
           rightColumnY -= 15;
@@ -635,8 +639,8 @@ serve(async (req) => {
         x: page.getWidth() - 100,
         y: 30,
         size: fontSizes.small,
-        font: timesRoman,
-        color: colors.lightGray
+        font: helvetica,
+        color: colors.lightGreen
       });
     }
     // Save the PDF
