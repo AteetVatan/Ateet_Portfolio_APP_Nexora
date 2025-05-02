@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
   // Handle CV download
   const handleDownloadCV = (lang: string) => {
     window.open(`https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf?lang=${lang}&user_name=ateet`, '_blank');
-  };  
+  };
 
   return (
     <div className="relative flex items-center justify-center min-h-[85vh] px-6 md:px-12">
@@ -64,25 +64,26 @@ const Hero: React.FC = () => {
 
           {/* CV Download Button - Added right after job title */}
           <div className="flex flex-row items-center justify-center">
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
-            onClick={() => handleDownloadCV('en')}
-          >
-            <Download className="mr-2 h-4 w-4" />
-            Download CV
-          </Button>
-          {/* CV Download Button - Added right after job title */}
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
-            onClick={() => handleDownloadCV('de')}
-          >
-            <Download className="mr-2 h-4 w-4" />
-            Download German CV
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
+              onClick={() => handleDownloadCV('en')}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download CV
+            </Button>
+            {/* CV Download Button - Added right after job title */}
+            <div className="w-5"></div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
+              onClick={() => handleDownloadCV('de')}
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download German CV
+            </Button>
           </div>
         </div>
 
