@@ -14,11 +14,19 @@ serve(async (req) => {
     });
   }
   try {
+    // Get language parameter from URL
+    const url = new URL(req.url);
+    const lang = url.searchParams.get('lang') || 'en';
+    const userName = url.searchParams.get('user_name') || 'ateet';
+    console.log(`Language selected: ${lang}`);
+    console.log(`User selected: ${userName}`);
     const supabaseUrl = Deno.env.get('SUPABASE_URL') || '';
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+    console.log(`Supabase URL configured: ${!!supabaseUrl}`);
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
-    // Fetch CV data from the database
-    const { data: cvData, error } = await supabase.from('cv').select('*').single();
+    console.log(`Fetching CV data for user: ${userName} with language: ${lang}`);
+    // Fetch CV data from the database using user_name and language columns
+    const { data: cvData, error } = await supabase.from('cv').select('*').eq('user_name', userName).eq('language', lang).single();
     if (error) {
       console.error('Error fetching CV data:', error);
       return new Response(JSON.stringify({
@@ -31,19 +39,39 @@ serve(async (req) => {
         }
       });
     }
+    const sanitizeText = (text) => text.replace(/[\r\n]+/g, ' ') // remove line breaks
+      .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^\x00-\x7F]/g, '') // remove remaining non-ASCII
+      .trim();
+    // Sanitize all string values in cvData
+    Object.keys(cvData).forEach((key) => {
+      if (typeof cvData[key] === 'string') {
+        cvData[key] = sanitizeText(cvData[key]);
+      } else if (Array.isArray(cvData[key])) {
+        cvData[key] = cvData[key].map((item) => typeof item === 'string' ? sanitizeText(item) : typeof item === 'object' && item !== null ? Object.fromEntries(Object.entries(item).map(([k, v]) => [
+          k,
+          typeof v === 'string' ? sanitizeText(v) : v
+        ])) : item);
+      }
+    });
+    console.log(`CV data retrieved: ${!!cvData}`);
+    // Add a language identifier to the filename
+    const fileName = lang === 'de' ? 'Lebenslauf.pdf' : 'CV.pdf';
     // Create a new PDF document
     const pdfDoc = await PDFDocument.create();
+    console.log('PDF document created');
     // Add first page
     let page = pdfDoc.addPage([
       612,
       792
     ]); // US Letter size
+    console.log('First page added');
     // Load fonts
     const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const timesRoman = await pdfDoc.embedFont(StandardFonts.TimesRoman);
     const timesRomanBold = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
     const timesRomanItalic = await pdfDoc.embedFont(StandardFonts.TimesRomanItalic);
+    console.log('Fonts loaded successfully');
     // Define our styles and constants
     const margins = {
       top: 50,
@@ -117,6 +145,49 @@ serve(async (req) => {
       }
       return lines;
     };
+    // Text translations for the CV
+    const translations = {
+      en: {
+        summary: 'PROFESSIONAL SUMMARY',
+        skills: 'SKILLS',
+        experience: 'PROFESSIONAL EXPERIENCE',
+        education: 'EDUCATION',
+        certifications: 'CERTIFICATIONS',
+        languages: 'LANGUAGES',
+        location: 'Location',
+        phone: 'Phone',
+        email: 'Email',
+        web_site: 'Website',
+        twitter: 'Twitter',
+        linkedin: 'LinkedIn',
+        github: 'Github',
+        authorization: 'Work Authorization',
+        german_citizen: 'German Citizen – EU Work Rights'
+      },
+      de: {
+        summary: 'BERUFLICHES PROFIL',
+        skills: 'FÄHIGKEITEN',
+        experience: 'BERUFSERFAHRUNG',
+        education: 'AUSBILDUNG',
+        certifications: 'ZERTIFIZIERUNGEN',
+        languages: 'SPRACHEN',
+        location: 'Standort',
+        phone: 'Telefon',
+        email: 'E-Mail',
+        web_site: 'Website',
+        twitter: 'Twitter',
+        linkedin: 'LinkedIn',
+        github: 'Github',
+        authorization: 'Arbeitserlaubnis',
+        german_citizen: 'Deutscher Staatsbürger – EU-Arbeitsrechte'
+      }
+    };
+    // Use the correct translations based on language
+    let text = translations[lang] || translations.en;
+    const t = Object.fromEntries(Object.entries(text).map(([key, value]) => [
+      key,
+      value + ": "
+    ]));
     // Header Section with Name and Contact Info
     // ----------------------------------------
     // Name and Title
@@ -152,7 +223,7 @@ serve(async (req) => {
     let contactRightY = currentY;
     // Left column contact info
     if (cvData.email) {
-      page.drawText('Email:', {
+      page.drawText(t.email, {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
@@ -169,7 +240,7 @@ serve(async (req) => {
       contactLeftY -= 15;
     }
     if (cvData.phone) {
-      page.drawText('Phone:', {
+      page.drawText(t.phone, {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
@@ -186,7 +257,7 @@ serve(async (req) => {
       contactLeftY -= 15;
     }
     if (cvData.website) {
-      page.drawText('Website:', {
+      page.drawText(t.web_site, {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
@@ -203,7 +274,7 @@ serve(async (req) => {
       contactLeftY -= 15;
     }
     if (cvData.twitter) {
-      page.drawText('Twitter:', {
+      page.drawText(t.twitter, {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
@@ -219,9 +290,9 @@ serve(async (req) => {
       });
       contactLeftY -= 15;
     }
-    //work_authorization
+    // work_authorization
     if (cvData.work_authorization) {
-      page.drawText('Work Authorization:', {
+      page.drawText(t.authorization, {
         x: margins.left,
         y: contactLeftY,
         size: fontSizes.normal,
@@ -239,7 +310,7 @@ serve(async (req) => {
     }
     // Right column contact info
     if (cvData.location) {
-      page.drawText('Location:', {
+      page.drawText(t.location, {
         x: margins.left + contactInfoWidth + 20,
         y: contactRightY,
         size: fontSizes.normal,
@@ -256,7 +327,7 @@ serve(async (req) => {
       contactRightY -= 15;
     }
     if (cvData.linkedin) {
-      page.drawText('LinkedIn:', {
+      page.drawText(t.linkedin, {
         x: margins.left + contactInfoWidth + 20,
         y: contactRightY,
         size: fontSizes.normal,
@@ -273,7 +344,7 @@ serve(async (req) => {
       contactRightY -= 15;
     }
     if (cvData.github) {
-      page.drawText('Github:', {
+      page.drawText(t.github, {
         x: margins.left + contactInfoWidth + 20,
         y: contactRightY,
         size: fontSizes.normal,
@@ -296,7 +367,7 @@ serve(async (req) => {
     // -------------------
     if (cvData.summary) {
       ensureSpace(100);
-      page.drawText('PROFESSIONAL SUMMARY', {
+      page.drawText(t.summary, {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
@@ -321,7 +392,7 @@ serve(async (req) => {
     // ------
     if (cvData.skills && Object.keys(cvData.skills).length > 0) {
       ensureSpace(100);
-      page.drawText('SKILLS', {
+      page.drawText(t.skills, {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
@@ -379,7 +450,7 @@ serve(async (req) => {
     // ---------------------
     if (cvData.experience && cvData.experience.length > 0) {
       ensureSpace(100);
-      page.drawText('PROFESSIONAL EXPERIENCE', {
+      page.drawText(t.experience, {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
@@ -446,7 +517,7 @@ serve(async (req) => {
     // --------
     if (cvData.education && cvData.education.length > 0) {
       ensureSpace(100);
-      page.drawText('EDUCATION', {
+      page.drawText(t.education, {
         x: margins.left,
         y: currentY,
         size: fontSizes.heading,
@@ -488,7 +559,7 @@ serve(async (req) => {
       let rightColumnY = currentY;
       // Certifications on the left
       if (hasCerts) {
-        page.drawText('CERTIFICATIONS', {
+        page.drawText(t.certifications, {
           x: margins.left,
           y: leftColumnY,
           size: fontSizes.heading,
@@ -525,7 +596,7 @@ serve(async (req) => {
       // Languages on the right
       if (hasLangs) {
         const languageColX = margins.left + pageWidth / 2 + 10;
-        page.drawText('LANGUAGES', {
+        page.drawText(t.languages, {
           x: languageColX,
           y: rightColumnY,
           size: fontSizes.heading,
@@ -570,10 +641,13 @@ serve(async (req) => {
     }
     // Save the PDF
     const pdfBytes = await pdfDoc.save();
-    // Return the PDF
+    // Return the PDF with proper filename
     return new Response(pdfBytes, {
       status: 200,
-      headers: corsHeaders
+      headers: {
+        ...corsHeaders,
+        'Content-Disposition': `attachment; filename="${fileName}"`
+      }
     });
   } catch (error) {
     console.error('Error generating PDF:', error);
