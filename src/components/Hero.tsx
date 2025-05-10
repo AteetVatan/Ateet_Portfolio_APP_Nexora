@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Hero: React.FC = () => {
   const [displayedText, setDisplayedText] = useState<string>('');
   const [cursorVisible, setCursorVisible] = useState<boolean>(true);
-  const fullText = 'LLM INTEGRATION & AI AUTOMATION EXPERT';
+  const fullText = 'AI ENGINEER_';//'LLM INTEGRATION & AI AUTOMATION EXPERT';
   const typeDelay = 60; // time in ms between typing each character
 
   // Typing animation effect

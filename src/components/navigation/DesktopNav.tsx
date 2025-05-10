@@ -27,7 +27,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ activeItem, handleNavClick, nav
             <AvatarFallback className="text-[#00c3ff]">AT</AvatarFallback>
           </Avatar>
         </div>
-        <h2 className="glow-text text-base mb-1">DEVELOPER_</h2>
+        <h2 className="glow-text text-base mb-1">AI ENGINEER_</h2>
         <p className="text-[#85a5b3] text-xs font-mono">Full Stack // AI</p>
       </div>
       
