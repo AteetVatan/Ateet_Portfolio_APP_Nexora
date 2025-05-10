@@ -243,23 +243,23 @@ serve(async (req) => {
       });
       contactLeftY -= 15;
     }
-    if (cvData.phone) {
-      page.drawText(t.phone, {
-        x: margins.left,
-        y: contactLeftY,
-        size: fontSizes.normal,
-        font: helveticaBold,
-        color: colors.dark
-      });
-      page.drawText(cvData.phone, {
-        x: margins.left + 60,
-        y: contactLeftY,
-        size: fontSizes.normal,
-        font: helvetica,
-        color: colors.gray
-      });
-      contactLeftY -= 15;
-    }
+    // if (cvData.phone) {
+    //   page.drawText(t.phone, {
+    //     x: margins.left,
+    //     y: contactLeftY,
+    //     size: fontSizes.normal,
+    //     font: helveticaBold,
+    //     color: colors.dark
+    //   });
+    //   page.drawText(cvData.phone, {
+    //     x: margins.left + 60,
+    //     y: contactLeftY,
+    //     size: fontSizes.normal,
+    //     font: helvetica,
+    //     color: colors.gray
+    //   });
+    //   contactLeftY -= 15;
+    // }
     if (cvData.website) {
       page.drawText(t.web_site, {
         x: margins.left,
