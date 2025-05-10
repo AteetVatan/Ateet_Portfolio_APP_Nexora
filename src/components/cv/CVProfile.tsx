@@ -74,13 +74,6 @@ const CVProfile: React.FC<CVProfileProps> = ({
               </p>
             </div>
             <div className="flex items-center">
-              <Phone className="w-4 h-4 mr-2 text-[#00c3ff]" />
-              <p>
-                <strong className="text-[#b9dcea] mr-2">Phone:</strong>
-                <span className="text-white">{phone || "+1 (555) 123-4567"}</span>
-              </p>
-            </div>
-            <div className="flex items-center">
               <Mail className="w-4 h-4 mr-2 text-[#00c3ff]" />
               <p>
                 <strong className="text-[#b9dcea] mr-2">Email:</strong>

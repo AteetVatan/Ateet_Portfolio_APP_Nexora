@@ -20,7 +20,6 @@ const ContactSection: React.FC = () => {
   const [contactInfo, setContactInfo] = useState({
     name: '',
     email: '',
-    phone: '',
     website: '',
     linkedin: '',
     github: '',
@@ -37,7 +36,6 @@ const ContactSection: React.FC = () => {
         // Query the 'cv' table to get contact information
         type CvRow = {
           email: string;
-          phone: string;
           linkedin: string;
           github: string;
           twitter: string;
@@ -59,7 +57,6 @@ const ContactSection: React.FC = () => {
           setContactInfo({
             ...contactInfo,
             email: data.email || '',
-            phone: data.phone || '',
             linkedin: data.linkedin || '',
             github: data.github || '',
             twitter: data.twitter || '',

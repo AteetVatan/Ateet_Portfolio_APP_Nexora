@@ -18,7 +18,6 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [contactInfo, setContactInfo] = useState({
     email: '',
-    phone: '',
     linkedin: '',
     github: '',
     twitter: '',
@@ -40,7 +39,6 @@ const Footer: React.FC = () => {
         } else if (data) {
           setContactInfo({
             email: data.email || '',
-            phone: data.phone || '',
             linkedin: data.linkedin || '',
             github: data.github || '',
             twitter: data.twitter || '',
