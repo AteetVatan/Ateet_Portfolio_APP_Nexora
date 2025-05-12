@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
         
         {/* Copyright and legal */}
         <FooterCopyright 
-          name="Ateet Vatan Bahmani"
+          name="Ateet Bahamani"
           year={currentYear}
         />
       </div>
