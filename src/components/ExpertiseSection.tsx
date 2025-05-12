@@ -12,7 +12,7 @@ const ExpertiseSection: React.FC = () => {
   const expertiseItems: ExpertiseItem[] = [
     {
       title: "LLM Integration",
-      description: "Building advanced applications leveraging large language models through LangChain, AutoGen, and vector databases for semantic search and RAG systems.",
+      description: "Designing intelligent agents powered by large language models using LangChain and AutoGen. Enables semantic search, memory, and real-time reasoning via vector databases and RAG pipelines.",
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 12.5C2 11.3954 2.89543 10.5 4 10.5H8C9.10457 10.5 10 11.3954 10 12.5V18.5C10 19.6046 9.10457 20.5 8 20.5H4C2.89543 20.5 2 19.6046 2 18.5V12.5Z" stroke="#00c3ff" strokeWidth="1.5"/>
@@ -25,11 +25,11 @@ const ExpertiseSection: React.FC = () => {
           <path d="M14 17.5L14 15.5" stroke="#00c3ff" strokeWidth="1.5"/>
         </svg>
       ),
-      skills: ["LangChain", "AutoGen", "Pinecone", "ChromaDB", "RAG", "Custom Agents"],
+      skills: ["LangChain", "AutoGen", "ChromaDB", "RAG", "Custom LangChain Agents", "Embedding Optimization"],
     },
     {
       title: "AI Automation Systems",
-      description: "Developing intelligent automation pipelines that leverage AI for data processing, decision making, and autonomous task execution in enterprise environments.",
+      description: "Orchestrating autonomous pipelines with LangChain, AutoGen, and vector reasoning agents to execute end-to-end geopolitical data processing, classification, and strategic alerting.",
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="8" stroke="#00c3ff" strokeWidth="1.5"/>
@@ -40,11 +40,11 @@ const ExpertiseSection: React.FC = () => {
           <circle cx="12" cy="12" r="3" stroke="#00c3ff" strokeWidth="1.5"/>
         </svg>
       ),
-      skills: ["Process Automation", "ML Pipelines", "Decision Systems", "ETL", "Workflow Orchestration", "Python"],
+      skills: ["LangChain Pipelines", "AutoGen Agents", "LLM Orchestration", "Redis Job Queues", "Event-Driven ETL", "Python (async + multiprocessing)"],
     },
     {
-      title: "Multimodal AI Development",
-      description: "Building systems that combine text, vision, audio, and spatial intelligence for comprehensive AI applications including the pioneering MASX AI project.",
+      title: "Software Engineering",
+      description: "Applying modular architecture, clean coding principles, robust testing strategies, and agile methodologies to build scalable, maintainable, and production-grade software systems — with a focus on domain-driven design, CI/CD automation, cloud-native deployment, and long-term code sustainability across the full software development lifecycle.",
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15 6C15 8.20914 13.2091 10 11 10C8.79086 10 7 8.20914 7 6C7 3.79086 8.79086 2 11 2C13.2091 2 15 3.79086 15 6Z" stroke="#00c3ff" strokeWidth="1.5"/>
@@ -53,11 +53,18 @@ const ExpertiseSection: React.FC = () => {
           <path d="M6 14C8.20914 14 10 12.2091 10 10C10 7.79086 8.20914 6 6 6C3.79086 6 2 7.79086 2 10C2 12.2091 3.79086 14 6 14Z" stroke="#00c3ff" strokeWidth="1.5"/>
         </svg>
       ),
-      skills: ["Computer Vision", "NLP", "Speech Recognition", "Multimodal Transformers", "CLIP", "GPT-4 Vision"],
+      skills: [
+        "Scalable Architecture (Hexagonal, MVVM, MVC, Microservices, Repository & Service Layer Patterns)",
+        "Clean Code – PEP8, SOLID, DRY, KISS, YAGNI",
+        "Unit & Integration Testing – pytest, unittest, TDD",
+        "Agile Methodologies – Scrum, Kanban, Sprints",
+        "Full SDLC – Design, Dev, Test, Deploy, Maintain",
+        "CI/CD – GitLab, Azure DevOps, GitHub, Code Reviews"
+      ]
     },
     {
-      title: "Full-Stack Development",
-      description: "Building robust applications with Python backends and React frontends, creating seamless user experiences with clean, performant code.",
+      title: "Full-Stack & Cloud Engineering",
+      description: "Extensive experience designing and delivering scalable applications using modern Python, .NET, frontend, and cloud-native technologies — with a focus on performance, automation, and clean architecture.",
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 6.5C2 4.567 2 3.6 2.654 3C3.309 2.4 4.283 2.4 6.23 2.4H17.77C19.717 2.4 20.691 2.4 21.346 3C22 3.6 22 4.567 22 6.5V15.5C22 17.433 22 18.4 21.346 19C20.691 19.6 19.717 19.6 17.77 19.6H6.23C4.283 19.6 3.309 19.6 2.654 19C2 18.4 2 17.433 2 15.5V6.5Z" stroke="#00c3ff" strokeWidth="1.5"/>
@@ -69,7 +76,19 @@ const ExpertiseSection: React.FC = () => {
           <path d="M13 9.5L15.5 12L13 14.5" stroke="#00c3ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      skills: ["React", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Docker", "Git"],
+      skills: [// 🐍 Python & Backend
+        "Python", "Flask", "FastAPI", "Jinja2","Pandas", "NumPy", "pytest",
+        "Redis", "Kafka", "Apache Airflow", "Vector Databases",
+        "SQL Server", "PostgreSQL", 
+        // 💻 Microsoft Stack
+        ".NET Core", ".NET Framework", "C#", "ASP.NET", "WCF", "WPF",
+
+        // ☁️ Cloud & DevOps
+        "AWS (Lambda, ECS, S3, Microservices)", "Supabase", "CI/CD Pipelines – GitLab, Azure DevOps", "Docker", "Git (Version Control)",
+
+        // 🌐 Frontend & Web
+        "Angular (v15–17)", "TypeScript", "SCSS", "SASS", "Responsive UI Design"
+  ],
     },
   ];
   

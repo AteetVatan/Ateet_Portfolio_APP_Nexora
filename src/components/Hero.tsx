@@ -91,8 +91,8 @@ const Hero: React.FC = () => {
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           <div className="skill-tag">LLM Integration</div>
           <div className="skill-tag">AI Automation</div>
-          <div className="skill-tag">Multimodal AI</div>
-          <div className="skill-tag">Python + C#</div>
+          <div className="skill-tag">Software Engineering</div>
+          <div className="skill-tag">Full-Stack & Cloud Engineering</div>
         </div>
 
         {/* Matrix-inspired data streams - purely decorative */}

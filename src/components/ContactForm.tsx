@@ -193,7 +193,6 @@ const ContactForm = () => {
         className="neon-button flex items-center justify-center gap-2 w-full md:w-auto"
         style={{ 
           borderColor: currentTheme.primaryColor,
-          color: currentTheme.primaryColor,
           backgroundColor: 'transparent', // Ensure transparent background
           // Ensure button text is always visible regardless of theme
           textShadow: '0 0 5px rgba(0, 0, 0, 0.3)'
