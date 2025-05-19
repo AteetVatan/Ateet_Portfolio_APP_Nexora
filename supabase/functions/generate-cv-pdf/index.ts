@@ -187,15 +187,15 @@ serve(async (req) => {
       key,
       value + ": "
     ]));
-    const imageUrl = 'https://ateetai.vercel.app/uploads/cv.png';
+    const imageUrl = cvData.picture;
     const imageResponse = await fetch(imageUrl);
     const imageBuffer = new Uint8Array(await imageResponse.arrayBuffer());
     const profilePic = await pdfDoc.embedPng(imageBuffer);
     // Draw profile picture at top right
     const picDims = profilePic.scale(0.13); // Resize appropriately
     page.drawImage(profilePic, {
-      x: page.getWidth() - margins.right - picDims.width,
-      y: page.getHeight() - margins.top - picDims.height + 10,
+      x: page.getWidth() - margins.right - picDims.width + 7,
+      y: page.getHeight() - margins.top - picDims.height + 14,
       width: picDims.width,
       height: picDims.height
     });
