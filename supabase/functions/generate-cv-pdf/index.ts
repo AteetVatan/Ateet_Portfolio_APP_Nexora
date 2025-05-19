@@ -70,23 +70,19 @@ serve(async (req) => {
     // const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-
-
-
-
     console.log('Fonts loaded successfully');
     // Define our styles and constants
     const margins = {
       top: 40,
       right: 40,
       bottom: 40,
-      left: 40
+      left: 40 // balanced left margin
     };
     const colors = {
       primary: rgb(0.0, 0.6, 0.3),
       dark: rgb(0.1, 0.1, 0.1),
       gray: rgb(0.3, 0.3, 0.3),
-      lightGreen: rgb(0.5, 0.9, 0.5)
+      lightGray: rgb(0.7, 0.7, 0.7) // ✅ light gray → for optional thin dividers
     };
     const fontSizes = {
       title: 22,
@@ -94,7 +90,7 @@ serve(async (req) => {
       heading: 12,
       subheading: 11,
       normal: 10,
-      small: 9
+      small: 9 // Dates, locations, soft labels, or page numbers if you add them
     };
     // Current vertical position tracker
     let currentY = 750;
@@ -123,11 +119,10 @@ serve(async (req) => {
           x: margins.left + width,
           y
         },
-        thickness: 1,
-        color: colors.lightGreen
+        thickness: 0,
+        color: colors.lightGray
       });
       return y - 20; // Return new Y position after the divider
-      
     };
     // Function to wrap text
     const wrapText = (text, font, fontSize, maxWidth) => {
@@ -192,6 +187,20 @@ serve(async (req) => {
       key,
       value + ": "
     ]));
+    const imageUrl = 'https://ateetai.vercel.app/uploads/cv.png';
+    const imageResponse = await fetch(imageUrl);
+    const imageBuffer = new Uint8Array(await imageResponse.arrayBuffer());
+    const profilePic = await pdfDoc.embedPng(imageBuffer);
+    // Draw profile picture at top right
+    const picDims = profilePic.scale(0.13); // Resize appropriately
+    page.drawImage(profilePic, {
+      x: page.getWidth() - margins.right - picDims.width,
+      y: page.getHeight() - margins.top - picDims.height + 10,
+      width: picDims.width,
+      height: picDims.height
+    });
+    // Load and embed profile picture
+    // Draw profile picture at top right
     // Header Section with Name and Contact Info
     // ----------------------------------------
     // Name and Title
@@ -207,17 +216,21 @@ serve(async (req) => {
       x: margins.left,
       y: currentY,
       size: fontSizes.subtitle,
-      font: helvetica,
+      font: helveticaBold,
       color: colors.primary
     });
     if (cvData.sub_title) {
-      currentY -= 25;
-      page.drawText(cvData.sub_title, {
-        x: margins.left,
-        y: currentY,
-        size: fontSizes.subtitle,
-        font: helvetica,
-        color: colors.primary
+      const maxWidth = pageWidth - 180;
+      const subtitleLines = wrapText(cvData.sub_title, helvetica, fontSizes.subtitle, maxWidth);
+      currentY -= (fontSizes.subtitle + 4) * subtitleLines.length; // reserve full space **before** drawing
+      subtitleLines.forEach((line, index) => {
+        page.drawText(line, {
+          x: margins.left,
+          y: currentY + (subtitleLines.length - 1 - index) * (fontSizes.subtitle + 4),
+          size: fontSizes.subtitle,
+          font: helvetica,
+          color: colors.primary
+        });
       });
     }
     currentY -= 30;
@@ -640,7 +653,7 @@ serve(async (req) => {
         y: 30,
         size: fontSizes.small,
         font: helvetica,
-        color: colors.lightGreen
+        color: colors.lightGray
       });
     }
     // Save the PDF
