@@ -1,11 +1,15 @@
-const SUPABASE_PING_URL = 'https://bidswcansixttbhmwpkj.supabase.co/functions/v1/ping-service';
+import { supabase } from "@/integrations/supabase/client";
+
+//const SUPABASE_PING_URL = 'https://bidswcansixttbhmwpkj.supabase.co/functions/v1/ping-service';
 
 const startPinging = () => {
-    const ping = () => {
-        fetch(SUPABASE_PING_URL)
-            .then(res => res.json())
-            .then(data => console.log('Ping results:', data))
-            .catch(err => console.error('Ping error:', err));
+    const ping = async () => {
+        const { data, error } = await supabase.functions.invoke('ping-service');
+        if (error) {
+            console.error('Ping error:', error);
+        } else {
+            console.log('Ping results:', data);
+        }
     };
 
     ping(); // Initial call
