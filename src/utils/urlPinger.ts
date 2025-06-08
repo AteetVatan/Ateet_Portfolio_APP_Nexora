@@ -1,29 +1,17 @@
-import axios from 'axios';
-
-const PING_INTERVAL = 14 * 60 * 1000; // 14 minutes in milliseconds
-
-const urlsToPing = [
-    'https://masx-ai-gdelt-api.onrender.com/',
-    'https://movie-app-kufy.onrender.com/'
-];
-
-const pingUrl = async (url: string) => {
-    try {
-        const response = await axios.get(url);
-        console.log(`Successfully pinged ${url} - Status: ${response.status}`);
-    } catch (error) {
-        console.error(`Failed to ping ${url}:`, error);
-    }
-};
+const SUPABASE_PING_URL = 'https://bidswcansixttbhmwpkj.supabase.co/functions/v1/ping-service';
 
 const startPinging = () => {
-    // Initial ping
-    urlsToPing.forEach(pingUrl);
+    const ping = () => {
+        fetch(SUPABASE_PING_URL)
+            .then(res => res.json())
+            .then(data => console.log('Ping results:', data))
+            .catch(err => console.error('Ping error:', err));
+    };
 
-    // Set up interval for subsequent pings
-    setInterval(() => {
-        urlsToPing.forEach(pingUrl);
-    }, PING_INTERVAL);
+    ping(); // Initial call
+    const interval = setInterval(ping, 14 * 60 * 1000); // 14 minutes
+
+    return () => clearInterval(interval);
 };
 
 export default startPinging; 
