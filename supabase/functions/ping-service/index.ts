@@ -5,6 +5,16 @@ const urlsToPing = [
     'https://movie-app-kufy.onrender.com/'
 ];
 Deno.serve(async (req) => {
+    // CORS preflight support
+    if (req.method === "OPTIONS") {
+        return new Response("OK", {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "*"
+            }
+        });
+    }
     const results = await Promise.all(urlsToPing.map(async (url) => {
         try {
             const res = await fetch(url, {
@@ -26,7 +36,8 @@ Deno.serve(async (req) => {
         results
     }), {
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
         }
     });
 });
