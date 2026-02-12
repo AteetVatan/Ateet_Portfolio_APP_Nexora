@@ -81,28 +81,28 @@ export default {
           to: { height: '0' },
         },
         "pulse-glow": {
-          '0%, 100%': { 
+          '0%, 100%': {
             boxShadow: '0 0 15px rgba(0, 195, 255, 0.2)',
             borderColor: '#1291c7'
           },
-          '50%': { 
+          '50%': {
             boxShadow: '0 0 25px rgba(0, 195, 255, 0.6)',
             borderColor: '#00c3ff'
           }
         },
         "float": {
-          '0%, 100%': { 
+          '0%, 100%': {
             transform: 'translateY(0px)'
           },
-          '50%': { 
+          '50%': {
             transform: 'translateY(-10px)'
           }
         },
         "data-stream": {
-          '0%': { 
+          '0%': {
             transform: 'translateY(0%)'
           },
-          '100%': { 
+          '100%': {
             transform: 'translateY(-100%)'
           }
         }
@@ -116,5 +116,5 @@ export default {
       }
     }
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

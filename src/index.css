@@ -249,7 +249,7 @@
     @apply text-[#00c3ff] font-bold hover:text-[#b9dcea] !important;
   }
 
-  .nav-menu-trigger-inactive {    
+  .nav-menu-trigger-inactive {
     @apply text-[#85a5b3] hover:text-[#b9dcea] !important;
   }
 
@@ -452,4 +452,172 @@
 
 .slide-up {
   animation: slideUp 0.5s ease forwards;
+}
+
+/* ── Cyberpunk Prose Overrides ── */
+.prose-cyber {
+  --tw-prose-body: #a9c2d1;
+  --tw-prose-headings: #e0f0ff;
+  --tw-prose-lead: #85a5b3;
+  --tw-prose-links: #00c3ff;
+  --tw-prose-bold: #e0f0ff;
+  --tw-prose-counters: #4dabce;
+  --tw-prose-bullets: #4dabce;
+  --tw-prose-hr: #1e3a4a;
+  --tw-prose-quotes: #a9c2d1;
+  --tw-prose-quote-borders: #00c3ff;
+  --tw-prose-captions: #85a5b3;
+  --tw-prose-code: #00c3ff;
+  --tw-prose-pre-code: #a9c2d1;
+  --tw-prose-pre-bg: rgba(10, 22, 40, 0.85);
+  --tw-prose-th-borders: #1e3a4a;
+  --tw-prose-td-borders: #162a3a;
+}
+
+/* Heading styles */
+.prose-cyber h1,
+.prose-cyber h2,
+.prose-cyber h3,
+.prose-cyber h4 {
+  font-family: 'Space Mono', monospace;
+  color: #e0f0ff;
+}
+
+.prose-cyber h2 {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(30, 58, 74, 0.6);
+  margin-top: 2.5rem;
+}
+
+/* Link styles */
+.prose-cyber a {
+  color: #00c3ff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  word-break: break-all;
+}
+
+.prose-cyber a:hover {
+  text-shadow: 0 0 8px rgba(0, 195, 255, 0.6);
+  text-decoration: underline;
+}
+
+/* Blockquote styles */
+.prose-cyber blockquote {
+  border-left: 3px solid #00c3ff;
+  background: rgba(12, 24, 36, 0.6);
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+  box-shadow: inset 4px 0 12px rgba(0, 195, 255, 0.05);
+}
+
+.prose-cyber blockquote p {
+  margin: 0.25rem 0;
+}
+
+/* Horizontal rule */
+.prose-cyber hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #1e3a4a 20%, #4dabce 50%, #1e3a4a 80%, transparent);
+  margin: 2rem 0;
+}
+
+/* Table styles */
+.prose-cyber table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.prose-cyber thead th {
+  background: rgba(12, 24, 36, 0.9);
+  color: #00c3ff;
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #1e3a4a;
+  text-align: left;
+}
+
+.prose-cyber tbody td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid rgba(30, 58, 74, 0.4);
+  color: #a9c2d1;
+}
+
+.prose-cyber tbody tr:nth-child(even) {
+  background: rgba(12, 24, 36, 0.4);
+}
+
+.prose-cyber tbody tr:hover {
+  background: rgba(18, 145, 199, 0.08);
+}
+
+/* Code inline */
+.prose-cyber :not(pre)>code {
+  color: #00c3ff;
+  background: rgba(12, 24, 36, 0.8);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  border: 1px solid rgba(30, 58, 74, 0.5);
+}
+
+.prose-cyber :not(pre)>code::before,
+.prose-cyber :not(pre)>code::after {
+  content: '' !important;
+}
+
+/* Code block */
+.prose-cyber pre {
+  background: rgba(10, 22, 40, 0.85) !important;
+  border: 1px solid rgba(30, 58, 74, 0.5);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  overflow-x: auto;
+  box-shadow: 0 0 15px rgba(0, 195, 255, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.prose-cyber pre code {
+  color: #a9c2d1;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* Strong and emphasis */
+.prose-cyber strong {
+  color: #e0f0ff;
+  font-weight: 700;
+}
+
+.prose-cyber em {
+  color: #b9dcea;
+}
+
+/* List styles */
+.prose-cyber ul>li::marker,
+.prose-cyber ol>li::marker {
+  color: #4dabce;
+}
+
+.prose-cyber li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Mermaid diagram – show expand button on hover */
+div:hover>.mermaid-expand-btn {
+  opacity: 1 !important;
+  transition: opacity 0.2s ease;
+}
+
+/* Mermaid diagram – scale SVG to fill expanded container */
+.mermaid-expanded-container>svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }

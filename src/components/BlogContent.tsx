@@ -1,12 +1,27 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BlogPost } from '@/types';
 import { Badge } from './ui/badge';
 import { CalendarClock, Clock } from 'lucide-react';
+import { marked } from 'marked';
+import MermaidDiagram from './MermaidDiagram';
+
+// Configure marked for GFM (tables, strikethrough, etc.)
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+});
 
 interface BlogContentProps {
   post: BlogPost;
 }
+
+/** Regex to match fenced mermaid code blocks: ```mermaid ... ``` */
+const MERMAID_BLOCK_RE = /```mermaid\s*\n([\s\S]*?)```/g;
+
+type ContentSegment =
+  | { type: 'text'; value: string }
+  | { type: 'mermaid'; value: string };
 
 const BlogContent: React.FC<BlogContentProps> = ({ post }) => {
   // Format date
@@ -26,39 +41,46 @@ const BlogContent: React.FC<BlogContentProps> = ({ post }) => {
     return `${minutes} min read`;
   };
 
-  // Convert newlines to <br> and handle markdown-like formatting
-  const formatContent = (content: string) => {
-    // First, split by double newlines for paragraphs
-    let formatted = content.split('\n\n').map((paragraph, idx) => {
-      // Handle headers (markdown style)
-      if (paragraph.startsWith('# ')) {
-        return `<h1 class="text-3xl font-bold my-6">${paragraph.substring(2)}</h1>`;
-      } else if (paragraph.startsWith('## ')) {
-        return `<h2 class="text-2xl font-bold my-5">${paragraph.substring(3)}</h2>`;
-      } else if (paragraph.startsWith('### ')) {
-        return `<h3 class="text-xl font-bold my-4">${paragraph.substring(4)}</h3>`;
-      } else if (paragraph.startsWith('- ')) {
-        // Handle bullet lists
-        const items = paragraph.split('\n- ').map(item =>
-          item.startsWith('- ') ? item.substring(2) : item
-        );
-        return `<ul class="list-disc pl-5 my-4 space-y-2">
-          ${items.map(item => `<li>${item}</li>`).join('')}
-        </ul>`;
-      } else {
-        // Regular paragraph with single newlines converted to <br>
-        return `<p class="my-4">${paragraph.replace(/\n/g, '<br>')}</p>`;
-      }
-    }).join('');
-
-    // Bold (**text**)
-    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-    // Italic (*text*)
-    formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-    return formatted;
+  // Convert markdown content to HTML using the marked library
+  const formatContent = (content: string): string => {
+    return marked.parse(content, { async: false }) as string;
   };
+
+  /**
+   * Split content into text and mermaid segments.
+   * Mermaid blocks are detected via fenced ```mermaid ``` code blocks.
+   */
+  const segments: ContentSegment[] = useMemo(() => {
+    const result: ContentSegment[] = [];
+    const content = post.content;
+    let lastIndex = 0;
+
+    // Reset regex state
+    MERMAID_BLOCK_RE.lastIndex = 0;
+
+    let match: RegExpExecArray | null;
+    while ((match = MERMAID_BLOCK_RE.exec(content)) !== null) {
+      // Add text before this mermaid block
+      if (match.index > lastIndex) {
+        result.push({ type: 'text', value: content.slice(lastIndex, match.index) });
+      }
+      // Add the mermaid block content (captured group 1)
+      result.push({ type: 'mermaid', value: match[1] });
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text after the last mermaid block
+    if (lastIndex < content.length) {
+      result.push({ type: 'text', value: content.slice(lastIndex) });
+    }
+
+    // If no mermaid blocks found, return the whole content as text
+    if (result.length === 0) {
+      result.push({ type: 'text', value: content });
+    }
+
+    return result;
+  }, [post.content]);
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-8">
@@ -101,11 +123,19 @@ const BlogContent: React.FC<BlogContentProps> = ({ post }) => {
         )}
       </header>
 
-      {/* Content */}
-      <div
-        className="prose prose-invert max-w-none text-[#a9c2d1]"
-        dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
-      />
+      {/* Content — rendered as a mix of formatted HTML and Mermaid diagrams */}
+      <div className="prose prose-invert prose-cyber max-w-none">
+        {segments.map((segment, i) =>
+          segment.type === 'mermaid' ? (
+            <MermaidDiagram key={`mermaid-${i}`} chart={segment.value} />
+          ) : (
+            <div
+              key={`text-${i}`}
+              dangerouslySetInnerHTML={{ __html: formatContent(segment.value) }}
+            />
+          )
+        )}
+      </div>
     </article>
   );
 };
