@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download } from 'lucide-react';
+import { Download, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
@@ -29,11 +29,6 @@ const Hero: React.FC = () => {
 
     return () => clearInterval(blinkingCursor);
   }, []);
-
-  // Handle CV download
-  const handleDownloadCV = (lang: string) => {
-    window.open(`https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf?lang=${lang}&user_name=ateet`, '_blank');
-  };
 
   return (
     <div className="relative flex items-center justify-center min-h-[85vh] px-6 md:px-12">
@@ -68,10 +63,12 @@ const Hero: React.FC = () => {
               variant="outline"
               size="sm"
               className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
-              onClick={() => handleDownloadCV('en')}
+              asChild
             >
-              <Download className="mr-2 h-4 w-4" />
-              Download CV
+              <a href="/files/Ateet.pdf" download>
+                <Download className="mr-2 h-4 w-4" />
+                Download CV
+              </a>
             </Button>
             {/* CV Download Button - Added right after job title */}
             <div className="w-5"></div>
@@ -79,10 +76,12 @@ const Hero: React.FC = () => {
               variant="outline"
               size="sm"
               className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
-              onClick={() => handleDownloadCV('de')}
+              asChild
             >
-              <Download className="mr-2 h-4 w-4" />
-              Download German CV
+              <a href="https://ateetclone.masxai.com/" target="_blank" rel="noopener noreferrer">
+                <Bot className="mr-2 h-4 w-4" />
+                Talk to Ateet's AI Clone
+              </a>
             </Button>
           </div>
         </div>
