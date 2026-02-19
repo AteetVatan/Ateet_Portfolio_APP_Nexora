@@ -59,6 +59,8 @@ const Hero: React.FC = () => {
             style={{ color: 'var(--mono-primary)' }}
           >
             {title}
+            <br />
+            Essen, Germany
           </div>
         </div>
 
