@@ -5,7 +5,7 @@ import {
   Collapsible,
   CollapsibleContent
 } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { CaretDown, CaretUp } from '@phosphor-icons/react';
 
 interface CVCollapsibleSectionProps {
   title: string;
@@ -27,8 +27,8 @@ const CVCollapsibleSection: React.FC<CVCollapsibleSectionProps> = ({
             {title}
           </div>
           {isOpen ?
-            <ChevronUp className="h-5 w-5" style={{ color: 'var(--mono-primary)' }} /> :
-            <ChevronDown className="h-5 w-5" style={{ color: 'var(--mono-primary)' }} />
+            <CaretUp className="h-5 w-5" style={{ color: 'var(--mono-primary)' }} /> :
+            <CaretDown className="h-5 w-5" style={{ color: 'var(--mono-primary)' }} />
           }
         </CardTitle>
       </CardHeader>

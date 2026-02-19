@@ -4,8 +4,9 @@ import SEOHead from '../components/SEOHead';
 import { useSearchParams } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout';
 import BlogCard from '../components/BlogCard';
+import PageCTA from '../components/PageCTA';
 import { useStaticBlogPosts, prefetchAllBlogs } from '../hooks/use-static-blog-posts';
-import { Search, Tag } from 'lucide-react';
+import { MagnifyingGlass, Tag } from '@phosphor-icons/react';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import {
@@ -117,7 +118,7 @@ const Blog: React.FC = () => {
         {/* Search and filter */}
         <div className="mb-12 space-y-6">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: 'var(--mono-muted)' }} />
+            <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: 'var(--mono-muted)' }} />
             <Input
               type="text"
               placeholder="Search articles..."
@@ -209,6 +210,11 @@ const Blog: React.FC = () => {
           </>
         )}
       </section>
+
+      {/* CTA */}
+      <div className="px-6 md:px-20 max-w-[1400px] mx-auto">
+        <PageCTA text="Want to discuss AI?" />
+      </div>
     </PageLayout>
   );
 };

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Bot, FileText, BookOpen } from 'lucide-react';
+import { Robot, FileText, BookOpen } from '@phosphor-icons/react';
 
 type MobileNavProps = {
   activeItem: string;
@@ -68,7 +68,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
 
         <div className="mobile-nav-subnav">
           <div className="mobile-nav-subnav-header">
-            <Bot className="mr-2 h-3.5 w-3.5" />
+            <Robot className="mr-2 h-3.5 w-3.5" />
             <span className="font-mono text-xs uppercase">MASX AI</span>
           </div>
           <Link

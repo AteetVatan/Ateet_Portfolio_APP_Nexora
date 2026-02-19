@@ -6,9 +6,9 @@ import PageLayout from '../components/layout/PageLayout';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import {
-  ExternalLink, Code, Layers, Calendar, Target, User, Lightbulb,
-  LayoutDashboard, AlertTriangle, TrendingUp, MessageSquare, BookOpen
-} from 'lucide-react';
+  ArrowSquareOut, Code, Stack, CalendarBlank, Crosshair, User, Lightbulb,
+  SquaresFour, Warning, TrendUp, ChatCircle, BookOpen
+} from '@phosphor-icons/react';
 import { Skeleton } from '../components/ui/skeleton';
 
 const MasxAICaseStudy: React.FC = () => {
@@ -27,7 +27,7 @@ const MasxAICaseStudy: React.FC = () => {
     <PageLayout>
       <SEOHead
         title="MASX AI Case Study"
-        description="In-depth case study of the MASX AI system — architecture, implementation, challenges, and outcomes by Ateet Vatan."
+        description="In-depth case study of the MASX AI system, architecture, implementation, challenges, and outcomes by Ateet Vatan."
       />
       <div className="py-20 px-6 md:px-20 max-w-[900px] mx-auto">
         {isLoading ? (
@@ -61,7 +61,7 @@ const MasxAICaseStudy: React.FC = () => {
               <div className="flex flex-wrap gap-4 mt-6">
                 {masxAi.timeframe && (
                   <div className="flex items-center text-sm" style={{ color: 'var(--mono-muted)' }}>
-                    <Calendar className="h-4 w-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+                    <CalendarBlank className="h-4 w-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
                     {masxAi.timeframe}
                   </div>
                 )}
@@ -73,7 +73,7 @@ const MasxAICaseStudy: React.FC = () => {
 
             {masxAi.problem_statement && (
               <section>
-                <SectionHeading icon={Target}>Problem Statement</SectionHeading>
+                <SectionHeading icon={Crosshair}>Problem Statement</SectionHeading>
                 <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
                   <p>{masxAi.problem_statement}</p>
                 </div>
@@ -108,7 +108,7 @@ const MasxAICaseStudy: React.FC = () => {
             )}
 
             <section>
-              <SectionHeading icon={Layers}>Architecture</SectionHeading>
+              <SectionHeading icon={Stack}>Architecture</SectionHeading>
               <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
                 <p className="whitespace-pre-line">{masxAi.architecture}</p>
                 {masxAi.architecture_snapshot && (
@@ -124,7 +124,7 @@ const MasxAICaseStudy: React.FC = () => {
 
             {masxAi.modules && masxAi.modules.length > 0 && (
               <section>
-                <SectionHeading icon={LayoutDashboard}>Core Modules</SectionHeading>
+                <SectionHeading icon={SquaresFour}>Core Modules</SectionHeading>
                 <div className="grid md:grid-cols-2 gap-4">
                   {masxAi.modules.map((module: any, index: number) => (
                     <Card key={index} className="monolith-card">
@@ -150,7 +150,7 @@ const MasxAICaseStudy: React.FC = () => {
 
             {masxAi.challenges && (
               <section>
-                <SectionHeading icon={AlertTriangle}>Challenges & Lessons Learned</SectionHeading>
+                <SectionHeading icon={Warning}>Challenges & Lessons Learned</SectionHeading>
                 <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
                   <div className="whitespace-pre-line">{masxAi.challenges}</div>
                 </div>
@@ -159,7 +159,7 @@ const MasxAICaseStudy: React.FC = () => {
 
             {masxAi.impact && (
               <section>
-                <SectionHeading icon={TrendingUp}>Impact & Future Scope</SectionHeading>
+                <SectionHeading icon={TrendUp}>Impact & Future Scope</SectionHeading>
                 <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
                   <div className="whitespace-pre-line">{masxAi.impact}</div>
                 </div>
@@ -171,7 +171,7 @@ const MasxAICaseStudy: React.FC = () => {
                 <div className="flex flex-wrap gap-4">
                   {masxAi.demo_url && (
                     <a href={masxAi.demo_url} target="_blank" rel="noopener noreferrer">
-                      <Button className="btn-primary"><ExternalLink className="mr-2 h-4 w-4" /> Live Demo</Button>
+                      <Button className="btn-primary"><ArrowSquareOut className="mr-2 h-4 w-4" /> Live Demo</Button>
                     </a>
                   )}
                   {masxAi.github_url && (
@@ -185,10 +185,10 @@ const MasxAICaseStudy: React.FC = () => {
                 {masxAi.call_to_action && (
                   <div className="monolith-card p-6">
                     <div className="flex items-start gap-4">
-                      <MessageSquare className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--mono-primary)' }} />
+                      <ChatCircle className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--mono-primary)' }} />
                       <div>
                         <p className="mb-4" style={{ color: 'var(--mono-muted)' }}>{masxAi.call_to_action}</p>
-                        <a href="/contact"><Button className="btn-primary">Contact Me →</Button></a>
+                        <a href="/contact"><Button className="btn-primary">Contact Me</Button></a>
                       </div>
                     </div>
                   </div>

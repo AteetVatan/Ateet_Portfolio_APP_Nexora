@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 import { useQuery } from '@tanstack/react-query';
-import { Filter, Search } from 'lucide-react';
+import { Funnel, MagnifyingGlass } from '@phosphor-icons/react';
 import { supabase } from '../integrations/supabase/client';
 import PageLayout from '../components/layout/PageLayout';
 import ProjectCard from '../components/ProjectCard';
 import { Skeleton } from '../components/ui/skeleton';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
+import PageCTA from '../components/PageCTA';
 
 interface Project {
   id: string;
@@ -61,7 +62,7 @@ const Projects: React.FC = () => {
     <PageLayout>
       <SEOHead
         title="Projects"
-        description="Explore AI and full-stack projects by Ateet Vatan — from multi-agent systems to production LLM applications."
+        description="Explore AI and full-stack projects by Ateet Vatan, from multi-agent systems to production LLM applications."
       />
       <div className="py-20 md:py-32 px-6 md:px-20 max-w-[1400px] mx-auto">
         <div className="mb-12">
@@ -77,7 +78,7 @@ const Projects: React.FC = () => {
         {/* Search and filters */}
         <div className="flex flex-col md:flex-row gap-3 mb-6">
           <div className="relative flex-grow">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2" style={{ color: 'var(--mono-muted)' }} size={18} />
+            <MagnifyingGlass className="absolute left-3 top-1/2 transform -translate-y-1/2" style={{ color: 'var(--mono-muted)' }} size={18} />
             <Input
               type="text"
               placeholder="Search projects..."
@@ -102,7 +103,7 @@ const Projects: React.FC = () => {
             )}
             <Button variant="outline" size="icon" aria-label="Filter"
               style={{ borderColor: 'var(--mono-border)', color: 'var(--mono-muted)' }}>
-              <Filter size={18} />
+              <Funnel size={18} />
             </Button>
           </div>
         </div>
@@ -206,6 +207,9 @@ const Projects: React.FC = () => {
             ))}
           </div>
         )}
+
+        {/* CTA */}
+        <PageCTA text="Ready to start your project?" />
       </div>
     </PageLayout>
   );

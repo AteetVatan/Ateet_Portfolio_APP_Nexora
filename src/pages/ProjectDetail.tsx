@@ -1,14 +1,16 @@
 
 import React from 'react';
 import SEOHead from '../components/SEOHead';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Github, ExternalLink, Calendar, Tag, Bookmark } from 'lucide-react';
+import { ArrowLeft, GithubLogo, ArrowSquareOut, CalendarBlank, Tag, BookmarkSimple } from '@phosphor-icons/react';
 import { supabase } from '../integrations/supabase/client';
 import PageLayout from '../components/layout/PageLayout';
 import { Button } from '../components/ui/button';
 import { Skeleton } from '../components/ui/skeleton';
 import BlogContent from '../components/BlogContent';
+import PageCTA from '../components/PageCTA';
+import { PROJECT_CONTEXT } from '../data/testimonialsData';
 
 interface SupabaseError extends Error { code?: string; }
 
@@ -44,6 +46,25 @@ const ProjectDetail: React.FC = () => {
       return data as Project;
     },
   });
+
+  // Related projects query (same category, exclude current)
+  const { data: relatedProjects } = useQuery({
+    queryKey: ['related-projects', project?.category, slug],
+    queryFn: async () => {
+      if (!project?.category) return [];
+      const { data } = await supabase
+        .from('projects')
+        .select('id, title, slug, image_url, description')
+        .eq('category', project.category)
+        .neq('slug', slug)
+        .limit(2);
+      return (data || []) as Array<{ id: string; title: string; slug: string; image_url: string | null; description: string }>;
+    },
+    enabled: !!project?.category,
+  });
+
+  // Look up context lines for this project
+  const context = slug ? PROJECT_CONTEXT[slug] || PROJECT_CONTEXT[slug.toLowerCase()] : null;
 
 
 
@@ -99,7 +120,7 @@ const ProjectDetail: React.FC = () => {
                   <div className="flex flex-wrap gap-3 mb-6">
                     {project.category && (
                       <div className="flex items-center text-xs" style={{ color: 'var(--mono-muted)' }}>
-                        <Bookmark className="w-3 h-3 mr-1" style={{ color: 'var(--mono-primary)' }} />
+                        <BookmarkSimple className="w-3 h-3 mr-1" style={{ color: 'var(--mono-primary)' }} />
                         {project.category}
                       </div>
                     )}
@@ -111,7 +132,7 @@ const ProjectDetail: React.FC = () => {
                     )}
                     {project.created_at && (
                       <div className="flex items-center text-xs" style={{ color: 'var(--mono-muted)' }}>
-                        <Calendar className="w-3 h-3 mr-1" style={{ color: 'var(--mono-primary)' }} />
+                        <CalendarBlank className="w-3 h-3 mr-1" style={{ color: 'var(--mono-primary)' }} />
                         {new Date(project.created_at).toLocaleDateString()}
                       </div>
                     )}
@@ -121,20 +142,41 @@ const ProjectDetail: React.FC = () => {
                   {project.github_url && (
                     <a href={project.github_url} target="_blank" rel="noopener noreferrer">
                       <Button variant="outline" size="sm" style={{ borderColor: 'var(--mono-border)', color: 'var(--mono-muted)' }}>
-                        <Github className="w-4 h-4 mr-2" /> View Code
+                        <GithubLogo className="w-4 h-4 mr-2" /> View Code
                       </Button>
                     </a>
                   )}
                   {project.project_url && (
                     <a href={project.project_url} target="_blank" rel="noopener noreferrer">
                       <Button variant="default" size="sm" className="btn-primary">
-                        <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+                        <ArrowSquareOut className="w-4 h-4 mr-2" /> Live Demo
                       </Button>
                     </a>
                   )}
                 </div>
               </div>
             </div>
+
+            {/* Context Lines (Built for / Designed to prove) */}
+            {context && (
+              <div
+                className="rounded-xl p-5"
+                style={{
+                  background: 'var(--mono-surface)',
+                  border: '1px solid var(--mono-border)',
+                  borderLeft: '3px solid var(--mono-primary)',
+                }}
+              >
+                <p className="text-sm mb-2" style={{ color: 'var(--mono-text)' }}>
+                  <span className="font-semibold" style={{ color: 'var(--mono-primary)' }}>Built for:</span>{' '}
+                  <span style={{ color: 'var(--mono-muted)' }}>{context.builtFor}</span>
+                </p>
+                <p className="text-sm" style={{ color: 'var(--mono-text)' }}>
+                  <span className="font-semibold" style={{ color: 'var(--mono-primary)' }}>Designed to prove:</span>{' '}
+                  <span style={{ color: 'var(--mono-muted)' }}>{context.designedToProve}</span>
+                </p>
+              </div>
+            )}
 
             {/* Image */}
             {project.image_url && (
@@ -170,6 +212,40 @@ const ProjectDetail: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {/* Related Projects */}
+            {relatedProjects && relatedProjects.length > 0 && (
+              <div className="monolith-card p-6">
+                <h2 className="font-heading text-xl mb-4 pb-2" style={{ color: 'var(--mono-text)', borderBottom: '1px solid var(--mono-border)' }}>Related Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {relatedProjects.map((rp) => (
+                    <Link
+                      key={rp.id}
+                      to={`/projects/${rp.slug}`}
+                      className="rounded-lg p-4 no-underline transition-all duration-300"
+                      style={{
+                        background: 'var(--mono-surface)',
+                        border: '1px solid var(--mono-border)',
+                        textDecoration: 'none',
+                        display: 'block',
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.borderColor = 'var(--mono-primary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.borderColor = 'var(--mono-border)';
+                      }}
+                    >
+                      <h4 className="font-heading font-semibold text-sm mb-1" style={{ color: 'var(--mono-text)' }}>{rp.title}</h4>
+                      <p className="text-xs line-clamp-2" style={{ color: 'var(--mono-muted)' }}>{rp.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* CTA */}
+            <PageCTA text="Need something similar? Let's talk" />
           </div>
         )}
       </div>

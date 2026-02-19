@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../integrations/supabase/client';
+import { Brain, Lightning, Wrench, Cloud } from '@phosphor-icons/react';
 
 /**
  * ExpertiseSection — Monolith horizontal scroll cards
@@ -12,29 +13,29 @@ interface Expertise {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon: React.ComponentType<any>;
   skills: string[];
   display_order: number;
 }
 
 const fallbackExpertise: Expertise[] = [
   {
-    id: '1', title: 'LLM Integration', icon: '🧠',
+    id: '1', title: 'LLM Integration', icon: Brain,
     description: 'Intelligent agents with semantic search, memory, and real-time reasoning via vector databases and RAG pipelines.',
     skills: ['LangChain', 'AutoGen', 'ChromaDB', 'RAG'], display_order: 1,
   },
   {
-    id: '2', title: 'AI Automation', icon: '⚡',
+    id: '2', title: 'AI Automation', icon: Lightning,
     description: 'Autonomous pipelines with multi-agent systems for end-to-end data processing and strategic alerting.',
     skills: ['Multi-Agent', 'Redis', 'ETL'], display_order: 2,
   },
   {
-    id: '3', title: 'Software Engineering', icon: '🔧',
+    id: '3', title: 'Software Engineering', icon: Wrench,
     description: 'Clean code, SOLID principles, TDD, agile methodologies across the full SDLC.',
     skills: ['SOLID', 'TDD', 'CI/CD'], display_order: 3,
   },
   {
-    id: '4', title: 'Full-Stack & Cloud', icon: '☁️',
+    id: '4', title: 'Full-Stack & Cloud', icon: Cloud,
     description: 'Scalable applications with Python, .NET, React, and cloud-native technologies.',
     skills: ['Python', 'React', '.NET', 'AWS', 'Docker'], display_order: 4,
   },

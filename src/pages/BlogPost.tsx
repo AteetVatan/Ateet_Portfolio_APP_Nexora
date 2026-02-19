@@ -4,7 +4,7 @@ import SEOHead from '../components/SEOHead';
 import { useParams, useNavigate } from 'react-router-dom';
 import BlogContent from '../components/BlogContent';
 import { useStaticBlogPost } from '../hooks/use-static-blog-posts';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from '@phosphor-icons/react';
 import { Button } from '../components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import PageLayout from '../components/layout/PageLayout';
@@ -68,7 +68,7 @@ const BlogPost: React.FC = () => {
               </h1>
               <div className="flex items-center gap-3 text-sm font-mono mb-4" style={{ color: 'var(--mono-muted)' }}>
                 <time>{new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-                {post.content && <span>• {Math.ceil(post.content.length / 1500)} min read</span>}
+                {post.content && <span>· {Math.ceil(post.content.length / 1500)} min read</span>}
               </div>
               {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">

@@ -4,6 +4,7 @@ import { Skeleton } from '../components/ui/skeleton';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import PageLayout from '../components/layout/PageLayout';
+import PageCTA from '../components/PageCTA';
 
 const About: React.FC = () => {
   const { data: aboutContent, isLoading, error } = useAboutContent();
@@ -69,7 +70,7 @@ const About: React.FC = () => {
                 {aboutContent.cta_footer}
               </div>
               <Link to="/contact" className="btn-primary inline-block">
-                Contact Me →
+                Let's build something together
               </Link>
             </div>
           </div>

@@ -46,7 +46,7 @@ const BlogPreview: React.FC = () => {
         </div>
 
         <Link to="/blog" className="btn-primary mt-6 md:mt-0">
-          All Articles →
+          All Articles
         </Link>
       </div>
 
@@ -75,7 +75,7 @@ const BlogPreview: React.FC = () => {
             <div className="p-6">
               <div className="mb-2 text-xs font-mono flex items-center" style={{ color: 'var(--mono-muted)' }}>
                 <span>{formatDate(posts[0].created_at)}</span>
-                <span className="mx-2">•</span>
+                <span className="mx-2">·</span>
                 <span>{Math.ceil(posts[0].content.length / 1500)} min read</span>
               </div>
 
@@ -88,7 +88,7 @@ const BlogPreview: React.FC = () => {
               </p>
 
               <span className="project-link mt-auto">
-                Read Article →
+                Read Article
               </span>
             </div>
           </Link>
@@ -117,7 +117,7 @@ const BlogPreview: React.FC = () => {
                   <span className="tag" style={{ background: 'var(--mono-primary)', color: '#fff', borderColor: 'transparent', fontSize: '10px', padding: '2px 8px' }}>
                     {post.tags?.[0] || 'Tech'}
                   </span>
-                  <span className="mx-2">•</span>
+                  <span className="mx-2">·</span>
                   <span>{formatDate(post.created_at)}</span>
                 </div>
 
@@ -139,7 +139,7 @@ const BlogPreview: React.FC = () => {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--mono-primary)'; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--mono-border)'; }}
           >
-            <span className="font-mono" style={{ color: 'var(--mono-primary)' }}>View All Articles →</span>
+            <span className="font-mono" style={{ color: 'var(--mono-primary)' }}>View All Articles</span>
           </Link>
         </div>
       </div>

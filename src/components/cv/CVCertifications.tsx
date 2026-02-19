@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award } from 'lucide-react';
+import { Medal } from '@phosphor-icons/react';
 
 interface Certification {
   name: string;
@@ -20,7 +20,7 @@ const CVCertifications: React.FC<CVCertificationsProps> = ({ certifications }) =
           className="flex items-start gap-3 p-4 rounded transition-all duration-300"
           style={{ background: 'var(--mono-surface)', border: '1px solid var(--mono-border)' }}
         >
-          <Award className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--mono-primary)' }} />
+          <Medal className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--mono-primary)' }} />
           <div>
             <p className="text-sm font-medium" style={{ color: 'var(--mono-text)' }}>{cert.name}</p>
             {cert.issuer && <p className="text-xs" style={{ color: 'var(--mono-muted)' }}>{cert.issuer}</p>}

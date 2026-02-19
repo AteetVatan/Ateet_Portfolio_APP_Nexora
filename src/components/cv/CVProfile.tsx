@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download, Mail, Phone, MapPin, Linkedin, Github, Briefcase } from 'lucide-react';
+import { DownloadSimple, Envelope, MapPin, LinkedinLogo, GithubLogo, Briefcase } from '@phosphor-icons/react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 interface CVProfileProps {
@@ -43,7 +43,7 @@ const CVProfile: React.FC<CVProfileProps> = ({
             style={{ color: 'var(--mono-primary)', borderColor: 'var(--mono-border)' }}
             onClick={onDownload}
           >
-            <Download className="mr-2 h-4 w-4" />
+            <DownloadSimple className="mr-2 h-4 w-4" />
             Download CV
           </Button>
         </div>
@@ -59,14 +59,14 @@ const CVProfile: React.FC<CVProfileProps> = ({
               </p>
             </div>
             <div className="flex items-center">
-              <Mail className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+              <Envelope className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
               <p>
                 <strong className="mr-2" style={{ color: 'var(--mono-muted)' }}>Email:</strong>
                 <span style={{ color: 'var(--mono-text)' }}>{email || "developer@example.com"}</span>
               </p>
             </div>
             <div className="flex items-center">
-              <Linkedin className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+              <LinkedinLogo className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
               <p style={{ color: 'var(--mono-muted)' }}>
                 <strong className="mr-2">LinkedIn:</strong>
                 <a href={linkedin || "#"} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--mono-primary)]" style={{ color: 'var(--mono-text)' }}>
@@ -75,7 +75,7 @@ const CVProfile: React.FC<CVProfileProps> = ({
               </p>
             </div>
             <div className="flex items-center">
-              <Github className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+              <GithubLogo className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
               <p style={{ color: 'var(--mono-muted)' }}>
                 <strong className="mr-2">GitHub:</strong>
                 <a href={github || "#"} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--mono-primary)]" style={{ color: 'var(--mono-text)' }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download } from 'lucide-react';
+import { DownloadSimple } from '@phosphor-icons/react';
 
 interface Language {
   name: string;
@@ -34,7 +34,7 @@ const CVLanguages: React.FC<CVLanguagesProps> = ({ languages, onDownload }) => {
         style={{ background: 'var(--mono-primary)', color: '#fff' }}
         aria-label="Download CV"
       >
-        <Download className="w-6 h-6" />
+        <DownloadSimple className="w-6 h-6" />
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import SEOHead from '../components/SEOHead';
 import { formatDistanceToNow } from 'date-fns';
-import { Rss, RefreshCw } from 'lucide-react';
+import { RssSimple, ArrowsClockwise } from '@phosphor-icons/react';
 import PageLayout from '../components/layout/PageLayout';
 import AiNewsCard from '../components/AiNewsCard';
 import {
@@ -106,7 +106,7 @@ const AiNews: React.FC = () => {
         <PageLayout>
             <SEOHead
                 title="AI News"
-                description="Live AI news feed curated by Ateet Vatan — latest updates on LLMs, agents, and AI research from top sources."
+                description="Live AI news feed curated by Ateet Vatan. Latest updates on LLMs, agents, and AI research from top sources."
             />
             <section className="py-20 md:py-32 px-6 md:px-20 max-w-[1400px] mx-auto">
                 {/* Header */}
@@ -134,7 +134,7 @@ const AiNews: React.FC = () => {
                                 title={lastUpdated?.toLocaleString() || ''}
                                 style={{ color: 'var(--mono-muted)', opacity: 0.7 }}
                             >
-                                <RefreshCw size={12} />
+                                <ArrowsClockwise size={12} />
                                 Updated {updatedAgo}
                             </span>
                         )}
@@ -219,8 +219,9 @@ const AiNews: React.FC = () => {
                         className="surface-card p-8 text-center"
                         style={{ maxWidth: '500px', margin: '0 auto' }}
                     >
-                        <Rss
+                        <RssSimple
                             size={40}
+                            weight="light"
                             style={{ color: 'var(--mono-muted)', margin: '0 auto 16px' }}
                         />
                         <p

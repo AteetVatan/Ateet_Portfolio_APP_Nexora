@@ -12,7 +12,7 @@ const BusinessCard: React.FC = () => {
         <PageLayout>
             <SEOHead
                 title="Business Card | Ateet Bahamani"
-                description="Digital business card for Ateet Bahamani — AI engineer, full-stack developer. Scan QR codes to visit the portfolio or talk to the AI clone."
+                description="Digital business card for Ateet Bahamani, AI engineer, full-stack developer. Scan QR codes to visit the portfolio or talk to the AI clone."
             />
             <section
                 className="min-h-screen flex items-center justify-center"
@@ -20,7 +20,7 @@ const BusinessCard: React.FC = () => {
             >
                 <iframe
                     src="/business-card.html"
-                    title="Ateet Bahamani — Business Card"
+                    title="Ateet Bahamani, Business Card"
                     style={{
                         width: '100%',
                         maxWidth: '620px',

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ateet Bahamani — Business Card</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap"
         rel="stylesheet" />
     <style>
         *,
@@ -17,10 +17,26 @@
             padding: 0
         }
 
+        :root {
+            /* Standard US business card: 3.5in × 2in  (landscape) */
+            --card-w: 3.5in;
+            --card-h: 2in;
+            /* Screen preview scale (× 2.2) */
+            --screen-w: 750px;
+            --screen-h: 430px;
+            --primary: #FF4D00;
+            --primary-hover: #E64400;
+            --bg: #111;
+            --card-bg: #1A1A1A;
+            --text: #E5E5E5;
+            --muted: #666;
+            --border-subtle: rgba(245, 240, 235, 0.08);
+        }
+
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #0a0a0f;
-            color: #f1f1f1;
+            font-family: 'Instrument Sans', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -28,14 +44,13 @@
             padding: 40px 20px;
         }
 
-        /* ───── ambient background ───── */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0, 180, 216, 0.06), transparent),
-                radial-gradient(ellipse 60% 50% at 80% 90%, rgba(99, 102, 241, 0.04), transparent);
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 77, 0, 0.05), transparent),
+                radial-gradient(ellipse 60% 50% at 80% 90%, rgba(255, 133, 51, 0.03), transparent);
             pointer-events: none;
         }
 
@@ -45,11 +60,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
+            gap: 24px;
         }
 
         .page-title {
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.25em;
             text-transform: uppercase;
@@ -57,42 +72,58 @@
         }
 
         /* ═══════════════════════════════════
-       CARD FRONT
-       ═══════════════════════════════════ */
-        .card {
-            width: 540px;
-            border-radius: 16px;
+           CARD SHELL — Landscape 3.5:2
+           ═══════════════════════════════════ */
+        .card,
+        .card-back {
+            width: var(--screen-w);
+            height: var(--screen-h);
+            border-radius: 14px;
             overflow: hidden;
-            background: #111118;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             position: relative;
         }
 
-        /* top gradient line */
-        .card::before {
+        .card::before,
+        .card-back::before {
             content: '';
             display: block;
             height: 3px;
-            background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #8b5cf6, #ec4899);
+            background: linear-gradient(90deg, var(--primary), rgba(255, 133, 51, 0.6), var(--primary));
         }
 
+        .card-back::before {
+            background: linear-gradient(90deg, rgba(255, 133, 51, 0.6), var(--primary), rgba(255, 133, 51, 0.6));
+        }
+
+        /* ═══════════════════════════════════
+           FRONT — Two-column landscape
+           Left: avatar + brand
+           Right: name + contact
+           ═══════════════════════════════════ */
         .card-inner {
-            padding: 40px 38px 34px;
+            padding: 28px 32px 22px;
+            height: calc(var(--screen-h) - 3px);
+            display: flex;
+            gap: 28px;
         }
 
-        /* ── top row: avatar + name ── */
-        .top-row {
+        .card-left {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 22px;
-            margin-bottom: 10px;
+            justify-content: center;
+            gap: 16px;
+            flex-shrink: 0;
+            width: 150px;
         }
 
         .avatar {
             position: relative;
-            width: 76px;
-            height: 76px;
+            width: 90px;
+            height: 90px;
             flex-shrink: 0;
         }
 
@@ -101,7 +132,7 @@
             position: absolute;
             inset: -3px;
             border-radius: 50%;
-            background: conic-gradient(#06b6d4, #8b5cf6, #ec4899, #ef4444, #f97316, #06b6d4);
+            background: conic-gradient(var(--primary), rgba(255, 133, 51, 0.6), transparent 70%, var(--primary));
             animation: ring-rotate 5s linear infinite;
         }
 
@@ -119,13 +150,64 @@
             border-radius: 50%;
             object-fit: cover;
             object-position: top;
-            border: 3px solid #111118;
+            border: 3px solid var(--card-bg);
+        }
+
+        .masx-brand {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.06em;
+            text-align: center;
+        }
+
+        .masx-brand strong {
+            color: var(--primary);
+        }
+
+        .masx-brand span {
+            color: #444;
+        }
+
+        .dot-grid {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .dot-grid span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #222;
+        }
+
+        .dot-grid span:nth-child(1) {
+            background: var(--primary);
+        }
+
+        .dot-grid span:nth-child(2) {
+            background: rgba(255, 133, 51, 0.7);
+        }
+
+        .dot-grid span:nth-child(3) {
+            background: var(--primary);
+        }
+
+        /* ── right column ── */
+        .card-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid var(--border-subtle);
+            padding-left: 28px;
         }
 
         .identity h1 {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: -0.03em;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
             line-height: 1;
             color: #fff;
         }
@@ -133,9 +215,9 @@
         .identity h1 .blink {
             display: inline-block;
             width: 3px;
-            height: 22px;
-            background: #06b6d4;
-            margin-left: 3px;
+            height: 20px;
+            background: var(--primary);
+            margin-left: 2px;
             vertical-align: text-bottom;
             animation: cursor-blink 1s step-end infinite;
         }
@@ -147,56 +229,44 @@
         }
 
         .identity .tagline {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 400;
-            color: #777;
-            margin-top: 8px;
-            line-height: 1.55;
+            color: var(--muted);
+            margin-top: 5px;
+            line-height: 1.4;
         }
 
-        /* ── separator ── */
         .sep {
             height: 1px;
-            background: rgba(255, 255, 255, 0.06);
-            margin: 26px 0;
-        }
-
-        /* ── contact section ── */
-        .section-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #06b6d4;
-            margin-bottom: 16px;
+            background: var(--border-subtle);
+            margin: 12px 0;
         }
 
         .contact-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 11px;
+            gap: 10px;
         }
 
         .contact-row {
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-size: 13px;
+            gap: 12px;
+            font-size: 15px;
             color: #999;
             text-decoration: none;
             transition: color 0.2s;
         }
 
         a.contact-row:hover {
-            color: #06b6d4;
+            color: var(--primary);
         }
 
         .contact-row .ico {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            border-radius: 7px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
@@ -212,29 +282,29 @@
         }
 
         .contact-row .ico svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
         }
 
         .contact-row .label {
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: #555;
-            width: 72px;
+            width: 74px;
             flex-shrink: 0;
         }
 
         .contact-row .value {
             color: #bbb;
+            font-size: 15px;
         }
 
         a.contact-row:hover .value {
-            color: #06b6d4;
+            color: var(--primary);
         }
 
-        /* ai clone highlight */
         .contact-row.ai-highlight .ico {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
             border-color: rgba(6, 182, 212, 0.3);
@@ -242,108 +312,59 @@
 
         .contact-row.ai-highlight .badge {
             margin-left: auto;
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 8px;
-            letter-spacing: 0.12em;
-            padding: 3px 10px;
+            letter-spacing: 0.1em;
+            padding: 2px 7px;
             border-radius: 999px;
             background: rgba(6, 182, 212, 0.1);
             border: 1px solid rgba(6, 182, 212, 0.2);
-            color: #06b6d4;
-        }
-
-        /* ── MASX AI footer inside card ── */
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 26px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .masx-brand {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.06em;
-        }
-
-        .masx-brand strong {
-            color: #06b6d4;
-        }
-
-        .masx-brand span {
-            color: #444;
-        }
-
-        .card-footer .dot-grid {
-            display: flex;
-            gap: 4px;
-        }
-
-        .card-footer .dot-grid span {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #222;
-        }
-
-        .card-footer .dot-grid span:nth-child(1) {
-            background: #ef4444;
-        }
-
-        .card-footer .dot-grid span:nth-child(2) {
-            background: #22c55e;
-        }
-
-        .card-footer .dot-grid span:nth-child(3) {
-            background: #06b6d4;
+            color: var(--primary);
         }
 
         /* ═══════════════════════════════════
-       CARD BACK — QR codes
-       ═══════════════════════════════════ */
-        .card-back {
-            width: 540px;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #111118;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-        }
-
-        .card-back::before {
-            content: '';
-            display: block;
-            height: 3px;
-            background: linear-gradient(90deg, #8b5cf6, #06b6d4, #22c55e, #eab308, #f97316, #ef4444, #ec4899);
-        }
-
+           BACK — QR codes landscape
+           ═══════════════════════════════════ */
         .card-back-inner {
-            padding: 32px 38px 34px;
+            padding: 16px 24px 14px;
+            height: calc(var(--screen-h) - 3px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
         }
 
         .qr-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            display: flex;
+            gap: 60px;
+            align-items: center;
         }
 
         .qr-block {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             text-decoration: none;
             color: inherit;
         }
 
         .qr-img-wrap {
-            width: 100%;
-            aspect-ratio: 1;
+            width: 200px;
+            height: 200px;
             background: #ffffff;
-            border-radius: 14px;
-            padding: 14px;
+            border-radius: 12px;
+            padding: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -351,8 +372,8 @@
         }
 
         .qr-block:hover .qr-img-wrap {
-            transform: scale(1.03);
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.12);
+            transform: scale(1.04);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.12);
         }
 
         .qr-img-wrap img {
@@ -366,12 +387,12 @@
         }
 
         .qr-meta .qr-tag {
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: #06b6d4;
-            margin-bottom: 4px;
+            color: var(--primary);
+            margin-bottom: 2px;
         }
 
         .qr-meta .qr-url {
@@ -379,77 +400,198 @@
             color: #555;
         }
 
-        /* scan prompt */
         .scan-prompt {
-            text-align: center;
-            margin-top: 20px;
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.1em;
             color: #333;
         }
 
+        .back-brand {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            text-align: center;
+        }
+
+        .back-brand strong {
+            color: var(--primary);
+        }
+
+        .back-brand span {
+            color: #444;
+        }
+
         /* ═══════════════════════════════════
-       ACTIONS
-       ═══════════════════════════════════ */
+           ACTIONS (screen only)
+           ═══════════════════════════════════ */
         .actions {
             display: flex;
             gap: 10px;
         }
 
         .action-btn {
-            font-family: 'Space Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 11px;
             letter-spacing: 0.06em;
             padding: 10px 22px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            background: #111118;
+            background: var(--card-bg);
             color: #555;
             cursor: pointer;
             transition: all 0.25s;
         }
 
         .action-btn:hover {
-            border-color: #06b6d4;
-            color: #06b6d4;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Hidden on screen */
+        .cut-label {
+            display: none;
         }
 
         /* ═══════════════════════════════════
-       PRINT STYLES
-       ═══════════════════════════════════ */
+           PRINT — 3.5in × 2in on standard paper
+           ═══════════════════════════════════ */
         @media print {
+
+            @page {
+                size: auto;
+                margin: 0.5in;
+            }
+
+            html,
             body {
-                background: #fff;
-                padding: 0;
+                background: #fff !important;
                 color: #111;
+                margin: 0;
+                padding: 0;
             }
 
             body::before {
                 display: none;
             }
 
+            .page {
+                display: block;
+                padding: 0;
+                margin: 0;
+                gap: 0;
+            }
+
             .page-title,
             .actions {
-                display: none;
+                display: none !important;
+            }
+
+            .cut-label {
+                display: block !important;
+                text-align: center;
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 8px;
+                color: #aaa;
+                margin: 6px 0;
+                letter-spacing: 0.1em;
             }
 
             .card,
             .card-back {
+                width: var(--card-w);
+                height: var(--card-h);
+                margin: 0 auto;
+                border-radius: 0;
                 box-shadow: none;
-                border: 2px solid #ccc;
-                background: #fff;
-                break-inside: avoid;
-                page-break-inside: avoid;
+                background: #fff !important;
+                border: 1px dashed #aaa;
+                overflow: hidden;
+            }
+
+            .card {
+                page-break-after: always;
+                break-after: page;
             }
 
             .card::before,
             .card-back::before {
-                background: linear-gradient(90deg, #666, #999, #666);
                 height: 2px;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            /* ── Front print ── */
+            .card-inner {
+                padding: 8px 10px 6px;
+                height: calc(var(--card-h) - 2px);
+                gap: 10px;
+            }
+
+            .card-left {
+                width: 58px;
+                gap: 6px;
+            }
+
+            .avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .avatar::before {
+                display: none;
+            }
+
+            .avatar img {
+                border: 1.5px solid #ccc;
+            }
+
+            .masx-brand {
+                font-size: 5.5px;
+            }
+
+            .masx-brand strong {
+                color: #1a8a9c;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .masx-brand span {
+                color: #999;
+            }
+
+            .dot-grid span {
+                width: 2.5px;
+                height: 2.5px;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .dot-grid span:nth-child(1) {
+                background: #e74c3c !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .dot-grid span:nth-child(2) {
+                background: #27ae60 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .dot-grid span:nth-child(3) {
+                background: #2980b9 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .card-right {
+                padding-left: 10px;
+                border-left: 0.5px solid #ccc;
             }
 
             .identity h1 {
+                font-size: 10px;
                 color: #111;
             }
 
@@ -458,100 +600,176 @@
             }
 
             .identity .tagline {
+                font-size: 5.5px;
                 color: #555;
+                margin-top: 2px;
             }
 
-            .section-label {
-                color: #333;
+            .sep {
+                margin: 4px 0;
+                background: #ccc;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .contact-list {
+                gap: 2px;
             }
 
             .contact-row {
+                gap: 4px;
+                font-size: 6px;
                 color: #333;
-            }
-
-            .contact-row .label {
-                color: #666;
-            }
-
-            .contact-row .value {
-                color: #222;
             }
 
             .contact-row .ico {
-                background: #f0f0f0;
-                border-color: #ddd;
+                width: 12px;
+                height: 12px;
+                border-radius: 2px;
+                background: #f0f0f0 !important;
+                border: 0.5px solid #ccc;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .contact-row .ico svg {
+                width: 6px;
+                height: 6px;
+            }
+
+            .contact-row .label {
+                font-size: 4.5px;
+                width: 28px;
+                color: #888;
+            }
+
+            .contact-row .value {
+                font-size: 6px;
+                color: #222;
+            }
+
+            .contact-row.ai-highlight .ico {
+                background: #e0f7fa !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
             }
 
             .contact-row.ai-highlight .badge {
-                background: #eee;
-                border-color: #ccc;
-                color: #333;
+                font-size: 4px;
+                padding: 1px 3px;
+                background: #e0f7fa !important;
+                border-color: #80cbc4;
+                color: #00796b;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
             }
 
-            .card-footer {
-                border-top-color: #ddd;
+            /* ── Back print ── */
+            .card-back {
+                page-break-before: always;
+                break-before: page;
             }
 
-            .masx-brand strong {
-                color: #333;
+            .card-back-inner {
+                padding: 8px 14px 6px;
+                height: calc(var(--card-h) - 2px);
+                gap: 6px;
             }
 
-            .masx-brand span {
-                color: #888;
+            .section-label {
+                font-size: 5px;
+                color: #1a8a9c;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .qr-grid {
+                gap: 16px;
+            }
+
+            .qr-block {
+                gap: 3px;
             }
 
             .qr-img-wrap {
-                border: 1px solid #ddd;
+                width: 52px;
+                height: 52px;
+                border-radius: 4px;
+                padding: 3px;
+                border: 0.5px solid #ccc;
             }
 
             .qr-meta .qr-tag {
-                color: #333;
+                font-size: 4.5px;
+                color: #1a8a9c;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
             }
 
             .qr-meta .qr-url {
-                color: #555;
+                font-size: 4.5px;
+                color: #777;
             }
 
             .scan-prompt {
-                color: #888;
+                font-size: 4.5px;
+                color: #aaa;
             }
 
-            .avatar::before {
-                display: none;
+            .back-brand {
+                font-size: 5.5px;
             }
 
-            .avatar img {
-                border-color: #ddd;
+            .back-brand strong {
+                color: #1a8a9c;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .back-brand span {
+                color: #999;
             }
         }
 
         /* ═══════════════════════════════════
-       RESPONSIVE
-       ═══════════════════════════════════ */
-        @media (max-width: 580px) {
+           RESPONSIVE (screen)
+           ═══════════════════════════════════ */
+        @media screen and (max-width: 640px) {
 
             .card,
             .card-back {
                 width: 100%;
+                height: auto;
+                min-height: 200px;
             }
 
-            .card-inner,
+            .card-inner {
+                height: auto;
+                min-height: 200px;
+            }
+
             .card-back-inner {
-                padding: 28px 22px 24px;
+                height: auto;
+                min-height: 200px;
+                padding: 20px 16px;
             }
 
-            .identity h1 {
-                font-size: 22px;
-            }
-
-            .contact-row .label {
-                width: 60px;
-                font-size: 9px;
+            .card-left {
+                width: 90px;
             }
 
             .avatar {
-                width: 60px;
-                height: 60px;
+                width: 56px;
+                height: 56px;
+            }
+
+            .identity h1 {
+                font-size: 16px;
+            }
+
+            .qr-img-wrap {
+                width: 90px;
+                height: 90px;
             }
         }
     </style>
@@ -566,107 +784,107 @@
         <div class="card">
             <div class="card-inner">
 
-                <div class="top-row">
+                <div class="card-left">
                     <div class="avatar">
                         <img src="/profile.jpeg" alt="Ateet Bahamani" />
                     </div>
-                    <div class="identity">
-                        <h1>ATEET BAHAMANI<span class="blink"></span></h1>
-                        <p class="tagline">AI Architect / Engineer building intelligent systems from code to cognition.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="sep"></div>
-
-                <div class="section-label">Contact</div>
-
-                <ul class="contact-list">
-                    <li>
-                        <a class="contact-row" href="mailto:ab@masxai.com">
-                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                </svg></span>
-                            <span class="label">Email</span>
-                            <span class="value">ab@masxai.com</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="contact-row" href="tel:+4917623463484">
-                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                                </svg></span>
-                            <span class="label">Phone</span>
-                            <span class="value">+49 176 234 63484</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="contact-row" href="https://ateet.masxai.com/" target="_blank"
-                            rel="noopener noreferrer">
-                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M2 12h20" />
-                                    <path
-                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                                </svg></span>
-                            <span class="label">Portfolio</span>
-                            <span class="value">https://ateet.masxai.com</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="contact-row" href="https://github.com/AteetVatan" target="_blank"
-                            rel="noopener noreferrer">
-                            <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-                                </svg></span>
-                            <span class="label">GitHub</span>
-                            <span class="value">https://github.com/AteetVatan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="contact-row" href="https://www.linkedin.com/in/ateet-vatan-bahmani/" target="_blank"
-                            rel="noopener noreferrer">
-                            <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                </svg></span>
-                            <span class="label">LinkedIn</span>
-                            <span class="value">linkedin.com/in/ateet-vatan-bahmani</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="contact-row ai-highlight" href="https://ateetclone.masxai.com/" target="_blank"
-                            rel="noopener noreferrer">
-                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="3" />
-                                    <path
-                                        d="M12 2v4m0 12v4M2 12h4m12 0h4m-2.83-7.17-2.83 2.83M7.76 16.24l-2.83 2.83m11.31 0-2.83-2.83M7.76 7.76 4.93 4.93" />
-                                </svg></span>
-                            <span class="label">AI Clone</span>
-                            <span class="value">https://ateetclone.masxai.com</span>
-                            <span class="badge">TALK TO MY AI</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="card-footer">
                     <div class="masx-brand">
-                        <strong>MASX AI</strong> <span>— The AI Spark</span>
+                        <strong>MASX AI</strong><br />
+                        <span>The AI Spark</span>
                     </div>
                     <div class="dot-grid">
                         <span></span><span></span><span></span>
                     </div>
                 </div>
 
+                <div class="card-right">
+                    <div class="identity">
+                        <h1>ATEET BAHAMANI<span class="blink"></span></h1>
+                        <p class="tagline">AI Architect / Engineer</p>
+                    </div>
+
+                    <div class="sep"></div>
+
+                    <ul class="contact-list">
+                        <li>
+                            <a class="contact-row" href="mailto:ab@masxai.com">
+                                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                    </svg></span>
+                                <span class="label">Email</span>
+                                <span class="value">ab@masxai.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-row" href="tel:+4917623463484">
+                                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                                    </svg></span>
+                                <span class="label">Phone</span>
+                                <span class="value">+49 176 234 63484</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-row" href="https://ateet.masxai.com/" target="_blank"
+                                rel="noopener noreferrer">
+                                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M2 12h20" />
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                    </svg></span>
+                                <span class="label">Web</span>
+                                <span class="value">ateet.masxai.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-row" href="https://github.com/AteetVatan" target="_blank"
+                                rel="noopener noreferrer">
+                                <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                                    </svg></span>
+                                <span class="label">GitHub</span>
+                                <span class="value">github.com/AteetVatan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-row" href="https://www.linkedin.com/in/ateet-vatan-bahmani/"
+                                target="_blank" rel="noopener noreferrer">
+                                <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg></span>
+                                <span class="label">LinkedIn</span>
+                                <span class="value">in/ateet-vatan-bahmani</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="contact-row ai-highlight" href="https://ateetclone.masxai.com/" target="_blank"
+                                rel="noopener noreferrer">
+                                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <circle cx="12" cy="12" r="3" />
+                                        <path
+                                            d="M12 2v4m0 12v4M2 12h4m12 0h4m-2.83-7.17-2.83 2.83M7.76 16.24l-2.83 2.83m11.31 0-2.83-2.83M7.76 7.76 4.93 4.93" />
+                                    </svg></span>
+                                <span class="label">AI Clone</span>
+                                <span class="value">ateetclone.masxai.com</span>
+                                <span class="badge">TALK TO MY AI</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
+
+        <div class="cut-label">✂ — cut along dashed line — ✂</div>
 
         <div class="page-title">Back — Scan to connect</div>
 
@@ -674,7 +892,7 @@
         <div class="card-back">
             <div class="card-back-inner">
 
-                <div class="section-label" style="text-align:center;margin-bottom:24px">Scan to Connect</div>
+                <div class="section-label">Scan to Connect</div>
 
                 <div class="qr-grid">
                     <a class="qr-block" href="https://ateet.masxai.com/" target="_blank" rel="noopener noreferrer">
@@ -699,14 +917,20 @@
                     </a>
                 </div>
 
-                <p class="scan-prompt">↑ Point your camera to visit instantly ↑</p>
+                <div class="scan-prompt">↑ Point your camera ↑</div>
+
+                <div class="back-brand">
+                    <strong>MASX AI</strong> <span>— The AI Spark</span>
+                </div>
 
             </div>
         </div>
 
+        <div class="cut-label">✂ — cut along dashed line — ✂</div>
+
         <!-- ═══════ ACTIONS ═══════ -->
         <div class="actions">
-            <button class="action-btn" onclick="window.print()">⎙ Print</button>
+            <button class="action-btn" onclick="window.print()">⎙ Print Card</button>
             <button class="action-btn" id="shareBtn" onclick="shareCard()">↗ Share</button>
         </div>
 
@@ -716,7 +940,7 @@
         function shareCard() {
             const data = {
                 title: 'Ateet Bahamani — AI Engineer',
-                text: 'AI Architect / Engineer building intelligent systems from code to cognition.\n\nPortfolio: https://ateet.masxai.com/\nAI Clone: https://ateetclone.masxai.com/\nGitHub: https://github.com/AteetVatan\nLinkedIn: https://www.linkedin.com/in/ateet-vatan-bahmani/',
+                text: 'AI Architect / Engineer\n\nPortfolio: https://ateet.masxai.com/\nAI Clone: https://ateetclone.masxai.com/\nGitHub: https://github.com/AteetVatan\nLinkedIn: https://www.linkedin.com/in/ateet-vatan-bahmani/',
                 url: 'https://ateet.masxai.com/'
             };
             if (navigator.share) {

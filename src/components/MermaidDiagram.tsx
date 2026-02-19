@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
-import { Maximize2, Minimize2 } from 'lucide-react';
+import { ArrowsOut, ArrowsIn } from '@phosphor-icons/react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
@@ -162,7 +162,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart }) => {
           onClick={() => setIsExpanded(true)}
           title="Expand diagram"
         >
-          <Maximize2 className="w-4 h-4" />
+          <ArrowsOut className="w-4 h-4" />
         </button>
       </div>
 
@@ -184,7 +184,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart }) => {
               onClick={() => setIsExpanded(false)}
               title="Close expanded view"
             >
-              <Minimize2 className="w-4 h-4" />
+              <ArrowsIn className="w-4 h-4" />
             </button>
             <div dangerouslySetInnerHTML={{ __html: svgContent }} />
           </div>

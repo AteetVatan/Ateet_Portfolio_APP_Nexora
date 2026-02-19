@@ -5,9 +5,8 @@ import { supabase } from '../integrations/supabase/client';
 import { Link } from 'react-router-dom';
 
 /**
- * Hero — Monolith split layout
- * Left: floating portrait, label, giant name, description, two CTAs
- * Right: gradient accent panel (untouched)
+ * Hero — High-impact, client-benefit-first layout
+ * Big value proposition → personal intro → stats → CTAs
  */
 const Hero: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,8 +27,13 @@ const Hero: React.FC = () => {
   }, []);
 
   const name = heroData?.name || 'Ateet Bahamani';
-  const title = heroData?.title || 'AI Architect / Engineer';
-  const tagline = heroData?.tagline || 'Building intelligent systems that think, reason, and act. Specializing in LLM integration, multi-agent architectures, and production AI.';
+  const title = heroData?.title || 'AI Architect and Engineer';
+
+  const impactStats = [
+    { value: '15+', label: 'Years Enterprise' },
+    { value: '20+', label: 'Global Clients' },
+    { value: '7', label: 'Continents Served' },
+  ];
 
   return (
     <section id="hero" className="min-h-screen flex flex-col md:flex-row items-stretch">
@@ -38,7 +42,7 @@ const Hero: React.FC = () => {
 
         {/* Profile Portrait + Label row */}
         <div
-          className="flex items-center gap-5 mb-8"
+          className="flex items-center gap-5 mb-6"
           style={{
             animation: isVisible ? 'fade-in 0.6s forwards' : 'none',
             opacity: 0,
@@ -64,10 +68,10 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Name */}
+        {/* ═══ BIG IMPACT HEADLINE ═══ */}
         <h1
-          className="font-heading leading-[0.95] tracking-[-0.04em] mb-2"
-          style={{ fontSize: 'clamp(48px, 8vw, 120px)' }}
+          className="font-heading leading-[1.0] tracking-[-0.03em] mb-4"
+          style={{ fontSize: 'clamp(32px, 5.5vw, 64px)' }}
         >
           <span className="block overflow-hidden">
             <span
@@ -78,7 +82,7 @@ const Hero: React.FC = () => {
                 transform: 'translateY(100%)',
               }}
             >
-              {name.split(' ')[0]?.toUpperCase() || 'ATEET'}
+              Turn AI from buzzword
             </span>
           </span>
           <span className="block overflow-hidden">
@@ -90,26 +94,60 @@ const Hero: React.FC = () => {
                 transform: 'translateY(100%)',
               }}
             >
-              {name.split(' ')[1]?.toUpperCase() || 'BAHAMANI'}
-              <span style={{ color: 'var(--mono-primary)' }}>_</span>
+              into <span style={{ color: 'var(--mono-primary)' }}>business value.</span>
             </span>
           </span>
         </h1>
 
-        {/* Description */}
+        {/* ═══ PERSONAL INTRO ═══ */}
         <p
-          className="max-w-[480px] my-6 leading-relaxed"
+          className="max-w-[520px] my-5 leading-relaxed"
           style={{
-            fontSize: 'clamp(16px, 2vw, 22px)',
+            fontSize: 'clamp(16px, 2vw, 20px)',
             color: 'var(--mono-muted)',
             animation: isVisible ? 'fade-in 0.8s 0.4s forwards' : 'none',
             opacity: 0,
           }}
         >
-          {tagline}
+          <span style={{ color: 'var(--mono-text)', fontWeight: 600 }}>
+            Hi – I'm {name.split(' ')[0]}.
+          </span>{' '}
+          I help businesses cut through the AI hype and build systems that actually
+          ship to production. From multi-agent architectures to real-time LLM pipelines,
+          if it needs to work in the real world, I can build it.
         </p>
 
-        {/* Buttons */}
+        {/* ═══ IMPACT STATS ═══ */}
+        <div
+          className="flex flex-wrap gap-6 mb-8"
+          style={{
+            animation: isVisible ? 'fade-in 0.8s 0.5s forwards' : 'none',
+            opacity: 0,
+          }}
+        >
+          {impactStats.map((stat) => (
+            <div key={stat.label} className="flex flex-col">
+              <span
+                className="font-heading font-bold"
+                style={{
+                  fontSize: 'clamp(24px, 3vw, 36px)',
+                  color: 'var(--mono-primary)',
+                  lineHeight: 1,
+                }}
+              >
+                {stat.value}
+              </span>
+              <span
+                className="text-[11px] uppercase tracking-widest mt-1"
+                style={{ color: 'var(--mono-muted)' }}
+              >
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* ═══ CTAs ═══ */}
         <div
           className="flex flex-wrap gap-4"
           style={{
@@ -117,8 +155,11 @@ const Hero: React.FC = () => {
             opacity: 0,
           }}
         >
-          <Link to="/projects" className="btn-primary">
-            Explore Projects →
+          <Link to="/contact" className="btn-primary">
+            Let's build something
+          </Link>
+          <Link to="/projects" className="btn-outline">
+            See my work
           </Link>
           <a
             href="https://ateetclone.masxai.com/"
@@ -126,19 +167,12 @@ const Hero: React.FC = () => {
             rel="noopener noreferrer"
             className="btn-outline"
           >
-            Talk to Ateet's AI Clone
-          </a>
-          <a
-            href="/files/Ateet.pdf"
-            download
-            className="btn-outline"
-          >
-            Download CV ↓
+            Talk to my AI Clone
           </a>
         </div>
       </div>
 
-      {/* Right side — gradient photo placeholder */}
+      {/* Right side — gradient accent */}
       <div className="flex-[0_0_45%] overflow-hidden min-h-[50vh] md:min-h-0">
         <div
           className="w-full h-full flex items-center justify-center font-heading"
@@ -156,3 +190,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+

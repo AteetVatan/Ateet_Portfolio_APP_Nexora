@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeSelector from './ThemeSelector';
-import { Menu, X } from 'lucide-react';
+import { List, X } from '@phosphor-icons/react';
 
 /**
  * Navigation — Monolith top horizontal nav bar
@@ -91,16 +91,16 @@ const Navigation: React.FC = () => {
                     style={{ color: 'var(--mono-text)' }}
                     aria-label="Toggle menu"
                 >
-                    {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    {mobileOpen ? <X className="w-5 h-5" /> : <List className="w-5 h-5" />}
                 </button>
             </div>
 
             {/* Mobile dropdown */}
             {mobileOpen && (
                 <div
-                    className="absolute top-full left-0 w-full backdrop-blur-md py-4 md:hidden"
+                    className="absolute top-full left-0 w-full py-4 md:hidden"
                     style={{
-                        background: 'var(--mono-nav-bg)',
+                        background: 'var(--mono-bg)',
                         borderBottom: '1px solid var(--mono-border)',
                     }}
                 >

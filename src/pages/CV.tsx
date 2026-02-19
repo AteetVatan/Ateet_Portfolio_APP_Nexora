@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SEOHead from '@/components/SEOHead';
 import { supabase } from '@/integrations/supabase/client';
-import { Briefcase, GraduationCap, Award, Languages } from 'lucide-react';
+import { Briefcase, Student, Medal, Translate } from '@phosphor-icons/react';
 import { toast } from "@/hooks/use-toast";
 import { CVData, downloadCV } from '@/utils/cv';
 import PageLayout from '@/components/layout/PageLayout';
@@ -14,6 +14,7 @@ import CVExperience from '@/components/cv/CVExperience';
 import CVEducation from '@/components/cv/CVEducation';
 import CVCertifications from '@/components/cv/CVCertifications';
 import CVLanguages from '@/components/cv/CVLanguages';
+import PageCTA from '@/components/PageCTA';
 
 const CV: React.FC = () => {
   const [cvData, setCvData] = useState<CVData | null>(null);
@@ -128,20 +129,23 @@ const CV: React.FC = () => {
                 <CVExperience experience={transformExperience(cvData.experience)} />
               </CVCollapsibleSection>
               <CVCollapsibleSection title="Education"
-                icon={<GraduationCap className="mr-2 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />}
+                icon={<Student className="mr-2 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />}
                 isOpen={openSections.education} toggleSection={() => toggleSection('education')}>
                 <CVEducation education={transformEducation(cvData.education)} />
               </CVCollapsibleSection>
               <CVCollapsibleSection title="Certifications"
-                icon={<Award className="mr-2 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />}
+                icon={<Medal className="mr-2 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />}
                 isOpen={openSections.certifications} toggleSection={() => toggleSection('certifications')}>
                 <CVCertifications certifications={transformCertifications(cvData.certifications)} />
               </CVCollapsibleSection>
               <CVCollapsibleSection title="Languages"
-                icon={<Languages className="mr-2 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />}
+                icon={<Translate className="mr-2 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />}
                 isOpen={openSections.languages} toggleSection={() => toggleSection('languages')}>
                 <CVLanguages languages={transformLanguages(cvData.languages)} onDownload={handleDownloadCV} />
               </CVCollapsibleSection>
+
+              {/* CTA */}
+              <PageCTA text="Let's connect" />
             </>
           )}
         </div>

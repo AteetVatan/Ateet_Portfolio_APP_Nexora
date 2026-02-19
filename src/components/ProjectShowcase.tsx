@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { supabase } from '../integrations/supabase/client';
+import { ChartBar } from '@phosphor-icons/react';
 
 /**
  * ProjectShowcase — Monolith editorial 50/50 layout
@@ -85,7 +86,7 @@ const ProjectShowcase: React.FC = () => {
                 minHeight: '300px',
               }}
             >
-              {!project.image_url && '📊'}
+              {!project.image_url && <ChartBar size={48} weight="light" style={{ color: 'var(--mono-muted)' }} />}
             </div>
           </div>
 
@@ -103,7 +104,7 @@ const ProjectShowcase: React.FC = () => {
               ))}
             </div>
             <Link to={`/projects/${project.slug}`} className="project-link">
-              View Project →
+              View Project
             </Link>
           </div>
         </div>
@@ -112,7 +113,7 @@ const ProjectShowcase: React.FC = () => {
       {/* View all link */}
       <div className="text-center mt-12 reveal">
         <Link to="/projects" className="btn-outline inline-block">
-          View All Projects →
+          View All Projects
         </Link>
       </div>
     </section>

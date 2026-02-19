@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { ExternalLink } from 'lucide-react';
+import { ArrowSquareOut } from '@phosphor-icons/react';
 import type { NewsItem } from '../lib/rssClient';
 
 interface AiNewsCardProps {
@@ -199,7 +199,7 @@ const AiNewsCard: React.FC<AiNewsCardProps> = ({ item }) => {
                     }}
                     className="group-hover:opacity-100"
                 >
-                    <ExternalLink size={12} />
+                    <ArrowSquareOut size={12} weight="thin" />
                     <span>Read article</span>
                 </div>
             </div>

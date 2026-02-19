@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bot, FileText, BookOpen } from 'lucide-react';
+import { Robot, FileText, BookOpen } from '@phosphor-icons/react';
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -22,12 +22,12 @@ const SubMenuNav: React.FC<SubMenuNavProps> = ({ activeItem, handleNavClick }) =
       <NavigationMenu orientation="vertical">
         <NavigationMenuList className="space-x-0 flex-col items-start">
           <NavigationMenuItem>
-            <NavigationMenuTrigger 
-              className={`nav-menu-trigger ${activeItem.startsWith('/masx-ai') 
-                ? 'nav-menu-trigger-active' 
+            <NavigationMenuTrigger
+              className={`nav-menu-trigger ${activeItem.startsWith('/masx-ai')
+                ? 'nav-menu-trigger-active'
                 : 'nav-menu-trigger-inactive'}`}>
               <span className="font-mono text-sm tracking-wider z-10 relative flex items-center">
-                <Bot className="mr-2 h-3.5 w-3.5" />
+                <Robot className="mr-2 h-3.5 w-3.5" />
                 MASX AI
               </span>
             </NavigationMenuTrigger>
@@ -36,7 +36,7 @@ const SubMenuNav: React.FC<SubMenuNavProps> = ({ activeItem, handleNavClick }) =
                 <li>
                   <Link
                     to="/masx-ai"
-                    className={cn("nav-dropdown-item", 
+                    className={cn("nav-dropdown-item",
                       activeItem === '/masx-ai' ? 'nav-dropdown-item-active' : '')}
                     onClick={() => handleNavClick('/masx-ai')}
                   >
@@ -47,7 +47,7 @@ const SubMenuNav: React.FC<SubMenuNavProps> = ({ activeItem, handleNavClick }) =
                 <li>
                   <Link
                     to="/masx-ai/case-study"
-                    className={cn("nav-dropdown-item", 
+                    className={cn("nav-dropdown-item",
                       activeItem === '/masx-ai/case-study' ? 'nav-dropdown-item-active' : '')}
                     onClick={() => handleNavClick('/masx-ai/case-study')}
                   >

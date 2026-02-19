@@ -23,7 +23,7 @@ const CVExperience: React.FC<CVExperienceProps> = ({ experience }) => {
           <p className="text-xs mb-3 font-mono" style={{ color: 'var(--mono-muted)' }}>{entry.duration}</p>
           <ul className="space-y-1">
             {entry.responsibilities?.map((item, i) => (
-              <li key={i} className="text-sm" style={{ color: 'var(--mono-muted)' }}>• {item}</li>
+              <li key={i} className="text-sm" style={{ color: 'var(--mono-muted)' }}>{item}</li>
             ))}
           </ul>
           {entry.technologies && entry.technologies.length > 0 && (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, ExternalLink } from 'lucide-react';
+import { GithubLogo, LinkedinLogo, ArrowSquareOut } from '@phosphor-icons/react';
 
 /**
  * Footer — Monolith centered footer
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
             (e.currentTarget as HTMLElement).style.color = 'var(--mono-muted)';
           }}
         >
-          <Github className="w-4 h-4" />
+          <GithubLogo className="w-4 h-4" weight="light" />
         </a>
         <a
           href="https://www.linkedin.com/in/ateet-vatan-62a4b4172"
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
             (e.currentTarget as HTMLElement).style.color = 'var(--mono-muted)';
           }}
         >
-          <Linkedin className="w-4 h-4" />
+          <LinkedinLogo className="w-4 h-4" weight="light" />
         </a>
         <a
           href="https://ateetclone.masxai.com/"
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
             (e.currentTarget as HTMLElement).style.color = 'var(--mono-muted)';
           }}
         >
-          <ExternalLink className="w-4 h-4" />
+          <ArrowSquareOut className="w-4 h-4" weight="light" />
         </a>
       </div>
 

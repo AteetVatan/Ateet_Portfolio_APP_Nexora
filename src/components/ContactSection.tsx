@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import ContactForm from './ContactForm';
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Mail, Phone, Github, Linkedin, ExternalLink } from "lucide-react";
+import { SpinnerGap, Envelope, GithubLogo, LinkedinLogo, ArrowSquareOut } from "@phosphor-icons/react";
 import { Link } from 'react-router-dom';
 
 const ContactSection: React.FC = () => {
@@ -74,7 +74,7 @@ const ContactSection: React.FC = () => {
             Open to AI roles, freelance projects, and collaborations in LLM system design.
           </p>
           <Link to="/contact" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
-            Send Message →
+            Send Message
           </Link>
         </div>
 
@@ -82,13 +82,13 @@ const ContactSection: React.FC = () => {
         <div className="contact-right">
           {loading ? (
             <div className="flex justify-center items-center h-40">
-              <Loader2 className="h-8 w-8 animate-spin" style={{ color: 'var(--mono-primary)' }} />
+              <SpinnerGap className="h-8 w-8 animate-spin" style={{ color: 'var(--mono-primary)' }} />
             </div>
           ) : (
             <>
               {/* Email */}
               <div className="contact-item">
-                <div className="contact-icon"><Mail className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
+                <div className="contact-icon"><Envelope className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
                 <div>
                   <h4 className="text-sm font-semibold mb-0.5" style={{ color: 'var(--mono-text)' }}>Email</h4>
                   {contactInfo.email ? (
@@ -103,7 +103,7 @@ const ContactSection: React.FC = () => {
 
               {/* LinkedIn */}
               <div className="contact-item">
-                <div className="contact-icon"><Linkedin className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
+                <div className="contact-icon"><LinkedinLogo className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
                 <div>
                   <h4 className="text-sm font-semibold mb-0.5" style={{ color: 'var(--mono-text)' }}>LinkedIn</h4>
                   {contactInfo.linkedin ? (
@@ -118,7 +118,7 @@ const ContactSection: React.FC = () => {
 
               {/* GitHub */}
               <div className="contact-item">
-                <div className="contact-icon"><Github className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
+                <div className="contact-icon"><GithubLogo className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
                 <div>
                   <h4 className="text-sm font-semibold mb-0.5" style={{ color: 'var(--mono-text)' }}>GitHub</h4>
                   {contactInfo.github ? (
@@ -133,7 +133,7 @@ const ContactSection: React.FC = () => {
 
               {/* AI Clone */}
               <div className="contact-item">
-                <div className="contact-icon"><ExternalLink className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
+                <div className="contact-icon"><ArrowSquareOut className="w-5 h-5" style={{ color: 'var(--mono-primary)' }} /></div>
                 <div>
                   <h4 className="text-sm font-semibold mb-0.5" style={{ color: 'var(--mono-text)' }}>AI Clone</h4>
                   <a href="https://ateetclone.masxai.com/" target="_blank" rel="noopener noreferrer" className="text-sm no-underline" style={{ color: 'var(--mono-muted)', textDecoration: 'none' }}>

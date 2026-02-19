@@ -5,7 +5,7 @@ import { useMasxAiDetails } from '../hooks/use-masx-ai';
 import PageLayout from '../components/layout/PageLayout';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Code, ArrowRight, Calendar, FileText } from 'lucide-react';
+import { ArrowSquareOut, Code, ArrowRight, CalendarBlank, FileText } from '@phosphor-icons/react';
 import { Skeleton } from '../components/ui/skeleton';
 import { removeReligiousReferences } from '../utils/removeReligiousReferences';
 
@@ -24,7 +24,7 @@ const MasxAI: React.FC = () => {
     <PageLayout>
       <SEOHead
         title="MASX AI"
-        description="MASX AI — an intelligent AI system built by Ateet Vatan featuring multi-agent architecture and production-grade LLM orchestration."
+        description="MASX AI, an intelligent AI system built by Ateet Vatan featuring multi-agent architecture and production-grade LLM orchestration."
       />
       <div className="py-20 px-6 md:px-20 max-w-[900px] mx-auto">
         {isLoading ? (
@@ -57,7 +57,7 @@ const MasxAI: React.FC = () => {
               <div className="flex flex-wrap gap-4 mt-6">
                 {masxAi.timeframe && (
                   <div className="flex items-center text-sm" style={{ color: 'var(--mono-muted)' }}>
-                    <Calendar className="h-4 w-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+                    <CalendarBlank className="h-4 w-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
                     {masxAi.timeframe}
                   </div>
                 )}
@@ -94,7 +94,7 @@ const MasxAI: React.FC = () => {
               <div className="flex flex-wrap gap-4">
                 {masxAi.demo_url && (
                   <a href={masxAi.demo_url} target="_blank" rel="noopener noreferrer">
-                    <Button className="btn-primary"><ExternalLink className="mr-2 h-4 w-4" /> Live Demo</Button>
+                    <Button className="btn-primary"><ArrowSquareOut className="mr-2 h-4 w-4" /> Live Demo</Button>
                   </a>
                 )}
                 {masxAi.github_url && (

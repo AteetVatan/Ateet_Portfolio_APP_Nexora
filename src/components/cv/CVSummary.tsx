@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { DownloadSimple } from '@phosphor-icons/react';
 
 interface CVSummaryProps {
   summary: string;
@@ -20,7 +20,7 @@ const CVSummary: React.FC<CVSummaryProps> = ({ summary, onDownload }) => {
           style={{ color: 'var(--mono-primary)', borderColor: 'var(--mono-border)' }}
           onClick={onDownload}
         >
-          <Download className="mr-2 h-4 w-4" />
+          <DownloadSimple className="mr-2 h-4 w-4" />
           PDF
         </Button>
       </CardHeader>

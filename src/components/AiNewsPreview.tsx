@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Rss } from 'lucide-react';
+import { RssSimple } from '@phosphor-icons/react';
 import AiNewsCard from './AiNewsCard';
 import {
     fetchAllNews,
@@ -81,7 +81,7 @@ const AiNewsPreview: React.FC = () => {
                     </p>
                 </div>
                 <Link to="/ai-news" className="btn-primary mt-6 md:mt-0">
-                    All Headlines →
+                    All Headlines
                 </Link>
             </div>
 
@@ -142,8 +142,8 @@ const AiNewsPreview: React.FC = () => {
                             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--mono-primary)'; }}
                             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--mono-border)'; }}
                         >
-                            <Rss size={14} style={{ marginRight: '8px', color: 'var(--mono-primary)' }} />
-                            <span className="font-mono" style={{ color: 'var(--mono-primary)' }}>View All Headlines →</span>
+                            <RssSimple size={14} weight="light" style={{ marginRight: '8px', color: 'var(--mono-primary)' }} />
+                            <span className="font-mono" style={{ color: 'var(--mono-primary)' }}>View All Headlines</span>
                         </Link>
                     </div>
                 </>

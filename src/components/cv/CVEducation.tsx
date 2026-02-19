@@ -29,7 +29,7 @@ const CVEducation: React.FC<CVEducationProps> = ({ education }) => {
               <td className="py-3 px-4" style={{ color: 'var(--mono-text)' }}>{entry.degree}</td>
               <td className="py-3 px-4" style={{ color: 'var(--mono-muted)' }}>{entry.institution}</td>
               <td className="py-3 px-4 font-mono" style={{ color: 'var(--mono-muted)' }}>{entry.year}</td>
-              <td className="py-3 px-4" style={{ color: 'var(--mono-muted)' }}>{entry.grade || '—'}</td>
+              <td className="py-3 px-4" style={{ color: 'var(--mono-muted)' }}>{entry.grade || '-'}</td>
             </tr>
           ))}
         </tbody>

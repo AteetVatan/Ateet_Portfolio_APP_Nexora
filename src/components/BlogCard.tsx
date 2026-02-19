@@ -60,7 +60,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       <div className="p-6">
         <div className="flex items-center text-xs font-mono mb-3 gap-2" style={{ color: 'var(--mono-muted)' }}>
           <span>{formatDate(createdAt)}</span>
-          <span>•</span>
+          <span>·</span>
           <span>{readTime} min read</span>
         </div>
 
@@ -73,7 +73,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         </p>
 
         <span className="project-link">
-          Read Article →
+          Read Article
         </span>
       </div>
     </Link>

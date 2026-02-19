@@ -53,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         <span className="project-link">
-          View Project →
+          View Project
         </span>
       </div>
     </Link>

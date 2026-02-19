@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { Send, Loader2 } from "lucide-react";
+import { PaperPlaneTilt, SpinnerGap } from "@phosphor-icons/react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -119,12 +119,12 @@ const ContactForm = () => {
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <SpinnerGap className="w-4 h-4 animate-spin" />
             <span>Sending...</span>
           </>
         ) : (
           <>
-            <Send className="w-4 h-4" />
+            <PaperPlaneTilt className="w-4 h-4" />
             <span>Send Message</span>
           </>
         )}
