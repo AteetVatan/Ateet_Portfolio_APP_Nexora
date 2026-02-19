@@ -17,45 +17,30 @@ interface CVProfileProps {
   onDownload: (e: React.MouseEvent) => void;
 }
 
-/**
- * CV Profile component - displays personal info and contact details
- */
 const CVProfile: React.FC<CVProfileProps> = ({
-  name,
-  title,
-  location,
-  phone,
-  email,
-  linkedin,
-  github,
-  twitter,
-  work_authorization,
-  onDownload
+  name, title, location, phone, email, linkedin, github, twitter, work_authorization, onDownload
 }) => {
   return (
-    <Card className="bg-[#0c1824] border-[#1e3a4a] relative z-10 text-white">
+    <Card className="monolith-card relative z-10">
       <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-          <CardTitle className="text-[#00c3ff] text-2xl md:text-3xl">
+          <CardTitle className="text-2xl md:text-3xl" style={{ color: 'var(--mono-text)' }}>
             {name || "Developer"}
           </CardTitle>
-          <p className="text-[#b9dcea] mt-1">{title || "Full Stack Developer"}</p>
+          <p className="mt-1" style={{ color: 'var(--mono-muted)' }}>{title || "Full Stack Developer"}</p>
         </div>
         <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center gap-4">
-          <Avatar className="w-24 h-24 border-2 border-[#1291c7] overflow-hidden">
-            <AvatarImage
-              src="/uploads/profile_pic.png"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-            <AvatarFallback className="text-[#00c3ff]">
+          <Avatar className="w-24 h-24 overflow-hidden" style={{ border: '2px solid var(--mono-primary)' }}>
+            <AvatarImage src="/profile.jpeg" alt="Profile" className="w-full h-full object-cover object-top" />
+            <AvatarFallback style={{ color: 'var(--mono-primary)' }}>
               {name ? name.split(' ').map(part => part[0]).join('').toUpperCase().slice(0, 2) : 'CV'}
             </AvatarFallback>
           </Avatar>
           <Button
             variant="outline"
             size="sm"
-            className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff]"
+            className="transition-colors"
+            style={{ color: 'var(--mono-primary)', borderColor: 'var(--mono-border)' }}
             onClick={onDownload}
           >
             <Download className="mr-2 h-4 w-4" />
@@ -65,49 +50,44 @@ const CVProfile: React.FC<CVProfileProps> = ({
       </CardHeader>
       <CardContent>
         <div className="grid md:grid-cols-2 gap-4">
-          <div className="space-y-2 w-screen">
+          <div className="space-y-2">
             <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-2 text-[#00c3ff]" />
+              <MapPin className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
               <p>
-                <strong className="text-[#b9dcea] mr-2">Location:</strong>
-                <span className="text-white">{location || "San Francisco, CA"}</span>
+                <strong className="mr-2" style={{ color: 'var(--mono-muted)' }}>Location:</strong>
+                <span style={{ color: 'var(--mono-text)' }}>{location || "San Francisco, CA"}</span>
               </p>
             </div>
             <div className="flex items-center">
-              <Mail className="w-4 h-4 mr-2 text-[#00c3ff]" />
+              <Mail className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
               <p>
-                <strong className="text-[#b9dcea] mr-2">Email:</strong>
-                <span className="text-white">{email || "developer@example.com"}</span>
+                <strong className="mr-2" style={{ color: 'var(--mono-muted)' }}>Email:</strong>
+                <span style={{ color: 'var(--mono-text)' }}>{email || "developer@example.com"}</span>
               </p>
             </div>
             <div className="flex items-center">
-              <Linkedin className="w-4 h-4 mr-2 text-[#00c3ff]" />
-              <p className="text-[#b9dcea]">
+              <Linkedin className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+              <p style={{ color: 'var(--mono-muted)' }}>
                 <strong className="mr-2">LinkedIn:</strong>
-                <a
-                  href={linkedin || "linkedin.com/in/developer"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-[#00c3ff] transition-colors"
-                >
+                <a href={linkedin || "#"} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--mono-primary)]" style={{ color: 'var(--mono-text)' }}>
                   {linkedin || "linkedin.com/in/developer"}
                 </a>
               </p>
             </div>
             <div className="flex items-center">
-              <Github className="w-4 h-4 mr-2 text-[#00c3ff]" />
-              <p className="text-[#b9dcea]">
+              <Github className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+              <p style={{ color: 'var(--mono-muted)' }}>
                 <strong className="mr-2">GitHub:</strong>
-                <a href={github || "github.com/developer"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#00c3ff] transition-colors">
+                <a href={github || "#"} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--mono-primary)]" style={{ color: 'var(--mono-text)' }}>
                   {github || "github.com/developer"}
                 </a>
               </p>
-            </div>            
+            </div>
             <div className="flex items-center">
-              <Briefcase className="w-4 h-4 mr-2 text-[#00c3ff]" />
+              <Briefcase className="w-4 h-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
               <p>
-                <strong className="text-[#b9dcea] mr-2">Work Authorization:</strong>
-                <span className="text-white">{work_authorization || "German Citizen – EU Work Rights"}</span>
+                <strong className="mr-2" style={{ color: 'var(--mono-muted)' }}>Work Authorization:</strong>
+                <span style={{ color: 'var(--mono-text)' }}>{work_authorization || "German Citizen – EU Work Rights"}</span>
               </p>
             </div>
           </div>

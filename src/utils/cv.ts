@@ -48,10 +48,15 @@ export interface CVData {
  */
 export const downloadCV = (e: React.MouseEvent): void => {
   e.preventDefault();
-  
-  // Use the full Supabase project URL
-  window.open('https://bidswcansixttbhmwpkj.functions.supabase.co/generate-cv-pdf?lang=en&user_name=ateet', '_blank');
-  
+
+  // Download the local CV PDF
+  const link = document.createElement('a');
+  link.href = '/files/Ateet.pdf';
+  link.download = 'Ateet.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
   // Log the download attempt for analytics (optional)
   console.log('CV download initiated', new Date().toISOString());
 };

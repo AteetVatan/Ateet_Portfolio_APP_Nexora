@@ -1,39 +1,40 @@
-
 import React from 'react';
-import { Table, TableBody, TableRow, TableCell } from '@/components/ui/table';
-import { MapPin, Calendar } from 'lucide-react';
 
-interface Education {
+interface EducationEntry {
   degree: string;
   institution: string;
-  location: string;
-  year: number;
+  year: string;
+  grade?: string;
 }
 
 interface CVEducationProps {
-  education: Education[];
+  education: EducationEntry[];
 }
 
 const CVEducation: React.FC<CVEducationProps> = ({ education }) => {
   return (
-    <Table>
-      <TableBody>
-        {education?.map((edu, index) => (
-          <TableRow key={index} className="border-b border-[#1e3a4a] hover:bg-[#0a131c]">
-            <TableCell className="py-4">
-              <div className="font-medium text-[#00c3ff]">{edu.degree}</div>
-              <div className="text-[#e4e6e9]">{edu.institution}</div>
-              <div className="flex items-center text-[#85a5b3] text-sm mt-1">
-                <MapPin className="w-3 h-3 mr-1" />
-                <span className="mr-4">{edu.location}</span>
-                <Calendar className="w-3 h-3 mr-1" />
-                <span>{edu.year}</span>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr style={{ borderBottom: '2px solid var(--mono-border)' }}>
+            <th className="text-left py-3 px-4 font-heading font-semibold" style={{ color: 'var(--mono-text)' }}>Degree</th>
+            <th className="text-left py-3 px-4 font-heading font-semibold" style={{ color: 'var(--mono-text)' }}>Institution</th>
+            <th className="text-left py-3 px-4 font-heading font-semibold" style={{ color: 'var(--mono-text)' }}>Year</th>
+            <th className="text-left py-3 px-4 font-heading font-semibold" style={{ color: 'var(--mono-text)' }}>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {education?.map((entry, index) => (
+            <tr key={index} style={{ borderBottom: '1px solid var(--mono-border)' }}>
+              <td className="py-3 px-4" style={{ color: 'var(--mono-text)' }}>{entry.degree}</td>
+              <td className="py-3 px-4" style={{ color: 'var(--mono-muted)' }}>{entry.institution}</td>
+              <td className="py-3 px-4 font-mono" style={{ color: 'var(--mono-muted)' }}>{entry.year}</td>
+              <td className="py-3 px-4" style={{ color: 'var(--mono-muted)' }}>{entry.grade || '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

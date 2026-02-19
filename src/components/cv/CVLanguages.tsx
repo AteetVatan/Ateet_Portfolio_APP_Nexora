@@ -1,49 +1,41 @@
-
 import React from 'react';
 import { Download } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { downloadCV } from '@/utils/cv';
 
-interface CVLanguagesProps {
-  languages: {
-    [language: string]: string;
-  };
-  onDownload?: (e: React.MouseEvent) => void;
+interface Language {
+  name: string;
+  level: string;
 }
 
-/**
- * CV Languages component - displays language proficiency levels
- */
-const CVLanguages: React.FC<CVLanguagesProps> = ({ languages, onDownload }) => {
-  const handleDownload = (e: React.MouseEvent) => {
-    if (onDownload) {
-      onDownload(e);
-    } else {
-      downloadCV(e);
-    }
-  };
+interface CVLanguagesProps {
+  languages: Language[];
+  onDownload: (e: React.MouseEvent) => void;
+}
 
+const CVLanguages: React.FC<CVLanguagesProps> = ({ languages, onDownload }) => {
   return (
-    <div className="relative">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {languages && Object.entries(languages).map(([language, level]) => (
-          <div key={language} className="flex justify-between items-center bg-[#0a131c] p-3 rounded-md border border-[#1e3a4a] text-white">
-            <span className="font-medium text-[#b9dcea]">{language}</span>
-            <span className="text-[#00c3ff]">{level}</span>
+    <div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {Array.isArray(languages) && languages.map((lang, index) => (
+          <div
+            key={index}
+            className="p-4 rounded text-center transition-all duration-300"
+            style={{ background: 'var(--mono-surface)', border: '1px solid var(--mono-border)' }}
+          >
+            <p className="font-heading font-semibold" style={{ color: 'var(--mono-text)' }}>{lang.name}</p>
+            <p className="text-sm font-mono" style={{ color: 'var(--mono-muted)' }}>{lang.level}</p>
           </div>
         ))}
       </div>
 
-      {/* Floating download button - fixed at bottom right */}
-      <div className="fixed bottom-8 right-8 z-50 md:hidden">
-        <Button 
-          size="icon" 
-          className="rounded-full h-12 w-12 bg-[#00c3ff] text-white hover:bg-[#00c3ff]/80 shadow-lg"
-          onClick={handleDownload}
-        >
-          <Download className="h-5 w-5" />
-        </Button>
-      </div>
+      {/* Floating download FAB for mobile */}
+      <button
+        onClick={onDownload}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 md:hidden"
+        style={{ background: 'var(--mono-primary)', color: '#fff' }}
+        aria-label="Download CV"
+      >
+        <Download className="w-6 h-6" />
+      </button>
     </div>
   );
 };

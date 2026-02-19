@@ -1,241 +1,196 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { Maximize2, Minimize2 } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
-// Initialize mermaid with dark theme matching the portfolio aesthetic
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'dark',
-  themeVariables: {
-    darkMode: true,
-    primaryColor: '#1291c7',
-    primaryTextColor: '#e0f0ff',
-    primaryBorderColor: '#1e3a4a',
-    lineColor: '#4dabce',
-    secondaryColor: '#0c1824',
-    tertiaryColor: '#0a1628',
-    background: '#0a1628',
-    mainBkg: '#0c1824',
-    nodeBorder: '#1e3a4a',
-    clusterBkg: '#0c1824',
-    clusterBorder: '#1e3a4a',
-    titleColor: '#00c3ff',
-    edgeLabelBackground: '#0c1824',
-    nodeTextColor: '#e0f0ff',
-    actorTextColor: '#e0f0ff',
-    actorLineColor: '#4dabce',
-    signalColor: '#4dabce',
-    signalTextColor: '#e0f0ff',
-    labelBoxBkgColor: '#0c1824',
-    labelBoxBorderColor: '#1e3a4a',
-    labelTextColor: '#e0f0ff',
-    loopTextColor: '#85a5b3',
-    noteBkgColor: '#122a3a',
-    noteTextColor: '#a9c2d1',
-    noteBorderColor: '#1e3a4a',
-  },
-  fontFamily: 'monospace',
-  fontSize: 14,
-});
-
+/**
+ * MermaidDiagram — renders Mermaid diagrams with Monolith theming
+ */
 interface MermaidDiagramProps {
   chart: string;
 }
 
-let diagramCounter = 0;
-
 const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [svgContent, setSvgContent] = useState<string>('');
-  const [expanded, setExpanded] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDark ? 'dark' : 'default',
+      themeVariables: isDark
+        ? {
+          darkMode: true,
+          primaryColor: '#FF4D00',
+          primaryTextColor: '#E5E5E5',
+          primaryBorderColor: 'rgba(245, 240, 235, 0.08)',
+          lineColor: '#8B8680',
+          secondaryColor: '#1A1A1A',
+          tertiaryColor: '#222',
+          background: '#111',
+          mainBkg: '#1A1A1A',
+          nodeBorder: 'rgba(245, 240, 235, 0.15)',
+          clusterBkg: '#1A1A1A',
+          clusterBorder: 'rgba(245, 240, 235, 0.08)',
+          titleColor: '#E5E5E5',
+          edgeLabelBackground: '#1A1A1A',
+          nodeTextColor: '#E5E5E5',
+          actorTextColor: '#E5E5E5',
+          actorBorder: 'rgba(245, 240, 235, 0.15)',
+          actorBkg: '#1A1A1A',
+          actorLineColor: '#8B8680',
+          signalColor: '#E5E5E5',
+          signalTextColor: '#E5E5E5',
+          labelBoxBkgColor: '#1A1A1A',
+          labelBoxBorderColor: 'rgba(245, 240, 235, 0.08)',
+          labelTextColor: '#E5E5E5',
+          loopTextColor: '#E5E5E5',
+          noteBkgColor: '#222',
+          noteTextColor: '#E5E5E5',
+          noteBorderColor: 'rgba(245, 240, 235, 0.08)',
+          sectionBkgColor: '#1A1A1A',
+          altSectionBkgColor: '#222',
+          sectionBkgColor2: '#1A1A1A',
+          taskBorderColor: '#FF4D00',
+          taskBkgColor: '#FF4D00',
+          taskTextColor: '#fff',
+          taskTextLightColor: '#E5E5E5',
+          activeTaskBorderColor: '#E64400',
+          activeTaskBkgColor: '#E64400',
+          gridColor: 'rgba(245, 240, 235, 0.08)',
+          doneTaskBkgColor: '#333',
+          doneTaskBorderColor: '#666',
+          critBorderColor: '#EF4444',
+          critBkgColor: '#7F1D1D',
+          todayLineColor: '#FF4D00',
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: '13px',
+        }
+        : {
+          darkMode: false,
+          primaryColor: '#FF4D00',
+          primaryTextColor: '#1A1A1A',
+          primaryBorderColor: 'rgba(26, 26, 26, 0.08)',
+          lineColor: '#8B8680',
+          secondaryColor: '#F5F0EB',
+          tertiaryColor: '#FFF',
+          background: '#F5F0EB',
+          mainBkg: '#FFF',
+          nodeBorder: 'rgba(26, 26, 26, 0.15)',
+          clusterBkg: '#FFF',
+          clusterBorder: 'rgba(26, 26, 26, 0.08)',
+          titleColor: '#1A1A1A',
+          edgeLabelBackground: '#FFF',
+          nodeTextColor: '#1A1A1A',
+          actorTextColor: '#1A1A1A',
+          actorBorder: 'rgba(26, 26, 26, 0.15)',
+          actorBkg: '#FFF',
+          actorLineColor: '#8B8680',
+          signalColor: '#1A1A1A',
+          signalTextColor: '#1A1A1A',
+          labelBoxBkgColor: '#FFF',
+          labelBoxBorderColor: 'rgba(26, 26, 26, 0.08)',
+          labelTextColor: '#1A1A1A',
+          loopTextColor: '#1A1A1A',
+          noteBkgColor: '#F5F0EB',
+          noteTextColor: '#1A1A1A',
+          noteBorderColor: 'rgba(26, 26, 26, 0.08)',
+          sectionBkgColor: '#FFF',
+          altSectionBkgColor: '#F5F0EB',
+          sectionBkgColor2: '#FFF',
+          taskBorderColor: '#FF4D00',
+          taskBkgColor: '#FF4D00',
+          taskTextColor: '#fff',
+          taskTextLightColor: '#1A1A1A',
+          activeTaskBorderColor: '#E64400',
+          activeTaskBkgColor: '#E64400',
+          gridColor: 'rgba(26, 26, 26, 0.08)',
+          doneTaskBkgColor: '#ddd',
+          doneTaskBorderColor: '#aaa',
+          critBorderColor: '#EF4444',
+          critBkgColor: '#FEE2E2',
+          todayLineColor: '#FF4D00',
+          fontFamily: 'IBM Plex Mono, monospace',
+          fontSize: '13px',
+        },
+    });
+
     const renderDiagram = async () => {
       try {
-        const id = `mermaid-diagram-${Date.now()}-${diagramCounter++}`;
-        const { svg } = await mermaid.render(id, chart.trim());
+        const id = `mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const { svg } = await mermaid.render(id, chart);
         setSvgContent(svg);
         setError(null);
       } catch (err) {
-        console.error('Mermaid rendering error:', err);
-        setError(err instanceof Error ? err.message : 'Failed to render diagram');
-        // Clean up any leftover error elements mermaid may have injected
-        const errorEl = document.getElementById(`d${diagramCounter - 1}`);
-        if (errorEl) errorEl.remove();
+        console.error('Mermaid render error:', err);
+        setError('Failed to render diagram');
       }
     };
 
     renderDiagram();
-  }, [chart]);
-
-  // Close on Escape key
-  useEffect(() => {
-    if (!expanded) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setExpanded(false);
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    // Prevent body scroll while expanded
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
-    };
-  }, [expanded]);
-
-  const toggleExpand = useCallback(() => setExpanded(prev => !prev), []);
+  }, [chart, isDark]);
 
   if (error) {
     return (
       <div
-        style={{
-          margin: '1.5rem 0',
-          padding: '1rem 1.25rem',
-          background: 'rgba(255, 62, 62, 0.08)',
-          border: '1px solid rgba(255, 62, 62, 0.25)',
-          borderRadius: '0.75rem',
-          fontFamily: 'monospace',
-          fontSize: '0.85rem',
-          color: '#ff6b6b',
-        }}
+        className="p-4 rounded text-sm my-4"
+        style={{ background: 'var(--mono-surface)', color: 'var(--mono-muted)', border: '1px solid var(--mono-border)' }}
       >
-        <div style={{ marginBottom: '0.5rem', fontWeight: 600, color: '#ff3e3e' }}>
-          ⚠ Diagram render error
-        </div>
-        <pre
-          style={{
-            margin: 0,
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            color: '#a9c2d1',
-          }}
-        >
-          {chart}
-        </pre>
+        ⚠️ {error}
       </div>
     );
   }
 
-  // Shared button style
-  const btnStyle: React.CSSProperties = {
-    position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '2rem',
-    height: '2rem',
-    borderRadius: '0.5rem',
-    border: '1px solid rgba(77, 171, 206, 0.35)',
-    background: 'rgba(12, 24, 36, 0.85)',
-    color: '#4dabce',
-    cursor: 'pointer',
-    backdropFilter: 'blur(8px)',
-    transition: 'all 0.2s ease',
-    zIndex: 10,
-  };
-
-  // ----- Full-screen overlay -----
-  if (expanded) {
-    return (
-      <div
-        onClick={toggleExpand}
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(5, 10, 20, 0.88)',
-          backdropFilter: 'blur(12px)',
-          padding: '2rem',
-        }}
-      >
-        {/* Minimize button */}
-        <button
-          onClick={(e) => { e.stopPropagation(); toggleExpand(); }}
-          style={{ ...btnStyle, top: '1.5rem', right: '1.5rem' }}
-          title="Minimize diagram"
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(18, 145, 199, 0.25)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = '#00c3ff';
-            (e.currentTarget as HTMLButtonElement).style.color = '#00c3ff';
-            (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 12px rgba(0, 195, 255, 0.25)';
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(12, 24, 36, 0.85)';
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(77, 171, 206, 0.35)';
-            (e.currentTarget as HTMLButtonElement).style.color = '#4dabce';
-            (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
-          }}
-        >
-          <Minimize2 size={16} />
-        </button>
-
-        {/* Expanded diagram container */}
+  return (
+    <>
+      {/* Inline diagram */}
+      <div className="relative my-6 group">
         <div
-          onClick={e => e.stopPropagation()}
-          className="mermaid-expanded-container"
-          style={{
-            width: '95vw',
-            height: '90vh',
-            overflow: 'auto',
-            padding: '2rem',
-            background: 'linear-gradient(135deg, rgba(12, 24, 36, 0.95) 0%, rgba(10, 22, 40, 0.98) 100%)',
-            border: '1px solid rgba(77, 171, 206, 0.3)',
-            borderRadius: '1rem',
-            boxShadow: '0 0 40px rgba(0, 195, 255, 0.1), 0 0 80px rgba(0, 195, 255, 0.05)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+          ref={containerRef}
+          className="overflow-x-auto p-4 rounded"
+          style={{ background: 'var(--mono-surface)', border: '1px solid var(--mono-border)' }}
           dangerouslySetInnerHTML={{ __html: svgContent }}
         />
+
+        {/* Expand button */}
+        <button
+          className="mermaid-expand-btn absolute top-2 right-2 p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+          style={{ background: 'var(--mono-surface)', border: '1px solid var(--mono-border)', color: 'var(--mono-text)' }}
+          onClick={() => setIsExpanded(true)}
+          title="Expand diagram"
+        >
+          <Maximize2 className="w-4 h-4" />
+        </button>
       </div>
-    );
-  }
 
-  // ----- Inline (normal) view -----
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        position: 'relative',
-        margin: '1.5rem 0',
-        padding: '1.5rem',
-        background: 'linear-gradient(135deg, rgba(12, 24, 36, 0.9) 0%, rgba(10, 22, 40, 0.95) 100%)',
-        border: '1px solid rgba(77, 171, 206, 0.2)',
-        borderRadius: '0.75rem',
-        boxShadow: '0 0 20px rgba(0, 195, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.03)',
-        overflow: 'auto',
-        textAlign: 'center',
-      }}
-    >
-      {/* Maximize button — visible on hover via CSS class below */}
-      <button
-        onClick={toggleExpand}
-        className="mermaid-expand-btn"
-        style={{ ...btnStyle, top: '0.75rem', right: '0.75rem', opacity: 0 }}
-        title="Maximize diagram"
-        onMouseEnter={e => {
-          (e.currentTarget as HTMLButtonElement).style.background = 'rgba(18, 145, 199, 0.25)';
-          (e.currentTarget as HTMLButtonElement).style.borderColor = '#00c3ff';
-          (e.currentTarget as HTMLButtonElement).style.color = '#00c3ff';
-          (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 12px rgba(0, 195, 255, 0.25)';
-        }}
-        onMouseLeave={e => {
-          (e.currentTarget as HTMLButtonElement).style.background = 'rgba(12, 24, 36, 0.85)';
-          (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(77, 171, 206, 0.35)';
-          (e.currentTarget as HTMLButtonElement).style.color = '#4dabce';
-          (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
-        }}
-      >
-        <Maximize2 size={16} />
-      </button>
-
-      <div dangerouslySetInnerHTML={{ __html: svgContent }} />
-    </div>
+      {/* Expanded overlay */}
+      {isExpanded && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-8"
+          style={{ background: 'rgba(0, 0, 0, 0.7)', backdropFilter: 'blur(4px)' }}
+          onClick={() => setIsExpanded(false)}
+        >
+          <div
+            className="mermaid-expanded-container relative w-full h-full max-w-[90vw] max-h-[90vh] overflow-auto p-6 rounded"
+            style={{ background: 'var(--mono-surface)', border: '1px solid var(--mono-border)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-4 right-4 p-2 rounded transition-colors cursor-pointer z-10"
+              style={{ background: 'var(--mono-surface)', border: '1px solid var(--mono-border)', color: 'var(--mono-text)' }}
+              onClick={() => setIsExpanded(false)}
+              title="Close expanded view"
+            >
+              <Minimize2 className="w-4 h-4" />
+            </button>
+            <div dangerouslySetInnerHTML={{ __html: svgContent }} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

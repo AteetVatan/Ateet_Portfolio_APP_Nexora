@@ -1,12 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
+import SEOHead from '../components/SEOHead';
 import { useSearchParams } from 'react-router-dom';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import GridBackground from '../components/GridBackground';
+import PageLayout from '../components/layout/PageLayout';
 import BlogCard from '../components/BlogCard';
 import { useStaticBlogPosts, prefetchAllBlogs } from '../hooks/use-static-blog-posts';
-import { MoveRight, Search, Tag } from 'lucide-react';
+import { Search, Tag } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import {
@@ -20,7 +19,6 @@ import {
 } from '@/components/ui/pagination';
 import { BlogPost } from '@/types';
 
-// Prefetch all blogs when this file is loaded
 prefetchAllBlogs();
 
 const Blog: React.FC = () => {
@@ -31,276 +29,187 @@ const Blog: React.FC = () => {
   const [allTags, setAllTags] = useState<string[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
 
-  // Pagination
   const postsPerPage = 6;
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const [totalPages, setTotalPages] = useState<number>(1);
 
-  // Set page title
-  useEffect(() => {
-    document.title = "Blog - Developer Portfolio";
-  }, []);
 
-  // Extract all unique tags from posts
+
   useEffect(() => {
     if (posts) {
       const tagsSet = new Set<string>();
-      posts.forEach(post => {
-        if (post.tags) {
-          post.tags.forEach(tag => tagsSet.add(tag));
-        }
-      });
+      posts.forEach(post => { if (post.tags) post.tags.forEach(tag => tagsSet.add(tag)); });
       setAllTags(Array.from(tagsSet).sort());
     }
   }, [posts]);
 
-  // Filter and paginate posts
   useEffect(() => {
     if (!posts) return;
-
     let result = [...posts];
-
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(
-        post =>
-          post.title.toLowerCase().includes(query) ||
-          (post.summary && post.summary.toLowerCase().includes(query)) ||
-          (post.content && post.content.toLowerCase().includes(query))
+      result = result.filter(post =>
+        post.title.toLowerCase().includes(query) ||
+        (post.summary && post.summary.toLowerCase().includes(query)) ||
+        (post.content && post.content.toLowerCase().includes(query))
       );
     }
-
-    // Filter by tag
     if (selectedTag) {
-      result = result.filter(
-        post => post.tags && post.tags.includes(selectedTag)
-      );
+      result = result.filter(post => post.tags && post.tags.includes(selectedTag));
     }
-
-    // Calculate total pages
     setTotalPages(Math.max(1, Math.ceil(result.length / postsPerPage)));
-
-    // Slice for current page
     const startIndex = (currentPage - 1) * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
-    setFilteredPosts(result.slice(startIndex, endIndex));
+    setFilteredPosts(result.slice(startIndex, startIndex + postsPerPage));
   }, [posts, searchQuery, selectedTag, currentPage]);
 
-  // Handle page change
   const handlePageChange = (page: number) => {
-    setSearchParams(prev => {
-      prev.set('page', page.toString());
-      return prev;
-    });
+    setSearchParams(prev => { prev.set('page', page.toString()); return prev; });
   };
 
-  // Handle tag selection
   const handleTagClick = (tag: string) => {
     setSelectedTag(prevTag => prevTag === tag ? null : tag);
-    setSearchParams(prev => {
-      if (prev.get('page')) {
-        prev.set('page', '1');
-      }
-      return prev;
-    });
+    setSearchParams(prev => { if (prev.get('page')) prev.set('page', '1'); return prev; });
   };
 
-  // Generate pagination items
   const renderPaginationItems = () => {
     const items = [];
-
-    // First page
     items.push(
       <PaginationItem key="first">
-        <PaginationLink
-          isActive={currentPage === 1}
-          onClick={() => handlePageChange(1)}
-        >
-          1
-        </PaginationLink>
+        <PaginationLink isActive={currentPage === 1} onClick={() => handlePageChange(1)}>1</PaginationLink>
       </PaginationItem>
     );
-
-    // Ellipsis after first page
-    if (currentPage > 3) {
-      items.push(
-        <PaginationItem key="ellipsis-1">
-          <PaginationEllipsis />
-        </PaginationItem>
-      );
-    }
-
-    // Pages around current page
+    if (currentPage > 3) items.push(<PaginationItem key="e1"><PaginationEllipsis /></PaginationItem>);
     for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
       if (i === 1 || i === totalPages) continue;
-
       items.push(
         <PaginationItem key={i}>
-          <PaginationLink
-            isActive={currentPage === i}
-            onClick={() => handlePageChange(i)}
-          >
-            {i}
-          </PaginationLink>
+          <PaginationLink isActive={currentPage === i} onClick={() => handlePageChange(i)}>{i}</PaginationLink>
         </PaginationItem>
       );
     }
-
-    // Ellipsis before last page
-    if (currentPage < totalPages - 2) {
-      items.push(
-        <PaginationItem key="ellipsis-2">
-          <PaginationEllipsis />
-        </PaginationItem>
-      );
-    }
-
-    // Last page (if more than one page)
+    if (currentPage < totalPages - 2) items.push(<PaginationItem key="e2"><PaginationEllipsis /></PaginationItem>);
     if (totalPages > 1) {
       items.push(
         <PaginationItem key="last">
-          <PaginationLink
-            isActive={currentPage === totalPages}
-            onClick={() => handlePageChange(totalPages)}
-          >
-            {totalPages}
-          </PaginationLink>
+          <PaginationLink isActive={currentPage === totalPages} onClick={() => handlePageChange(totalPages)}>{totalPages}</PaginationLink>
         </PaginationItem>
       );
     }
-
     return items;
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Fixed position grid background */}
-      <GridBackground />
+    <PageLayout>
+      <SEOHead
+        title="Blog"
+        description="Technical articles on AI engineering, LLM architecture, and modern full-stack development by Ateet Vatan."
+      />
+      <section className="py-20 md:py-32 px-6 md:px-20 max-w-[1400px] mx-auto">
+        <div className="mb-12">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--mono-text)' }}>
+            The <span className="highlight">Blog</span>
+          </h1>
+          <p className="max-w-xl text-base" style={{ color: 'var(--mono-muted)' }}>
+            Technical articles on AI development, best practices, and emerging technologies.
+          </p>
+        </div>
 
-      {/* Navigation - mobile: top bar, desktop: sidebar */}
-      <div className="hidden md:block md:fixed md:left-0 md:top-0 md:bottom-0 md:w-60 lg:w-64 z-20">
-        <Navigation />
-      </div>
-
-      {/* Main content - centered with adjusted padding */}
-      <main className="flex-grow w-full max-w-screen-2xl mx-auto md:pl-24 lg:pl-32 pb-20">
-        <section className="py-16 px-6 md:px-16 lg:px-24">
-          <div className="mb-12">
-            <h1 className="font-mono text-3xl md:text-4xl text-white font-bold mb-4">
-              THE <span className="text-[#00c3ff]">BLOG_</span>
-            </h1>
-            <p className="text-[#85a5b3] max-w-xl text-base">
-              Technical articles on AI development, best practices, and emerging technologies.
-            </p>
+        {/* Search and filter */}
+        <div className="mb-12 space-y-6">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: 'var(--mono-muted)' }} />
+            <Input
+              type="text"
+              placeholder="Search articles..."
+              className="pl-9"
+              style={{ background: 'var(--mono-surface)', borderColor: 'var(--mono-border)', color: 'var(--mono-text)' }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
 
-          {/* Search and filter */}
-          <div className="mb-12 space-y-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#85a5b3] h-4 w-4" />
-              <Input
-                type="text"
-                placeholder="Search articles..."
-                className="bg-[#0c1824] border-[#1e3a4a] pl-9 text-[#a9c2d1]"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+          {allTags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              <span className="flex items-center text-sm mr-1" style={{ color: 'var(--mono-muted)' }}>
+                <Tag className="h-4 w-4 mr-1" /> Tags:
+              </span>
+              {allTags.map(tag => (
+                <Badge
+                  key={tag}
+                  variant={selectedTag === tag ? "default" : "outline"}
+                  className="cursor-pointer transition-colors"
+                  style={selectedTag === tag
+                    ? { background: 'var(--mono-primary)', color: '#fff' }
+                    : { background: 'var(--mono-surface)', color: 'var(--mono-muted)', borderColor: 'var(--mono-border)' }
+                  }
+                  onClick={() => handleTagClick(tag)}
+                >
+                  {tag}
+                </Badge>
+              ))}
             </div>
-
-            {allTags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                <span className="flex items-center text-sm text-[#85a5b3] mr-1">
-                  <Tag className="h-4 w-4 mr-1" /> Tags:
-                </span>
-                {allTags.map(tag => (
-                  <Badge
-                    key={tag}
-                    variant={selectedTag === tag ? "default" : "outline"}
-                    className={`
-                      cursor-pointer transition-colors
-                      ${selectedTag === tag
-                        ? 'bg-[#00c3ff] text-black'
-                        : 'bg-[#0c1824] text-[#4dabce] border-[#1e3a4a] hover:border-[#00c3ff]'}
-                    `}
-                    onClick={() => handleTagClick(tag)}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {isLoading ? (
-            <div className="terminal-section p-8 text-center">
-              <div className="text-[#85a5b3] font-mono animate-pulse">
-                Loading blog posts...
-              </div>
-            </div>
-          ) : error ? (
-            <div className="terminal-section p-8 text-center">
-              <div className="text-[#ff3e3e] font-mono">
-                Error loading blog posts. Please try again later.
-              </div>
-            </div>
-          ) : filteredPosts.length === 0 ? (
-            <div className="terminal-section p-8 text-center">
-              <div className="text-[#85a5b3] font-mono">
-                No blog posts found matching your criteria.
-              </div>
-              <button
-                className="mt-4 text-[#00c3ff] font-mono"
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedTag(null);
-                }}
-              >
-                Clear filters
-              </button>
-            </div>
-          ) : (
-            <>
-              {/* Blog post grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPosts.map((post, index) => (
-                  <BlogCard
-                    key={post.id}
-                    post={post}
-                    featured={index === 0 && currentPage === 1}
-                  />
-                ))}
-              </div>
-
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <Pagination className="mt-12">
-                  <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious
-                        onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-                        className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
-                      />
-                    </PaginationItem>
-
-                    {renderPaginationItems()}
-
-                    <PaginationItem>
-                      <PaginationNext
-                        onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-                        className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
-                      />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-              )}
-            </>
           )}
-        </section>
+        </div>
 
-        <Footer />
-      </main>
-    </div>
+        {isLoading ? (
+          <div className="surface-card p-8 text-center">
+            <div className="animate-pulse" style={{ color: 'var(--mono-muted)' }}>Loading blog posts...</div>
+          </div>
+        ) : error ? (
+          <div className="surface-card p-8 text-center">
+            <div style={{ color: 'hsl(var(--destructive))' }}>Error loading blog posts. Please try again later.</div>
+          </div>
+        ) : filteredPosts.length === 0 ? (
+          <div className="surface-card p-8 text-center">
+            <div style={{ color: 'var(--mono-muted)' }}>No blog posts found matching your criteria.</div>
+            <button
+              className="mt-4 font-mono"
+              style={{ color: 'var(--mono-primary)' }}
+              onClick={() => { setSearchQuery(''); setSelectedTag(null); }}
+            >
+              Clear filters
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post, index) => (
+                <BlogCard
+                  key={post.id}
+                  title={post.title}
+                  summary={post.summary || ''}
+                  slug={post.slug}
+                  imageUrl={post.image_url}
+                  tags={post.tags}
+                  createdAt={post.created_at}
+                  content={post.content}
+                />
+              ))}
+            </div>
+
+            {totalPages > 1 && (
+              <Pagination className="mt-12">
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                      className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                    />
+                  </PaginationItem>
+                  {renderPaginationItems()}
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                      className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            )}
+          </>
+        )}
+      </section>
+    </PageLayout>
   );
 };
 

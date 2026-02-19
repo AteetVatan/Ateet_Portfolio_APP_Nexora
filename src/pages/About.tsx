@@ -1,82 +1,75 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAboutContent } from '../hooks/use-about-content';
 import { Skeleton } from '../components/ui/skeleton';
-import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
 import PageLayout from '../components/layout/PageLayout';
 
 const About: React.FC = () => {
   const { data: aboutContent, isLoading, error } = useAboutContent();
 
-  // Set page title
-  useEffect(() => {
-    document.title = "About Me - Developer Portfolio";
-  }, []);
-  
+
+
   return (
     <PageLayout>
-      <div className="min-h-screen py-12 px-6 md:px-12">
+      <SEOHead
+        title="About"
+        description="Learn about Ateet Vatan's background in AI engineering, LLM systems, multi-agent architectures, and full-stack development."
+      />
+      <div className="min-h-screen py-20 px-6 md:px-20 max-w-[900px] mx-auto">
         {isLoading ? (
-          <div className="terminal-section max-w-3xl mx-auto space-y-6">
-            <Skeleton className="h-12 w-2/3 bg-[#1e3a4a]" />
-            <Skeleton className="h-6 w-1/2 bg-[#1e3a4a]" />
+          <div className="space-y-6">
+            <Skeleton className="h-12 w-2/3" />
+            <Skeleton className="h-6 w-1/2" />
             <div className="space-y-4 mt-8">
-              <Skeleton className="h-4 w-full bg-[#1e3a4a]" />
-              <Skeleton className="h-4 w-full bg-[#1e3a4a]" />
-              <Skeleton className="h-4 w-3/4 bg-[#1e3a4a]" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
           </div>
         ) : error || !aboutContent ? (
-          <div className="terminal-section max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl font-mono text-white mb-4">
-              ABOUT <span className="text-[#00c3ff]">ME_</span>
+          <div className="text-center">
+            <h1 className="font-heading text-3xl font-bold mb-4" style={{ color: 'var(--mono-text)' }}>
+              About <span className="highlight">Me</span>
             </h1>
-            <p className="text-[#85a5b3]">
+            <p style={{ color: 'var(--mono-muted)' }}>
               Unable to load profile information. Please try again later.
             </p>
           </div>
         ) : (
-          <div className="terminal-section max-w-3xl mx-auto">
+          <div>
             <div className="mb-12">
-              <h1 className="text-3xl md:text-4xl font-mono text-white mb-2">
-                {aboutContent.name} <span className="text-[#00c3ff]">_</span>
+              <h1 className="font-heading text-3xl md:text-4xl font-bold mb-2" style={{ color: 'var(--mono-text)' }}>
+                {aboutContent.name}<span className="highlight">.</span>
               </h1>
-              <p className="text-xl text-[#00c3ff] font-mono mb-4">
+              <p className="text-xl font-mono mb-4" style={{ color: 'var(--mono-primary)' }}>
                 {aboutContent.title}
               </p>
-              <p className="text-lg text-[#85a5b3]">
+              <p className="text-lg" style={{ color: 'var(--mono-muted)' }}>
                 {aboutContent.tagline}
               </p>
             </div>
-            
-            <div className="prose prose-invert prose-cyan max-w-none mb-12">
-              <div className="text-[#85a5b3] whitespace-pre-line" 
-                   dangerouslySetInnerHTML={{ __html: aboutContent.bio.replace(/\*\*(.*?)\*\*/g, '<span class="text-[#00c3ff] font-semibold">$1</span>') }} />
+
+            <div className="prose prose-monolith max-w-none mb-12">
+              <div style={{ color: 'var(--mono-muted)' }} className="whitespace-pre-line"
+                dangerouslySetInnerHTML={{ __html: aboutContent.bio.replace(/\*\*(.*?)\*\*/g, '<span style="color: var(--mono-primary); font-weight: 600;">$1</span>') }} />
             </div>
-            
+
             <div className="mb-12">
-              <h2 className="text-xl font-mono text-[#00c3ff] mb-4">Expertise</h2>
-              <div className="flex flex-wrap gap-3">
+              <h2 className="font-heading text-xl mb-4" style={{ color: 'var(--mono-text)' }}>Expertise</h2>
+              <div className="flex flex-wrap gap-2">
                 {aboutContent.expertise.map((skill, index) => (
-                  <span 
-                    key={index} 
-                    className="px-3 py-1 text-sm rounded-sm 
-                             bg-[#0c1824] text-[#85a5b3] border border-[#1e3a4a]"
-                  >
-                    {skill}
-                  </span>
+                  <span key={index} className="tag">{skill}</span>
                 ))}
               </div>
             </div>
-            
-            <div className="border-t border-[#1e3a4a] pt-8 mt-12">
-              <div className="text-[#85a5b3] whitespace-pre-line mb-6">
+
+            <div className="pt-8 mt-12" style={{ borderTop: '1px solid var(--mono-border)' }}>
+              <div className="whitespace-pre-line mb-6" style={{ color: 'var(--mono-muted)' }}>
                 {aboutContent.cta_footer}
               </div>
-              <Link to="/contact">
-                <Button className="bg-[#1291c7] hover:bg-[#00c3ff] text-white">
-                  Contact Me
-                </Button>
+              <Link to="/contact" className="btn-primary inline-block">
+                Contact Me →
               </Link>
             </div>
           </div>

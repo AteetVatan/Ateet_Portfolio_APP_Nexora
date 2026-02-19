@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { 
+import {
   Collapsible,
   CollapsibleContent
 } from '@/components/ui/collapsible';
@@ -16,23 +16,19 @@ interface CVCollapsibleSectionProps {
 }
 
 const CVCollapsibleSection: React.FC<CVCollapsibleSectionProps> = ({
-  title,
-  icon,
-  isOpen,
-  toggleSection,
-  children
+  title, icon, isOpen, toggleSection, children
 }) => {
   return (
-    <Card className="bg-[#0c1824] border-[#1e3a4a] relative z-10">
+    <Card className="monolith-card relative z-10">
       <CardHeader className="cursor-pointer" onClick={toggleSection}>
-        <CardTitle className="text-[#00c3ff] flex items-center justify-between">
+        <CardTitle className="flex items-center justify-between" style={{ color: 'var(--mono-text)' }}>
           <div className="flex items-center">
             {icon}
             {title}
           </div>
-          {isOpen ? 
-            <ChevronUp className="h-5 w-5 text-[#00c3ff]" /> : 
-            <ChevronDown className="h-5 w-5 text-[#00c3ff]" />
+          {isOpen ?
+            <ChevronUp className="h-5 w-5" style={{ color: 'var(--mono-primary)' }} /> :
+            <ChevronDown className="h-5 w-5" style={{ color: 'var(--mono-primary)' }} />
           }
         </CardTitle>
       </CardHeader>

@@ -1,257 +1,204 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import SEOHead from '../components/SEOHead';
 import { useMasxAiDetails } from '../hooks/use-masx-ai';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import GridBackground from '../components/GridBackground';
+import PageLayout from '../components/layout/PageLayout';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { 
-  ExternalLink, 
-  Code, 
-  Layers, 
-  Calendar, 
-  Target, 
-  User, 
-  Lightbulb, 
-  LayoutDashboard, 
-  AlertTriangle, 
-  TrendingUp, 
-  MessageSquare, 
-  BookOpen
+import {
+  ExternalLink, Code, Layers, Calendar, Target, User, Lightbulb,
+  LayoutDashboard, AlertTriangle, TrendingUp, MessageSquare, BookOpen
 } from 'lucide-react';
 import { Skeleton } from '../components/ui/skeleton';
 
 const MasxAICaseStudy: React.FC = () => {
   const { data: masxAi, isLoading, error } = useMasxAiDetails();
 
-  useEffect(() => {
-    document.title = "MASX AI Case Study - Developer Portfolio";
-  }, []);
-  
+
+
+  const SectionHeading = ({ icon: Icon, children }: { icon: any; children: React.ReactNode }) => (
+    <h2 className="font-heading text-2xl mb-4 flex items-center" style={{ color: 'var(--mono-text)' }}>
+      <Icon className="mr-3 h-5 w-5" style={{ color: 'var(--mono-primary)' }} />
+      {children}
+    </h2>
+  );
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <GridBackground />
-      
-      <div className="hidden md:block md:fixed md:left-0 md:top-0 md:bottom-0 md:w-60 lg:w-64 z-20">
-        <Navigation />
-      </div>
-      
-      <main className="flex-grow w-full max-w-screen-2xl mx-auto md:pl-24 lg:pl-32">
-        <div className="min-h-screen py-12 px-6 md:px-12">
-          {isLoading ? (
-            <div className="space-y-8 max-w-4xl mx-auto">
-              <Skeleton className="h-12 w-3/4 bg-[#1e3a4a]" />
-              <Skeleton className="h-6 w-1/2 bg-[#1e3a4a]" />
-              <div className="grid md:grid-cols-2 gap-8">
-                <Skeleton className="h-48 bg-[#1e3a4a]" />
-                <Skeleton className="h-48 bg-[#1e3a4a]" />
+    <PageLayout>
+      <SEOHead
+        title="MASX AI Case Study"
+        description="In-depth case study of the MASX AI system — architecture, implementation, challenges, and outcomes by Ateet Vatan."
+      />
+      <div className="py-20 px-6 md:px-20 max-w-[900px] mx-auto">
+        {isLoading ? (
+          <div className="space-y-8">
+            <Skeleton className="h-12 w-3/4" />
+            <Skeleton className="h-6 w-1/2" />
+            <div className="grid md:grid-cols-2 gap-8"><Skeleton className="h-48" /><Skeleton className="h-48" /></div>
+            <Skeleton className="h-64" />
+          </div>
+        ) : error || !masxAi ? (
+          <div className="text-center">
+            <h1 className="font-heading text-3xl font-bold mb-4" style={{ color: 'var(--mono-text)' }}>
+              MASX <span className="highlight">AI</span> Case Study
+            </h1>
+            <p style={{ color: 'var(--mono-muted)' }}>Unable to load MASX AI project details.</p>
+          </div>
+        ) : (
+          <div className="space-y-16">
+            {/* Header */}
+            <section>
+              <div className="flex items-center mb-2">
+                <BookOpen className="h-5 w-5 mr-2" style={{ color: 'var(--mono-primary)' }} />
+                <h3 className="text-md font-mono" style={{ color: 'var(--mono-primary)' }}>CASE STUDY</h3>
               </div>
-              <Skeleton className="h-64 bg-[#1e3a4a]" />
-            </div>
-          ) : error || !masxAi ? (
-            <div className="terminal-section max-w-lg text-center p-6">
-              <h1 className="text-3xl font-mono text-white mb-4">
-                MASX <span className="text-[#00c3ff]">AI_</span> Case Study
+              <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl" style={{ color: 'var(--mono-text)' }}>
+                {masxAi.title}<span className="highlight">.</span>
               </h1>
-              <p className="text-[#85a5b3]">
-                Unable to load MASX AI project details. Please try again later.
-              </p>
-            </div>
-          ) : (
-            <div className="max-w-4xl mx-auto space-y-16">
-              {/* Project Header */}
-              <section className="case-study-header">
-                <div className="flex items-center mb-2">
-                  <BookOpen className="h-5 w-5 text-[#00c3ff] mr-2" />
-                  <h3 className="text-md text-[#00c3ff] font-mono">CASE STUDY</h3>
-                </div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-mono text-white">
-                  {masxAi.title} <span className="text-[#00c3ff]">_</span>
-                </h1>
-                {masxAi.tagline && (
-                  <p className="text-xl md:text-2xl text-[#00c3ff] mt-3 font-mono">
-                    {masxAi.tagline}
-                  </p>
+              {masxAi.tagline && (
+                <p className="text-xl md:text-2xl mt-3 font-mono" style={{ color: 'var(--mono-primary)' }}>{masxAi.tagline}</p>
+              )}
+              <div className="flex flex-wrap gap-4 mt-6">
+                {masxAi.timeframe && (
+                  <div className="flex items-center text-sm" style={{ color: 'var(--mono-muted)' }}>
+                    <Calendar className="h-4 w-4 mr-2" style={{ color: 'var(--mono-primary)' }} />
+                    {masxAi.timeframe}
+                  </div>
                 )}
-                
-                <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-6">
-                  {masxAi.timeframe && (
-                    <div className="case-study-timeframe">
-                      <Calendar className="h-4 w-4 mr-2 text-[#00c3ff]" />
-                      {masxAi.timeframe}
-                    </div>
-                  )}
-                  
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {masxAi.tech_stack?.map((tech, index) => (
-                      <span key={index} className="case-study-tag">{tech}</span>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {masxAi.tech_stack?.map((tech, index) => (<span key={index} className="tag">{tech}</span>))}
                 </div>
-              </section>
-              
-              {/* Problem Statement */}
-              {masxAi.problem_statement && (
-                <section>
-                  <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                    <Target className="mr-3 h-5 w-5" /> Problem Statement
-                  </h2>
-                  <div className="case-study-section">
-                    <p>{masxAi.problem_statement}</p>
-                  </div>
-                </section>
-              )}
-              
-              {/* My Role */}
-              {masxAi.role_description && (
-                <section>
-                  <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                    <User className="mr-3 h-5 w-5" /> My Role
-                  </h2>
-                  <div className="case-study-section">
-                    <div className="whitespace-pre-line">{masxAi.role_description}</div>
-                  </div>
-                </section>
-              )}
-              
-              {/* Key Innovations */}
-              {masxAi.key_innovations && masxAi.key_innovations.length > 0 && (
-                <section>
-                  <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                    <Lightbulb className="mr-3 h-5 w-5" /> Key Innovations & Outcomes
-                  </h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {masxAi.key_innovations.map((innovation, index) => (
-                      <Card key={index} className="case-study-module">
-                        <CardContent className="p-4">
-                          <div className="flex justify-between items-start">
-                            <p className="text-[#85a5b3] text-base">{innovation.feature}</p>
-                            <p className="text-[#00c3ff] text-sm font-mono">{innovation.impact}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </section>
-              )}
-              
-              {/* Architecture */}
+              </div>
+            </section>
+
+            {masxAi.problem_statement && (
               <section>
-                <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                  <Layers className="mr-3 h-5 w-5" /> Architecture
-                </h2>
-                <div className="case-study-section">
-                  <p className="whitespace-pre-line">{masxAi.architecture}</p>
-                  
-                  {masxAi.architecture_snapshot && (
-                    <div className="mt-6 pt-6 border-t border-[#1e3a4a]">
-                      <h3 className="text-lg text-[#00c3ff] mb-3 font-mono">Architecture Snapshot</h3>
-                      <div className="case-study-code">
-                        {masxAi.architecture_snapshot}
-                      </div>
-                    </div>
-                  )}
+                <SectionHeading icon={Target}>Problem Statement</SectionHeading>
+                <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
+                  <p>{masxAi.problem_statement}</p>
                 </div>
               </section>
-              
-              {/* Modules */}
-              {masxAi.modules && masxAi.modules.length > 0 && (
-                <section>
-                  <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                    <LayoutDashboard className="mr-3 h-5 w-5" /> Core Modules
-                  </h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {masxAi.modules.map((module: any, index: number) => (
-                      <Card key={index} className="case-study-module">
-                        <CardContent className="p-4">
-                          <div className="flex justify-between items-center mb-2">
-                            <p className="text-[#85a5b3] font-semibold">{module.name}</p>
-                            <span className={`text-xs px-2 py-0.5 rounded-sm ${
-                              module.status === 'completed' ? 'module-status-completed' : 
-                              module.status === 'in progress' ? 'module-status-inprogress' : 
-                              'module-status-default'
-                            }`}>
-                              {module.status}
-                            </span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </section>
-              )}
-              
-              {/* Challenges */}
-              {masxAi.challenges && (
-                <section>
-                  <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                    <AlertTriangle className="mr-3 h-5 w-5" /> Challenges & Lessons Learned
-                  </h2>
-                  <div className="case-study-section">
-                    <div className="whitespace-pre-line">{masxAi.challenges}</div>
-                  </div>
-                </section>
-              )}
-              
-              {/* Impact */}
-              {masxAi.impact && (
-                <section>
-                  <h2 className="text-2xl font-mono text-[#00c3ff] mb-4 flex items-center">
-                    <TrendingUp className="mr-3 h-5 w-5" /> Impact & Future Scope
-                  </h2>
-                  <div className="case-study-section">
-                    <div className="whitespace-pre-line">{masxAi.impact}</div>
-                  </div>
-                </section>
-              )}
-              
-              {/* Links and Call to Action */}
-              <section className="pt-8 border-t border-[#1e3a4a]">
-                <div className="flex flex-col space-y-6">
-                  {/* Project Links */}
-                  <div className="flex flex-wrap gap-4">
-                    {masxAi.demo_url && (
-                      <a href={masxAi.demo_url} target="_blank" rel="noopener noreferrer">
-                        <Button variant="default" className="bg-[#1291c7] hover:bg-[#00c3ff] text-white">
-                          <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                        </Button>
-                      </a>
-                    )}
-                    
-                    {masxAi.github_url && (
-                      <a href={masxAi.github_url} target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" className="border-[#1e3a4a] text-[#85a5b3] hover:text-[#00c3ff] hover:border-[#00c3ff]">
-                          <Code className="mr-2 h-4 w-4" /> View Code
-                        </Button>
-                      </a>
-                    )}
-                  </div>
-                  
-                  {/* Call to Action */}
-                  {masxAi.call_to_action && (
-                    <div className="case-study-cta">
-                      <div className="flex items-start gap-4">
-                        <MessageSquare className="h-6 w-6 text-[#00c3ff] flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="text-[#85a5b3] mb-4">{masxAi.call_to_action}</p>
-                          <a href="/contact">
-                            <Button className="bg-[#1291c7] hover:bg-[#00c3ff] text-white">
-                              Contact Me
-                            </Button>
-                          </a>
+            )}
+
+            {masxAi.role_description && (
+              <section>
+                <SectionHeading icon={User}>My Role</SectionHeading>
+                <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
+                  <div className="whitespace-pre-line">{masxAi.role_description}</div>
+                </div>
+              </section>
+            )}
+
+            {masxAi.key_innovations && masxAi.key_innovations.length > 0 && (
+              <section>
+                <SectionHeading icon={Lightbulb}>Key Innovations & Outcomes</SectionHeading>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {masxAi.key_innovations.map((innovation, index) => (
+                    <Card key={index} className="monolith-card">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-start">
+                          <p className="text-base" style={{ color: 'var(--mono-muted)' }}>{innovation.feature}</p>
+                          <p className="text-sm font-mono" style={{ color: 'var(--mono-primary)' }}>{innovation.impact}</p>
                         </div>
-                      </div>
-                    </div>
-                  )}
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </section>
-            </div>
-          )}
-        </div>
-        <Footer />
-      </main>
-    </div>
+            )}
+
+            <section>
+              <SectionHeading icon={Layers}>Architecture</SectionHeading>
+              <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
+                <p className="whitespace-pre-line">{masxAi.architecture}</p>
+                {masxAi.architecture_snapshot && (
+                  <div className="mt-6 pt-6" style={{ borderTop: '1px solid var(--mono-border)' }}>
+                    <h3 className="font-heading text-lg mb-3" style={{ color: 'var(--mono-text)' }}>Architecture Snapshot</h3>
+                    <pre className="font-mono text-sm p-4 rounded overflow-x-auto" style={{ background: 'var(--mono-bg)', color: 'var(--mono-muted)' }}>
+                      {masxAi.architecture_snapshot}
+                    </pre>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {masxAi.modules && masxAi.modules.length > 0 && (
+              <section>
+                <SectionHeading icon={LayoutDashboard}>Core Modules</SectionHeading>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {masxAi.modules.map((module: any, index: number) => (
+                    <Card key={index} className="monolith-card">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <p className="font-semibold" style={{ color: 'var(--mono-muted)' }}>{module.name}</p>
+                          <span className="text-xs px-2 py-0.5 rounded-sm"
+                            style={{
+                              background: module.status === 'completed' ? 'rgba(34, 197, 94, 0.15)' :
+                                module.status === 'in progress' ? 'rgba(255, 77, 0, 0.15)' : 'rgba(139, 134, 128, 0.15)',
+                              color: module.status === 'completed' ? '#22c55e' :
+                                module.status === 'in progress' ? 'var(--mono-primary)' : 'var(--mono-muted)',
+                            }}>
+                            {module.status}
+                          </span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {masxAi.challenges && (
+              <section>
+                <SectionHeading icon={AlertTriangle}>Challenges & Lessons Learned</SectionHeading>
+                <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
+                  <div className="whitespace-pre-line">{masxAi.challenges}</div>
+                </div>
+              </section>
+            )}
+
+            {masxAi.impact && (
+              <section>
+                <SectionHeading icon={TrendingUp}>Impact & Future Scope</SectionHeading>
+                <div className="monolith-card p-6" style={{ color: 'var(--mono-muted)' }}>
+                  <div className="whitespace-pre-line">{masxAi.impact}</div>
+                </div>
+              </section>
+            )}
+
+            <section className="pt-8" style={{ borderTop: '1px solid var(--mono-border)' }}>
+              <div className="flex flex-col space-y-6">
+                <div className="flex flex-wrap gap-4">
+                  {masxAi.demo_url && (
+                    <a href={masxAi.demo_url} target="_blank" rel="noopener noreferrer">
+                      <Button className="btn-primary"><ExternalLink className="mr-2 h-4 w-4" /> Live Demo</Button>
+                    </a>
+                  )}
+                  {masxAi.github_url && (
+                    <a href={masxAi.github_url} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" style={{ borderColor: 'var(--mono-border)', color: 'var(--mono-muted)' }}>
+                        <Code className="mr-2 h-4 w-4" /> View Code
+                      </Button>
+                    </a>
+                  )}
+                </div>
+                {masxAi.call_to_action && (
+                  <div className="monolith-card p-6">
+                    <div className="flex items-start gap-4">
+                      <MessageSquare className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--mono-primary)' }} />
+                      <div>
+                        <p className="mb-4" style={{ color: 'var(--mono-muted)' }}>{masxAi.call_to_action}</p>
+                        <a href="/contact"><Button className="btn-primary">Contact Me →</Button></a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
+        )}
+      </div>
+    </PageLayout>
   );
 };
 

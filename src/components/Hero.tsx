@@ -1,147 +1,155 @@
-import React, { useState, useEffect } from 'react';
-import { Download, Bot } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+
+import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '../integrations/supabase/client';
 import { Link } from 'react-router-dom';
 
+/**
+ * Hero — Monolith split layout
+ * Left: floating portrait, label, giant name, description, two CTAs
+ * Right: gradient accent panel (untouched)
+ */
 const Hero: React.FC = () => {
-  const [displayedText, setDisplayedText] = useState<string>('');
-  const [cursorVisible, setCursorVisible] = useState<boolean>(true);
-  const fullText = 'AI ENGINEER_';//'LLM INTEGRATION & AI AUTOMATION EXPERT';
-  const typeDelay = 60; // time in ms between typing each character
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Typing animation effect
+  const { data: heroData } = useQuery({
+    queryKey: ['hero-content'],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from('personal_info')
+        .select('*')
+        .single();
+      return data;
+    },
+  });
+
   useEffect(() => {
-    if (displayedText.length < fullText.length) {
-      const typingTimer = setTimeout(() => {
-        setDisplayedText(fullText.slice(0, displayedText.length + 1));
-      }, typeDelay);
-
-      return () => clearTimeout(typingTimer);
-    }
-  }, [displayedText]);
-
-  // Blinking cursor effect
-  useEffect(() => {
-    const blinkingCursor = setInterval(() => {
-      setCursorVisible(prev => !prev);
-    }, 500);
-
-    return () => clearInterval(blinkingCursor);
+    setIsVisible(true);
   }, []);
 
+  const name = heroData?.name || 'Ateet Bahamani';
+  const title = heroData?.title || 'AI Engineer & LLM Architect';
+  const tagline = heroData?.tagline || 'Building intelligent systems that think, reason, and act. Specializing in LLM integration, multi-agent architectures, and production AI.';
+
   return (
-    <div className="relative flex items-center justify-center min-h-[85vh] px-6 md:px-12">
-      {/* Background decorative elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#00c3ff] rounded-full filter blur-[120px] opacity-10 animate-float"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-[#0063f9] rounded-full filter blur-[100px] opacity-5 animate-float" style={{ animationDelay: "-2s" }}></div>
+    <section id="hero" className="min-h-screen flex flex-col md:flex-row items-stretch">
+      {/* Left side — text content with profile portrait */}
+      <div className="flex-[0_0_55%] flex flex-col justify-center px-6 py-10 md:px-20 md:py-16">
 
-      {/* Hero content - centered container */}
-      <div className="relative z-10 animate-on-load w-full max-w-4xl mx-auto text-center">
-        <div className="flex flex-col items-center justify-center">
-          {/* Profile image - added above the name */}
-          <div className="mb-6">
-            <Avatar className="w-32 h-32 mt-10 border-2 border-[#1291c7] animate-pulse-glow">
-              <AvatarImage src="/uploads/profile_pic.png" alt="Profile" />
-              <AvatarFallback className="text-[#00c3ff]">AT</AvatarFallback>
-            </Avatar>
+        {/* Profile Portrait + Label row */}
+        <div
+          className="flex items-center gap-5 mb-8"
+          style={{
+            animation: isVisible ? 'fade-in 0.6s forwards' : 'none',
+            opacity: 0,
+          }}
+        >
+          {/* Glowing portrait */}
+          <div className="hero-portrait-wrapper">
+            <div className="hero-portrait-ring" />
+            <img
+              src="/profile.jpeg"
+              alt="Ateet Bahamani"
+              className="hero-portrait-img"
+            />
           </div>
 
-          <h1 className="font-mono text-5xl sm:text-7xl md:text-8xl font-bold mb-8 text-center">
-            <span className="text-white">AT</span>
-            <span className="text-[#00c3ff]">EET_</span>
-          </h1>
-
-          <div className="font-mono text-sm sm:text-lg text-[#85a5b3] uppercase mb-4 text-center">
-            {displayedText}
-            <span className={`typing-cursor ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+          {/* Label */}
+          <div className="font-mono text-xs uppercase tracking-[0.15em]"
+            style={{ color: 'var(--mono-primary)' }}
+          >
+            {title}
           </div>
+        </div>
 
-          {/* CV Download Button - Added right after job title */}
-          <div className="flex flex-row items-center justify-center">
-            <Button
-              variant="outline"
-              size="sm"
-              className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
-              asChild
+        {/* Name */}
+        <h1
+          className="font-heading leading-[0.95] tracking-[-0.04em] mb-2"
+          style={{ fontSize: 'clamp(48px, 8vw, 120px)' }}
+        >
+          <span className="block overflow-hidden">
+            <span
+              className="inline-block"
+              style={{
+                animation: isVisible ? 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards' : 'none',
+                opacity: 0,
+                transform: 'translateY(100%)',
+              }}
             >
-              <a href="/files/Ateet.pdf" download>
-                <Download className="mr-2 h-4 w-4" />
-                Download CV
-              </a>
-            </Button>
-            {/* CV Download Button - Added right after job title */}
-            <div className="w-5"></div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="text-[#00c3ff] border-[#1e3a4a] hover:bg-[#1291c7]/20 hover:text-[#00c3ff] mb-8"
-              asChild
+              {name.split(' ')[0]?.toUpperCase() || 'ATEET'}
+            </span>
+          </span>
+          <span className="block overflow-hidden">
+            <span
+              className="inline-block"
+              style={{
+                animation: isVisible ? 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards' : 'none',
+                opacity: 0,
+                transform: 'translateY(100%)',
+              }}
             >
-              <a href="https://ateetclone.masxai.com/" target="_blank" rel="noopener noreferrer">
-                <Bot className="mr-2 h-4 w-4" />
-                Talk to Ateet's AI Clone
-              </a>
-            </Button>
-          </div>
-        </div>
+              {name.split(' ')[1]?.toUpperCase() || 'BAHAMANI'}
+              <span style={{ color: 'var(--mono-primary)' }}>_</span>
+            </span>
+          </span>
+        </h1>
 
-        {/* Expertise badges */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          <div className="skill-tag">LLM Integration</div>
-          <div className="skill-tag">AI Automation</div>
-          <div className="skill-tag">Software Engineering</div>
-          <div className="skill-tag">Full-Stack & Cloud Engineering</div>
-        </div>
+        {/* Description */}
+        <p
+          className="max-w-[480px] my-6 leading-relaxed"
+          style={{
+            fontSize: 'clamp(16px, 2vw, 22px)',
+            color: 'var(--mono-muted)',
+            animation: isVisible ? 'fade-in 0.8s 0.4s forwards' : 'none',
+            opacity: 0,
+          }}
+        >
+          {tagline}
+        </p>
 
-        {/* Matrix-inspired data streams - purely decorative */}
-        <div className="grid grid-cols-4 gap-2 my-12 opacity-90 mx-auto max-w-xl">
-          <div className="h-24 overflow-hidden font-mono text-xs text-[#00c3ff] opacity-20">
-            <div className="animate-data-stream">
-              {Array(20).fill(0).map((_, i) => (
-                <div key={i} className="my-1">
-                  {Math.random().toString(36).substring(2, 8)}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="h-24 overflow-hidden font-mono text-xs text-[#00c3ff] opacity-10" style={{ animationDelay: "-5s" }}>
-            <div className="animate-data-stream" style={{ animationDuration: "25s" }}>
-              {Array(20).fill(0).map((_, i) => (
-                <div key={i} className="my-1">
-                  {Math.random().toString(36).substring(2, 8)}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="h-24 overflow-hidden font-mono text-xs text-[#00c3ff] opacity-30" style={{ animationDelay: "-10s" }}>
-            <div className="animate-data-stream" style={{ animationDuration: "30s" }}>
-              {Array(20).fill(0).map((_, i) => (
-                <div key={i} className="my-1">
-                  {Math.random().toString(36).substring(2, 8)}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="h-24 overflow-hidden font-mono text-xs text-[#00c3ff] opacity-15" style={{ animationDelay: "-3s" }}>
-            <div className="animate-data-stream" style={{ animationDuration: "22s" }}>
-              {Array(20).fill(0).map((_, i) => (
-                <div key={i} className="my-1">
-                  {Math.random().toString(36).substring(2, 8)}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* CTA button - now uses Link to navigate to MASX AI page */}
-        <div className="mt-8 text-center">
-          <Link to="/masx-ai" className="neon-button">
-            EXPLORE WORK
+        {/* Buttons */}
+        <div
+          className="flex flex-wrap gap-4"
+          style={{
+            animation: isVisible ? 'fade-in 0.8s 0.6s forwards' : 'none',
+            opacity: 0,
+          }}
+        >
+          <Link to="/projects" className="btn-primary">
+            Explore Projects →
           </Link>
+          <a
+            href="https://ateetclone.masxai.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-outline"
+          >
+            Talk to Ateet's AI Clone
+          </a>
+          <a
+            href="/files/Ateet.pdf"
+            download
+            className="btn-outline"
+          >
+            Download CV ↓
+          </a>
         </div>
       </div>
-    </div>
+
+      {/* Right side — gradient photo placeholder */}
+      <div className="flex-[0_0_45%] overflow-hidden min-h-[50vh] md:min-h-0">
+        <div
+          className="w-full h-full flex items-center justify-center font-heading"
+          style={{
+            background: 'linear-gradient(135deg, #FF4D00 0%, #FF8533 50%, #1A1A1A 100%)',
+            fontSize: '200px',
+            color: 'rgba(255, 255, 255, 0.15)',
+          }}
+        >
+          A
+        </div>
+      </div>
+    </section>
   );
 };
 
