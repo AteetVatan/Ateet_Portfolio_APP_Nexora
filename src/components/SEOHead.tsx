@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const SITE_NAME = 'Ateet Vatan';
-const BASE_URL = 'https://ateetai.vercel.app';
+const BASE_URL = 'https://ateet.masxai.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/icon-og.png`;
 
 interface SEOHeadProps {

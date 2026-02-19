@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ateetai.vercel.app/sitemap.xml
+Sitemap: https://ateet.masxai.com/sitemap.xml
