@@ -18,6 +18,7 @@ const navLinks = [
     { label: 'CV', path: '/cv' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Card', path: '/business-card' },
 ];
 
 const Navigation: React.FC = () => {

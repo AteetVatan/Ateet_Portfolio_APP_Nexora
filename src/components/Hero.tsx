@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
   }, []);
 
   const name = heroData?.name || 'Ateet Bahamani';
-  const title = heroData?.title || 'AI Engineer & LLM Architect';
+  const title = heroData?.title || 'AI Architect / Engineer';
   const tagline = heroData?.tagline || 'Building intelligent systems that think, reason, and act. Specializing in LLM integration, multi-agent architectures, and production AI.';
 
   return (

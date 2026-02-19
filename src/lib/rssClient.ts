@@ -17,11 +17,34 @@ export type NewsItem = {
     imageUrl?: string;
 };
 
-// ─── CORS Proxy Config ──────────────────────────────────────
+// ─── CORS Proxy Config (multi-proxy fallback) ───────────────
 
-const PROXY_BASE =
-    import.meta.env.VITE_CORS_PROXY ||
-    'https://api.allorigins.win/raw?url=';
+interface ProxyConfig {
+    name: string;
+    /** Build the proxied URL; `target` is already encoded */
+    url: (encodedTarget: string) => string;
+}
+
+const PROXY_LIST: ProxyConfig[] = [
+    {
+        name: 'codetabs',
+        url: (t) => `https://api.codetabs.com/v1/proxy?quest=${decodeURIComponent(t)}`,
+    },
+    {
+        name: 'allorigins',
+        url: (t) => `https://api.allorigins.win/raw?url=${t}`,
+    },
+    {
+        name: 'corsproxy-org',
+        url: (t) => `https://corsproxy.org/?url=${t}`,
+    },
+];
+
+// Override: if VITE_CORS_PROXY is set, use only that and skip fallback
+const ENV_PROXY = import.meta.env.VITE_CORS_PROXY as string | undefined;
+
+// Track which proxy last succeeded so we try it first next time
+let lastWorkingIdx = 0;
 
 const DEBUG = import.meta.env.DEV;
 
@@ -30,10 +53,6 @@ function log(...args: unknown[]) {
 }
 
 // ─── Fetch Helpers ──────────────────────────────────────────
-
-function proxiedUrl(targetUrl: string): string {
-    return PROXY_BASE + encodeURIComponent(targetUrl);
-}
 
 async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
     const controller = new AbortController();
@@ -46,16 +65,49 @@ async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
     }
 }
 
+/**
+ * Fetch RSS XML with cascading proxy fallback.
+ * Tries the last-known-good proxy first, then cycles through the rest.
+ */
 export async function fetchRssXml(feedUrl: string): Promise<string> {
-    const url = proxiedUrl(feedUrl);
+    // If env override, use only that
+    if (ENV_PROXY) {
+        return fetchViaProxy(ENV_PROXY + encodeURIComponent(feedUrl), feedUrl);
+    }
+
+    const encoded = encodeURIComponent(feedUrl);
     let lastError: unknown;
 
+    // Build ordered list: start with lastWorkingIdx, then the rest
+    const ordered = [
+        ...PROXY_LIST.slice(lastWorkingIdx),
+        ...PROXY_LIST.slice(0, lastWorkingIdx),
+    ];
+
+    for (let i = 0; i < ordered.length; i++) {
+        const proxy = ordered[i];
+        const url = proxy.url(encoded);
+        try {
+            const text = await fetchViaProxy(url, feedUrl);
+            // Remember this proxy as working
+            lastWorkingIdx = PROXY_LIST.indexOf(proxy);
+            return text;
+        } catch (err) {
+            log(`✗ proxy ${proxy.name} failed for ${feedUrl}:`, err);
+            lastError = err;
+        }
+    }
+    throw lastError;
+}
+
+/** Single-proxy fetch with 1 retry */
+async function fetchViaProxy(url: string, feedUrl: string): Promise<string> {
+    let lastError: unknown;
     for (let attempt = 0; attempt < 2; attempt++) {
         try {
             const res = await fetchWithTimeout(url, 8000);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const text = await res.text();
-            // Basic sanity check: must look like XML
             if (!text.trim().startsWith('<')) {
                 throw new Error('Response is not XML');
             }
@@ -294,7 +346,10 @@ function setOgCache(cache: Record<string, OgCacheEntry>) {
 
 async function fetchOgImage(articleUrl: string): Promise<string | null> {
     try {
-        const res = await fetchWithTimeout(proxiedUrl(articleUrl), 2500);
+        const proxyUrl = ENV_PROXY
+            ? ENV_PROXY + encodeURIComponent(articleUrl)
+            : PROXY_LIST[lastWorkingIdx].url(encodeURIComponent(articleUrl));
+        const res = await fetchWithTimeout(proxyUrl, 2500);
         if (!res.ok) return null;
         const html = await res.text();
 

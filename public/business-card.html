@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ateet Bahamani — Business Card</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #0a0a0f;
+            color: #f1f1f1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ───── ambient background ───── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0, 180, 216, 0.06), transparent),
+                radial-gradient(ellipse 60% 50% at 80% 90%, rgba(99, 102, 241, 0.04), transparent);
+            pointer-events: none;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .page-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #444;
+        }
+
+        /* ═══════════════════════════════════
+       CARD FRONT
+       ═══════════════════════════════════ */
+        .card {
+            width: 540px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #111118;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        /* top gradient line */
+        .card::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e, #06b6d4, #8b5cf6, #ec4899);
+        }
+
+        .card-inner {
+            padding: 40px 38px 34px;
+        }
+
+        /* ── top row: avatar + name ── */
+        .top-row {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            position: relative;
+            width: 76px;
+            height: 76px;
+            flex-shrink: 0;
+        }
+
+        .avatar::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: conic-gradient(#06b6d4, #8b5cf6, #ec4899, #ef4444, #f97316, #06b6d4);
+            animation: ring-rotate 5s linear infinite;
+        }
+
+        @keyframes ring-rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .avatar img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 3px solid #111118;
+        }
+
+        .identity h1 {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .identity h1 .blink {
+            display: inline-block;
+            width: 3px;
+            height: 22px;
+            background: #06b6d4;
+            margin-left: 3px;
+            vertical-align: text-bottom;
+            animation: cursor-blink 1s step-end infinite;
+        }
+
+        @keyframes cursor-blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .identity .tagline {
+            font-size: 13.5px;
+            font-weight: 400;
+            color: #777;
+            margin-top: 8px;
+            line-height: 1.55;
+        }
+
+        /* ── separator ── */
+        .sep {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.06);
+            margin: 26px 0;
+        }
+
+        /* ── contact section ── */
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #06b6d4;
+            margin-bottom: 16px;
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 13px;
+            color: #999;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a.contact-row:hover {
+            color: #06b6d4;
+        }
+
+        .contact-row .ico {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        a.contact-row:hover .ico {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: rgba(6, 182, 212, 0.25);
+        }
+
+        .contact-row .ico svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .contact-row .label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #555;
+            width: 72px;
+            flex-shrink: 0;
+        }
+
+        .contact-row .value {
+            color: #bbb;
+        }
+
+        a.contact-row:hover .value {
+            color: #06b6d4;
+        }
+
+        /* ai clone highlight */
+        .contact-row.ai-highlight .ico {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .contact-row.ai-highlight .badge {
+            margin-left: auto;
+            font-family: 'Space Mono', monospace;
+            font-size: 8px;
+            letter-spacing: 0.12em;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            color: #06b6d4;
+        }
+
+        /* ── MASX AI footer inside card ── */
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 26px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .masx-brand {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+        }
+
+        .masx-brand strong {
+            color: #06b6d4;
+        }
+
+        .masx-brand span {
+            color: #444;
+        }
+
+        .card-footer .dot-grid {
+            display: flex;
+            gap: 4px;
+        }
+
+        .card-footer .dot-grid span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #222;
+        }
+
+        .card-footer .dot-grid span:nth-child(1) {
+            background: #ef4444;
+        }
+
+        .card-footer .dot-grid span:nth-child(2) {
+            background: #22c55e;
+        }
+
+        .card-footer .dot-grid span:nth-child(3) {
+            background: #06b6d4;
+        }
+
+        /* ═══════════════════════════════════
+       CARD BACK — QR codes
+       ═══════════════════════════════════ */
+        .card-back {
+            width: 540px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #111118;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-back::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #06b6d4, #22c55e, #eab308, #f97316, #ef4444, #ec4899);
+        }
+
+        .card-back-inner {
+            padding: 32px 38px 34px;
+        }
+
+        .qr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .qr-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .qr-img-wrap {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .qr-block:hover .qr-img-wrap {
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.12);
+        }
+
+        .qr-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .qr-meta {
+            text-align: center;
+        }
+
+        .qr-meta .qr-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #06b6d4;
+            margin-bottom: 4px;
+        }
+
+        .qr-meta .qr-url {
+            font-size: 11px;
+            color: #555;
+        }
+
+        /* scan prompt */
+        .scan-prompt {
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: #333;
+        }
+
+        /* ═══════════════════════════════════
+       ACTIONS
+       ═══════════════════════════════════ */
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            padding: 10px 22px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #111118;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .action-btn:hover {
+            border-color: #06b6d4;
+            color: #06b6d4;
+        }
+
+        /* ═══════════════════════════════════
+       PRINT STYLES
+       ═══════════════════════════════════ */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                color: #111;
+            }
+
+            body::before {
+                display: none;
+            }
+
+            .page-title,
+            .actions {
+                display: none;
+            }
+
+            .card,
+            .card-back {
+                box-shadow: none;
+                border: 2px solid #ccc;
+                background: #fff;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .card::before,
+            .card-back::before {
+                background: linear-gradient(90deg, #666, #999, #666);
+                height: 2px;
+            }
+
+            .identity h1 {
+                color: #111;
+            }
+
+            .identity h1 .blink {
+                display: none;
+            }
+
+            .identity .tagline {
+                color: #555;
+            }
+
+            .section-label {
+                color: #333;
+            }
+
+            .contact-row {
+                color: #333;
+            }
+
+            .contact-row .label {
+                color: #666;
+            }
+
+            .contact-row .value {
+                color: #222;
+            }
+
+            .contact-row .ico {
+                background: #f0f0f0;
+                border-color: #ddd;
+            }
+
+            .contact-row.ai-highlight .badge {
+                background: #eee;
+                border-color: #ccc;
+                color: #333;
+            }
+
+            .card-footer {
+                border-top-color: #ddd;
+            }
+
+            .masx-brand strong {
+                color: #333;
+            }
+
+            .masx-brand span {
+                color: #888;
+            }
+
+            .qr-img-wrap {
+                border: 1px solid #ddd;
+            }
+
+            .qr-meta .qr-tag {
+                color: #333;
+            }
+
+            .qr-meta .qr-url {
+                color: #555;
+            }
+
+            .scan-prompt {
+                color: #888;
+            }
+
+            .avatar::before {
+                display: none;
+            }
+
+            .avatar img {
+                border-color: #ddd;
+            }
+        }
+
+        /* ═══════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════ */
+        @media (max-width: 580px) {
+
+            .card,
+            .card-back {
+                width: 100%;
+            }
+
+            .card-inner,
+            .card-back-inner {
+                padding: 28px 22px 24px;
+            }
+
+            .identity h1 {
+                font-size: 22px;
+            }
+
+            .contact-row .label {
+                width: 60px;
+                font-size: 9px;
+            }
+
+            .avatar {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="page-title">Front</div>
+
+        <!-- ═══════ CARD FRONT ═══════ -->
+        <div class="card">
+            <div class="card-inner">
+
+                <div class="top-row">
+                    <div class="avatar">
+                        <img src="/profile.jpeg" alt="Ateet Bahamani" />
+                    </div>
+                    <div class="identity">
+                        <h1>ATEET BAHAMANI<span class="blink"></span></h1>
+                        <p class="tagline">AI Architect / Engineer building intelligent systems from code to cognition.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="sep"></div>
+
+                <div class="section-label">Contact</div>
+
+                <ul class="contact-list">
+                    <li>
+                        <a class="contact-row" href="mailto:ab@masxai.com">
+                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                </svg></span>
+                            <span class="label">Email</span>
+                            <span class="value">ab@masxai.com</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="tel:+4917623463484">
+                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                                </svg></span>
+                            <span class="label">Phone</span>
+                            <span class="value">+49 176 234 63484</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="https://ateet.masxai.com/" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M2 12h20" />
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                </svg></span>
+                            <span class="label">Portfolio</span>
+                            <span class="value">https://ateet.masxai.com</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="https://github.com/AteetVatan" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                                </svg></span>
+                            <span class="label">GitHub</span>
+                            <span class="value">https://github.com/AteetVatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="https://www.linkedin.com/in/ateet-vatan-bahmani/" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg></span>
+                            <span class="label">LinkedIn</span>
+                            <span class="value">linkedin.com/in/ateet-vatan-bahmani</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row ai-highlight" href="https://ateetclone.masxai.com/" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M12 2v4m0 12v4M2 12h4m12 0h4m-2.83-7.17-2.83 2.83M7.76 16.24l-2.83 2.83m11.31 0-2.83-2.83M7.76 7.76 4.93 4.93" />
+                                </svg></span>
+                            <span class="label">AI Clone</span>
+                            <span class="value">https://ateetclone.masxai.com</span>
+                            <span class="badge">TALK TO MY AI</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="card-footer">
+                    <div class="masx-brand">
+                        <strong>MASX AI</strong> <span>— The AI Spark</span>
+                    </div>
+                    <div class="dot-grid">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="page-title">Back — Scan to connect</div>
+
+        <!-- ═══════ CARD BACK ═══════ -->
+        <div class="card-back">
+            <div class="card-back-inner">
+
+                <div class="section-label" style="text-align:center;margin-bottom:24px">Scan to Connect</div>
+
+                <div class="qr-grid">
+                    <a class="qr-block" href="https://ateet.masxai.com/" target="_blank" rel="noopener noreferrer">
+                        <div class="qr-img-wrap">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://ateet.masxai.com/&bgcolor=FFFFFF&color=111111&margin=1"
+                                alt="Portfolio QR Code" />
+                        </div>
+                        <div class="qr-meta">
+                            <div class="qr-tag">Portfolio</div>
+                            <div class="qr-url">ateet.masxai.com</div>
+                        </div>
+                    </a>
+                    <a class="qr-block" href="https://ateetclone.masxai.com/" target="_blank" rel="noopener noreferrer">
+                        <div class="qr-img-wrap">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://ateetclone.masxai.com/&bgcolor=FFFFFF&color=111111&margin=1"
+                                alt="AI Clone QR Code" />
+                        </div>
+                        <div class="qr-meta">
+                            <div class="qr-tag">AI Clone</div>
+                            <div class="qr-url">ateetclone.masxai.com</div>
+                        </div>
+                    </a>
+                </div>
+
+                <p class="scan-prompt">↑ Point your camera to visit instantly ↑</p>
+
+            </div>
+        </div>
+
+        <!-- ═══════ ACTIONS ═══════ -->
+        <div class="actions">
+            <button class="action-btn" onclick="window.print()">⎙ Print</button>
+            <button class="action-btn" id="shareBtn" onclick="shareCard()">↗ Share</button>
+        </div>
+
+    </div>
+
+    <script>
+        function shareCard() {
+            const data = {
+                title: 'Ateet Bahamani — AI Engineer',
+                text: 'AI Architect / Engineer building intelligent systems from code to cognition.\n\nPortfolio: https://ateet.masxai.com/\nAI Clone: https://ateetclone.masxai.com/\nGitHub: https://github.com/AteetVatan\nLinkedIn: https://www.linkedin.com/in/ateet-vatan-bahmani/',
+                url: 'https://ateet.masxai.com/'
+            };
+            if (navigator.share) {
+                navigator.share(data).catch(() => { });
+            } else {
+                navigator.clipboard.writeText(data.text).then(() => {
+                    const btn = document.getElementById('shareBtn');
+                    btn.textContent = '✓ Copied!';
+                    setTimeout(() => (btn.textContent = '↗ Share'), 2000);
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
