@@ -8,6 +8,7 @@ import { supabase } from '../integrations/supabase/client';
 import PageLayout from '../components/layout/PageLayout';
 import { Button } from '../components/ui/button';
 import { Skeleton } from '../components/ui/skeleton';
+import BlogContent from '../components/BlogContent';
 
 interface SupabaseError extends Error { code?: string; }
 
@@ -147,9 +148,7 @@ const ProjectDetail: React.FC = () => {
               <h2 className="font-heading text-xl mb-4 pb-2" style={{ color: 'var(--mono-text)', borderBottom: '1px solid var(--mono-border)' }}>
                 Project Overview
               </h2>
-              <p className="whitespace-pre-line" style={{ color: 'var(--mono-muted)' }}>
-                {project.description}
-              </p>
+              <BlogContent content={project.description} />
             </div>
 
             {/* Tags */}

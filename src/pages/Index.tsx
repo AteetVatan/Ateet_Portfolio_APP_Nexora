@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import ExpertiseSection from '../components/ExpertiseSection';
 import ProjectShowcase from '../components/ProjectShowcase';
 import BlogPreview from '../components/BlogPreview';
+import AiNewsPreview from '../components/AiNewsPreview';
 import ContactSection from '../components/ContactSection';
 import PageLayout from '../components/layout/PageLayout';
 import startPinging from '../utils/urlPinger';
@@ -25,6 +26,7 @@ const Index: React.FC = () => {
       <ExpertiseSection />
       <ProjectShowcase />
       <BlogPreview />
+      <AiNewsPreview />
       <ContactSection />
     </PageLayout>
   );

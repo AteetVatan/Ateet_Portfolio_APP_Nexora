@@ -1,56 +1,71 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { marked } from 'marked';
 import MermaidDiagram from './MermaidDiagram';
 
 /**
- * BlogContent — renders blog post markdown with Monolith prose styling
+ * BlogContent — renders blog post markdown with Monolith prose styling.
+ * Mermaid code blocks are rendered inline at their correct position.
  */
 interface BlogContentProps {
   content: string;
 }
 
+/** A sentinel placed where each mermaid block was extracted */
+const MERMAID_SENTINEL = '<!--MERMAID_PLACEHOLDER_';
+
+type Segment =
+  | { type: 'html'; html: string }
+  | { type: 'mermaid'; code: string };
+
 const BlogContent: React.FC<BlogContentProps> = ({ content }) => {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [processedContent, setProcessedContent] = useState<string>('');
-  const [mermaidDiagrams, setMermaidDiagrams] = useState<{ id: string; code: string }[]>([]);
+  const segments: Segment[] = useMemo(() => {
+    if (!content) return [];
 
-  useEffect(() => {
-    // Extract mermaid code blocks and replace with placeholders
-    const diagrams: { id: string; code: string }[] = [];
-    let processed = content;
+    // 1. Extract mermaid code blocks → replace with sentinel comments
+    const diagrams: string[] = [];
+    const mermaidRegex = /```mermaid\r?\n([\s\S]*?)```/g;
 
-    const mermaidRegex = /```mermaid\n([\s\S]*?)```/g;
-    let match;
-    let index = 0;
+    const stripped = content.replace(mermaidRegex, (_match, code: string) => {
+      const idx = diagrams.length;
+      diagrams.push(code.trim());
+      return `${MERMAID_SENTINEL}${idx}-->`;
+    });
 
-    while ((match = mermaidRegex.exec(content)) !== null) {
-      const id = `mermaid-${index}`;
-      const code = match[1].trim();
-      diagrams.push({ id, code });
-      processed = processed.replace(match[0], `<div id="${id}" class="mermaid-placeholder"></div>`);
-      index++;
+    // 2. Parse remaining markdown → HTML
+    const html = marked.parse(stripped);
+    if (typeof html !== 'string') return [];
+
+    // 3. Split the HTML on the sentinels to produce interleaved segments
+    const parts = html.split(/<!--MERMAID_PLACEHOLDER_(\d+)-->/);
+    const result: Segment[] = [];
+
+    for (let i = 0; i < parts.length; i++) {
+      if (i % 2 === 0) {
+        // HTML segment (may be empty between consecutive diagrams)
+        if (parts[i].trim()) {
+          result.push({ type: 'html', html: parts[i] });
+        }
+      } else {
+        // Mermaid diagram index
+        const idx = parseInt(parts[i], 10);
+        if (diagrams[idx]) {
+          result.push({ type: 'mermaid', code: diagrams[idx] });
+        }
+      }
     }
 
-    setMermaidDiagrams(diagrams);
-
-    // Parse remaining markdown
-    const html = marked.parse(processed);
-    if (typeof html === 'string') {
-      setProcessedContent(html);
-    }
+    return result;
   }, [content]);
 
   return (
-    <div
-      ref={contentRef}
-      className="prose prose-monolith max-w-none"
-    >
-      <div dangerouslySetInnerHTML={{ __html: processedContent }} />
-
-      {/* Render mermaid diagrams */}
-      {mermaidDiagrams.map((diagram) => (
-        <MermaidDiagram key={diagram.id} chart={diagram.code} />
-      ))}
+    <div className="prose prose-monolith max-w-none">
+      {segments.map((seg, i) =>
+        seg.type === 'html' ? (
+          <div key={i} dangerouslySetInnerHTML={{ __html: seg.html }} />
+        ) : (
+          <MermaidDiagram key={i} chart={seg.code} />
+        )
+      )}
     </div>
   );
 };
