@@ -914,13 +914,13 @@ const Services: React.FC = () => {
                                 Ready to ship deterministic AI that works at 3 AM? Let's talk.
                             </p>
                             <div className="flex flex-wrap gap-3">
-                                <a
-                                    href={`mailto:${CONTACT_EMAIL}`}
+                                <Link
+                                    to="/contact#send-message"
                                     className="btn-primary"
                                     style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                                 >
-                                    <Envelope className="w-4 h-4" /> Email me
-                                </a>
+                                    <Envelope className="w-4 h-4" /> Send Message
+                                </Link>
                                 <button
                                     onClick={handleCopyEmail}
                                     className="copy-btn"

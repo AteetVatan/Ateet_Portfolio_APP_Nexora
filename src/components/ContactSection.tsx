@@ -73,7 +73,7 @@ const ContactSection: React.FC = () => {
           <p style={{ opacity: 0.7, maxWidth: '400px', marginBottom: '32px' }}>
             Open to AI roles, freelance projects, and collaborations in LLM system design.
           </p>
-          <Link to="/contact" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
+          <Link to="/contact#send-message" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
             Send Message
           </Link>
         </div>
