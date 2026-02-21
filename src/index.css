@@ -97,6 +97,11 @@
 
   * {
     @apply border-border;
+    /* iOS: remove tap flash on all elements */
+    -webkit-tap-highlight-color: transparent;
+    /* Android/iOS: no text size auto-inflate in landscape */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -106,6 +111,9 @@
     overflow-x: hidden;
     line-height: 1.6;
     transition: background 0.4s, color 0.4s;
+    /* iOS Safari: smooth font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -162,12 +170,16 @@
     font-family: 'Instrument Sans', sans-serif;
     transition: all 0.3s;
     text-decoration: none;
+    /* iOS/Android: remove 300ms tap delay */
+    touch-action: manipulation;
   }
 
-  .btn-primary:hover {
-    background: var(--mono-primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(255, 77, 0, 0.25);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--mono-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 77, 0, 0.25);
+    }
   }
 
   .btn-outline {
@@ -177,11 +189,14 @@
     font-family: 'Instrument Sans', sans-serif;
     transition: all 0.3s;
     text-decoration: none;
+    touch-action: manipulation;
   }
 
-  .btn-outline:hover {
-    background: var(--mono-secondary);
-    color: var(--mono-bg);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-outline:hover {
+      background: var(--mono-secondary);
+      color: var(--mono-bg);
+    }
   }
 
   /* ── Surface Cards ── */
@@ -191,10 +206,12 @@
     transition: all 0.4s;
   }
 
-  .monolith-card:hover {
-    border-color: var(--mono-primary);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  @media (hover: hover) and (pointer: fine) {
+    .monolith-card:hover {
+      border-color: var(--mono-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
   }
 
   .surface-card {
@@ -258,6 +275,8 @@
     padding-bottom: 24px;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    /* iOS: momentum scrolling on horizontal carousels */
+    -webkit-overflow-scrolling: touch;
   }
 
   .expertise-scroll::-webkit-scrollbar {
@@ -270,12 +289,15 @@
     border: 1px solid var(--mono-border);
     padding: 48px 40px;
     transition: all 0.4s;
+    touch-action: pan-y;
   }
 
-  .expertise-item:hover {
-    border-color: var(--mono-primary);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  @media (hover: hover) and (pointer: fine) {
+    .expertise-item:hover {
+      border-color: var(--mono-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
   }
 
   .expertise-num {
@@ -299,9 +321,11 @@
     transition: all 0.4s;
   }
 
-  .project-editorial:hover {
-    border-color: var(--mono-primary);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+  @media (hover: hover) and (pointer: fine) {
+    .project-editorial:hover {
+      border-color: var(--mono-primary);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+    }
   }
 
   .project-editorial.reverse {
@@ -460,12 +484,18 @@
     @apply fixed top-0 left-0 w-full z-50 backdrop-blur-md;
     background: var(--mono-nav-bg);
     border-bottom: 1px solid var(--mono-border);
+    /* iOS: account for notch/Dynamic Island safe area */
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   .mobile-nav-menu {
     @apply transform transition-transform duration-300 ease-in-out absolute top-full left-0 w-full backdrop-blur-md py-2;
     background: var(--mono-nav-bg);
     border-bottom: 1px solid var(--mono-border);
+    /* Prevent page scroll-through on iOS rubber-band */
+    overscroll-behavior: contain;
   }
 
   .mobile-nav-menu-open {
@@ -478,6 +508,11 @@
 
   .mobile-nav-item {
     @apply block py-3 px-6;
+    touch-action: manipulation;
+    /* iOS: large enough tap target */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .mobile-nav-item-active {
@@ -506,6 +541,13 @@
   .social-icon {
     @apply p-2;
     color: var(--mono-muted);
+    touch-action: manipulation;
+    /* iOS: 44px minimum tap target */
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* ── Case Study Components ── */
@@ -605,10 +647,12 @@
     transition: all 0.3s ease;
   }
 
-  .cyber-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-    border-color: var(--mono-primary);
+  @media (hover: hover) and (pointer: fine) {
+    .cyber-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+      border-color: var(--mono-primary);
+    }
   }
 
   /* ── Neon Button compat → Monolith primary ── */
@@ -617,22 +661,25 @@
     font-family: 'Instrument Sans', sans-serif;
     border-color: var(--mono-primary);
     color: var(--mono-primary);
+    touch-action: manipulation;
   }
 
-  .neon-button:hover {
-    background: var(--mono-primary);
-    color: #fff;
-    box-shadow: 0 8px 24px rgba(255, 77, 0, 0.25);
-  }
+  @media (hover: hover) and (pointer: fine) {
+    .neon-button:hover {
+      background: var(--mono-primary);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(255, 77, 0, 0.25);
+    }
 
-  .neon-button::before {
-    content: '';
-    @apply absolute top-0 left-0 w-0 h-full transition-all duration-300 z-[-1];
-    background-color: var(--mono-primary);
-  }
+    .neon-button::before {
+      content: '';
+      @apply absolute top-0 left-0 w-0 h-full transition-all duration-300 z-[-1];
+      background-color: var(--mono-primary);
+    }
 
-  .neon-button:hover::before {
-    @apply w-full;
+    .neon-button:hover::before {
+      @apply w-full;
+    }
   }
 
   .neon-button:disabled {
@@ -1921,12 +1968,22 @@ body.dark .voice-agent-section {
   border-color: rgba(255, 77, 0, 0.2);
 }
 
-.voice-agent-section:hover {
-  border-color: rgba(255, 77, 0, 0.4);
-  box-shadow:
-    0 0 60px rgba(255, 77, 0, 0.08),
-    0 20px 60px rgba(0, 0, 0, 0.06);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .voice-agent-section:hover {
+    border-color: rgba(255, 77, 0, 0.4);
+    box-shadow:
+      0 0 60px rgba(255, 77, 0, 0.08),
+      0 20px 60px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+}
+
+/* Only lift on real pointer/hover devices */
+@media (hover: none) {
+  .voice-agent-section:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 body.dark .voice-agent-section:hover {
@@ -2035,6 +2092,9 @@ body.dark .voice-agent-section:hover {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  /* iOS/Android: no tap delay, large enough touch target */
+  touch-action: manipulation;
+  min-height: 44px;
 }
 
 .voice-agent-cta::before {
@@ -2046,15 +2106,17 @@ body.dark .voice-agent-section:hover {
   transition: transform 0.6s;
 }
 
-.voice-agent-cta:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 8px 32px rgba(255, 77, 0, 0.35),
-    0 0 0 1px rgba(255, 77, 0, 0.2);
-}
+@media (hover: hover) and (pointer: fine) {
+  .voice-agent-cta:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 8px 32px rgba(255, 77, 0, 0.35),
+      0 0 0 1px rgba(255, 77, 0, 0.2);
+  }
 
-.voice-agent-cta:hover::before {
-  transform: translateX(100%);
+  .voice-agent-cta:hover::before {
+    transform: translateX(100%);
+  }
 }
 
 /* Developer badge */
@@ -3079,16 +3141,42 @@ body.dark .btc-cta__inner:hover {
     margin-bottom: 40px;
   }
 
+  /* ── Gallery: stack vertically so images are large & visible ── */
   .btc-race__gallery {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .btc-race__gallery-main {
+    aspect-ratio: 16/10;
+  }
+
+  .btc-race__gallery-stack {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .btc-race__gallery-stack img {
     aspect-ratio: 1/1;
+    height: 120px;
+    border-radius: 10px;
   }
 
   .btc-race__number {
     font-size: 40px;
+  }
+
+  .btc-race__title {
+    font-size: 22px;
+  }
+
+  .btc-race__stats {
+    gap: 6px;
+  }
+
+  .btc-race__stat-pill {
+    padding: 5px 10px;
+    font-size: 11px;
   }
 
   .btc-stats-grid {
@@ -3104,21 +3192,204 @@ body.dark .btc-cta__inner:hover {
     font-size: 28px;
   }
 
+  /* ── Lifestyle grid: single column for bigger photos ── */
   .btc-lifestyle-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
+  .btc-lifestyle-card__img-wrap {
+    aspect-ratio: 16/10;
+  }
+
+  .btc-lifestyle-card__caption {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  /* ── Family grid: single column for better visibility ── */
   .btc-family-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
+  .btc-family-card {
+    min-height: 220px;
+  }
+
+  /* Show captions by default on mobile (no hover) */
+  .btc-family-card__overlay {
+    opacity: 1;
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.15) 35%,
+        transparent 60%);
+  }
+
+  .btc-family-card__overlay p {
+    transform: translateY(0);
+    font-size: 13px;
+  }
+
+  /* ── CTA: stack buttons vertically ── */
   .btc-cta {
     padding: 48px 16px;
   }
 
   .btc-cta__inner {
     padding: 32px 20px;
+  }
+
+  .btc-cta__inner .flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btc-cta__inner .btn-primary,
+  .btc-cta__inner .btn-outline {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ── Footer nav: wrap links on small screens ── */
+@media (max-width: 480px) {
+  footer nav {
+    gap: 12px 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   iOS / ANDROID — Dynamic Viewport Height Fix
+   Use dvh (dynamic viewport height) so content
+   isn't hidden behind iOS Safari bottom bar.
+   ═══════════════════════════════════════════ */
+.btc-hero {
+  /* Fallback for browsers that don't support dvh */
+  min-height: 85vh;
+  /* iOS Safari 15.4+ / Chrome 108+: shrinks when browser chrome hides */
+  min-height: 85dvh;
+}
+
+/* ── Hero section min-h-screen dvh fix ── */
+#hero {
+  /* Fallback */
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ═══════════════════════════════════════════
+   TOUCH DEVICES — Family Card Overlay
+   On touch devices :hover never fires, so
+   always show the caption overlay.
+   ═══════════════════════════════════════════ */
+@media (hover: none) {
+  .btc-family-card__overlay {
+    opacity: 1;
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.18) 40%,
+        transparent 70%);
+  }
+
+  .btc-family-card__overlay p {
+    transform: translateY(0);
+  }
+
+  .btc-race:hover {
+    transform: none;
+  }
+
+  .btc-lifestyle-card:hover {
+    transform: none;
+  }
+
+  .btc-stat-card:hover {
+    transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ACCESSIBILITY — Reduced Motion
+   Respects system preference (iOS: Settings →
+   Accessibility → Reduce Motion).
+   Disables battery-draining animations.
+   ═══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+
+  /* Disable Ken Burns photo animation */
+  .btc-family-card img {
+    animation: none !important;
+  }
+
+  /* Disable floating particles */
+  .btc-particle {
+    animation: none !important;
+    opacity: 0.4;
+  }
+
+  /* Keep scroll reveal but skip the transform (opacity only) */
+  .btc-reveal {
+    transform: none !important;
+    transition: opacity 0.5s ease !important;
+  }
+
+  /* Disable animated CTA border spin */
+  .btc-cta__gradient-border {
+    animation: none !important;
+  }
+
+  /* Disable stat card glow spin */
+  .btc-stat-card__glow {
+    animation: none !important;
+  }
+
+  /* Disable arrow bounce */
+  .btc-hero__arrow {
+    animation: none !important;
+  }
+
+  /* Disable label pulse */
+  .btc-hero__label {
+    animation: none !important;
+  }
+
+  /* Disable hero portrait ring spin */
+  .hero-portrait-ring {
+    animation: none !important;
+  }
+
+  /* Disable soundwave bars */
+  .voice-agent-bars span {
+    animation: none !important;
+    transform: scaleY(0.6);
+  }
+
+  /* Disable voice agent glow float */
+  .voice-agent-section::before {
+    animation: none !important;
+  }
+
+  /* Disable mic pulse ring */
+  .voice-agent-mic::before,
+  .voice-agent-mic::after {
+    animation: none !important;
+  }
+
+  /* Disable badge blink */
+  .voice-agent-badge-dot {
+    animation: none !important;
+  }
+
+  /* Slow down all transitions for a calmer experience */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
   }
 }

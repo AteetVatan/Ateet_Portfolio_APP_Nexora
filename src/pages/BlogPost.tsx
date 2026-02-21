@@ -37,6 +37,16 @@ const BlogPost: React.FC = () => {
       <SEOHead
         title={post ? `${post.title} | Blog` : 'Blog Post'}
         description={post?.summary || 'Read this blog post by Ateet Vatan on AI engineering and development.'}
+        ogType={post ? 'article' : 'website'}
+        jsonLd={post ? {
+          '@type': 'Article',
+          headline: post.title,
+          description: post.summary || '',
+          datePublished: post.created_at,
+          author: { '@type': 'Person', name: 'Ateet Vatan', url: 'https://ateet.masxai.com' },
+          publisher: { '@type': 'Person', name: 'Ateet Vatan' },
+          mainEntityOfPage: `https://ateet.masxai.com/blog/${slug}`,
+        } : undefined}
       />
       <section className="py-20 px-6 md:px-16 lg:px-24 max-w-[900px] mx-auto">
         <div className="mb-8">
@@ -67,7 +77,7 @@ const BlogPost: React.FC = () => {
                 {post.title}
               </h1>
               <div className="flex items-center gap-3 text-sm font-mono mb-4" style={{ color: 'var(--mono-muted)' }}>
-                <time>{new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                <time dateTime={post.created_at}>{new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
                 {post.content && <span>· {Math.ceil(post.content.length / 1500)} min read</span>}
               </div>
               {post.tags && post.tags.length > 0 && (

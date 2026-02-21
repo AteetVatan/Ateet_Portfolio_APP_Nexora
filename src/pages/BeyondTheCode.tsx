@@ -149,10 +149,12 @@ const StatCard: React.FC<{ value: string; label: string; delay: number }> = ({ v
         return () => clearInterval(timer);
     }, [hasStarted, numericPart]);
 
-    // 3D tilt on mouse move
+    // 3D tilt on mouse move — skip on touch-only devices
     useEffect(() => {
         const el = ref.current;
         if (!el) return;
+        // Don't add tilt on touch-only devices (saves memory & event listeners)
+        if (window.matchMedia('(hover: none)').matches) return;
         const intensity = 10;
         const onMove = (e: MouseEvent) => {
             const rect = el.getBoundingClientRect();
@@ -163,8 +165,9 @@ const StatCard: React.FC<{ value: string; label: string; delay: number }> = ({ v
         const onLeave = () => {
             el.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
         };
-        el.addEventListener('mousemove', onMove);
-        el.addEventListener('mouseleave', onLeave);
+        // passive: true → allows browser to optimize scroll on iOS
+        el.addEventListener('mousemove', onMove, { passive: true });
+        el.addEventListener('mouseleave', onLeave, { passive: true });
         return () => {
             el.removeEventListener('mousemove', onMove);
             el.removeEventListener('mouseleave', onLeave);

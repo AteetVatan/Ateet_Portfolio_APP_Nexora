@@ -24,6 +24,17 @@ const Index: React.FC = () => {
       <SEOHead
         title="Ateet Vatan | AI Engineer, LLM Integration & Agentic AI Systems"
         description="Portfolio of Ateet Vatan, AI engineer specializing in LLM integration, multi-agent architectures, AI workflow automation, and production AI systems."
+        jsonLd={{
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ateet.masxai.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://ateet.masxai.com/projects' },
+            { '@type': 'ListItem', position: 3, name: 'Blog', item: 'https://ateet.masxai.com/blog' },
+            { '@type': 'ListItem', position: 4, name: 'Services', item: 'https://ateet.masxai.com/services' },
+            { '@type': 'ListItem', position: 5, name: 'About', item: 'https://ateet.masxai.com/about' },
+            { '@type': 'ListItem', position: 6, name: 'Contact', item: 'https://ateet.masxai.com/contact' },
+          ],
+        }}
       />
       <Hero />
       <VoiceAgentCTA />

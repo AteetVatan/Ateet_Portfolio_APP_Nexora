@@ -73,6 +73,20 @@ const Services: React.FC = () => {
             <SEOHead
                 title="AI Services"
                 description="AI system development services by Ateet Vatan. Agentic AI, RAG pipelines, LLM fine-tuning, multi-agent architecture, and evaluation setup."
+                jsonLd={{
+                    '@type': 'ProfessionalService',
+                    name: 'Ateet Vatan — AI Engineering Services',
+                    description: 'AI system development services: Agentic AI, RAG pipelines, LLM fine-tuning, multi-agent architecture, and evaluation setup.',
+                    url: 'https://ateet.masxai.com/services',
+                    provider: {
+                        '@type': 'Person',
+                        name: 'Ateet Vatan',
+                        url: 'https://ateet.masxai.com',
+                        jobTitle: 'AI Architect / Engineer',
+                    },
+                    areaServed: 'Worldwide',
+                    serviceType: ['AI Consulting', 'LLM Integration', 'Multi-Agent Systems', 'RAG Pipeline Development'],
+                }}
             />
             <div ref={sectionRef}>
                 {/* ═══ HERO ═══ */}
