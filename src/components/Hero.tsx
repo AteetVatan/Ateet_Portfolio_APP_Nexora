@@ -99,6 +99,27 @@ const Hero: React.FC = () => {
           </span>
         </h1>
 
+        {/* ═══ AI CLONE CTA ═══ */}
+        <div
+          style={{
+            animation: isVisible ? 'fade-in 0.8s 0.35s forwards' : 'none',
+            opacity: 0,
+            marginBottom: '8px',
+          }}
+        >
+          <a
+            href="https://ateetclone.masxai.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="voice-agent-cta"
+          >
+            🎙️ Talk or Chat with my AI Clone
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '2px' }}>
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
+
         {/* ═══ PERSONAL INTRO ═══ */}
         <p
           className="max-w-[520px] my-5 leading-relaxed"
@@ -161,14 +182,6 @@ const Hero: React.FC = () => {
           <Link to="/projects" className="btn-outline">
             See my work
           </Link>
-          <a
-            href="https://ateetclone.masxai.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline"
-          >
-            Talk to my AI Clone
-          </a>
         </div>
       </div>
 

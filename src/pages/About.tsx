@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import PageLayout from '../components/layout/PageLayout';
 import PageCTA from '../components/PageCTA';
+import VoiceAgentCTA from '../components/VoiceAgentCTA';
 
 const About: React.FC = () => {
   const { data: aboutContent, isLoading, error } = useAboutContent();
@@ -71,6 +72,8 @@ const About: React.FC = () => {
                 dangerouslySetInnerHTML={{ __html: aboutContent.bio.replace(/\*\*(.*?)\*\*/g, '<span style="color: var(--mono-primary); font-weight: 600;">$1</span>') }} />
             </div>
 
+            {/* ═══ VOICE AGENT — Talk to my Clone ═══ */}
+            <VoiceAgentCTA />
 
 
             <div className="mb-12">

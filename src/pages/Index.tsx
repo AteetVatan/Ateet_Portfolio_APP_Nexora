@@ -10,6 +10,7 @@ import AiNewsPreview from '../components/AiNewsPreview';
 import ContactSection from '../components/ContactSection';
 import PageLayout from '../components/layout/PageLayout';
 import startPinging from '../utils/urlPinger';
+import VoiceAgentCTA from '../components/VoiceAgentCTA';
 
 const Index: React.FC = () => {
 
@@ -25,6 +26,7 @@ const Index: React.FC = () => {
         description="Portfolio of Ateet Vatan, AI engineer specializing in LLM integration, multi-agent architectures, AI workflow automation, and production AI systems."
       />
       <Hero />
+      <VoiceAgentCTA />
       <ExpertiseSection />
       <TrustedBySection />
       <ProjectShowcase />

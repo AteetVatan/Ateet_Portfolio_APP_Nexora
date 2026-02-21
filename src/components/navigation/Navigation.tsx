@@ -14,38 +14,39 @@ const Navigation: React.FC = () => {
   const [activeItem, setActiveItem] = useState<string>('/');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const isMobile = useIsMobile();
-  
+
   useEffect(() => {
     setActiveItem(location.pathname);
     window.scrollTo(0, 0);
   }, [location.pathname]);
-  
+
   const navItems = [
     { to: '/', label: 'HOME' },
     { to: '/cv', label: 'CV' },
     { to: '/projects', label: 'PROJECTS' },
     { to: '/blog', label: 'BLOG' },
     { to: '/about', label: 'ABOUT' },
+    { to: '/beyond-the-code', label: 'BEYOND THE CODE' },
     { to: '/contact', label: 'CONTACT' },
   ];
-  
+
   const handleNavClick = (path: string) => {
     setActiveItem(path);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
   };
-  
+
   return (
     <>
       {/* Desktop Navigation */}
-      <DesktopNav 
+      <DesktopNav
         activeItem={activeItem}
         handleNavClick={handleNavClick}
         navItems={navItems}
       />
-      
+
       {/* Mobile Navigation */}
-      <MobileNav 
+      <MobileNav
         activeItem={activeItem}
         handleNavClick={handleNavClick}
         mobileMenuOpen={mobileMenuOpen}

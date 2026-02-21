@@ -17,6 +17,7 @@ const navLinks = [
     { label: 'AI News', path: '/ai-news' },
     { label: 'CV', path: '/cv' },
     { label: 'About', path: '/about' },
+    { label: 'Beyond', path: '/beyond-the-code' },
     { label: 'Contact', path: '/contact' },
     { label: 'Card', path: '/business-card' },
 ];

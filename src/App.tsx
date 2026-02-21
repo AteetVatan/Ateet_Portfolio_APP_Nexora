@@ -23,6 +23,7 @@ import CV from "./pages/CV";
 import AiNews from "./pages/AiNews";
 import Services from "./pages/Services";
 import BusinessCard from "./pages/BusinessCard";
+import BeyondTheCode from "./pages/BeyondTheCode";
 
 // Prefetch all blogs at app startup for static-like generation
 prefetchAllBlogs().catch(err => console.error("Error prefetching blogs:", err));
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/ai-news" element={<AiNews />} />
             <Route path="/services" element={<Services />} />
             <Route path="/business-card" element={<BusinessCard />} />
+            <Route path="/beyond-the-code" element={<BeyondTheCode />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
