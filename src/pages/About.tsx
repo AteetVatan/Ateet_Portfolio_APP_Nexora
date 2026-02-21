@@ -40,6 +40,21 @@ const About: React.FC = () => {
         ) : (
           <div>
             <div className="mb-12">
+              <h2 className="font-heading text-xl mb-4" style={{ color: 'var(--mono-text)' }}>
+                My Vision<span className="highlight">.</span>
+              </h2>
+              <video
+                className="w-full rounded-lg"
+                style={{ border: '1px solid var(--mono-border)' }}
+                controls
+                preload="metadata"
+              >
+                <source src="/videos/vision.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <div className="mb-12">
               <h1 className="font-heading text-3xl md:text-4xl font-bold mb-2" style={{ color: 'var(--mono-text)' }}>
                 {aboutContent.name}<span className="highlight">.</span>
               </h1>
@@ -55,6 +70,8 @@ const About: React.FC = () => {
               <div style={{ color: 'var(--mono-muted)' }} className="whitespace-pre-line"
                 dangerouslySetInnerHTML={{ __html: aboutContent.bio.replace(/\*\*(.*?)\*\*/g, '<span style="color: var(--mono-primary); font-weight: 600;">$1</span>') }} />
             </div>
+
+
 
             <div className="mb-12">
               <h2 className="font-heading text-xl mb-4" style={{ color: 'var(--mono-text)' }}>Expertise</h2>
