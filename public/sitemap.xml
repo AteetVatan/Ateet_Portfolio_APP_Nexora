@@ -2,52 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ateet.masxai.com/</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/services</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/projects</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/blog</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/ai-news</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/masx-ai</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/masx-ai/case-study</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/about</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/cv</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://ateet.masxai.com/contact</loc>
-    <lastmod>2026-02-19</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ateet.masxai.com/beyond-the-code</loc>
+    <lastmod>2026-02-21</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ateet.masxai.com/business-card</loc>
+    <lastmod>2026-02-21</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>
