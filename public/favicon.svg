@@ -1,5 +1,126 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="80" fill="#FF4D00"/>
-  <text x="220" y="400" font-family="'Space Grotesk','Arial Black',sans-serif" font-weight="700" font-size="420" fill="#FFFFFF" text-anchor="middle">A</text>
-  <circle cx="420" cy="400" r="36" fill="#FFFFFF"/>
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D0D0D"/>
+      <stop offset="100%" stop-color="#1A1A2E"/>
+    </linearGradient>
+
+    <!-- Primary glow gradient -->
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B2B"/>
+      <stop offset="50%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#E63E00"/>
+    </linearGradient>
+
+    <!-- Accent gradient for neural paths -->
+    <linearGradient id="neural" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF4D00" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF8C42" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <!-- Outer glow filter -->
+    <filter id="outerGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0.3 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle inner glow for the A -->
+    <filter id="innerGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0.3 0 0 0 0  0 0 0 0 0  0 0 0 0.7 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clip for rounded square -->
+    <clipPath id="clip">
+      <rect width="512" height="512" rx="96"/>
+    </clipPath>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern (circuit board feel) -->
+  <g clip-path="url(#clip)" opacity="0.06">
+    <line x1="128" y1="0" x2="128" y2="512" stroke="#FF4D00" stroke-width="1"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="#FF4D00" stroke-width="1"/>
+    <line x1="384" y1="0" x2="384" y2="512" stroke="#FF4D00" stroke-width="1"/>
+    <line x1="0" y1="128" x2="512" y2="128" stroke="#FF4D00" stroke-width="1"/>
+    <line x1="0" y1="256" x2="512" y2="256" stroke="#FF4D00" stroke-width="1"/>
+    <line x1="0" y1="384" x2="512" y2="384" stroke="#FF4D00" stroke-width="1"/>
+  </g>
+
+  <!-- Neural network connection lines (decorative) -->
+  <g clip-path="url(#clip)" filter="url(#outerGlow)">
+    <!-- Top-left to center connections -->
+    <line x1="80" y1="100" x2="200" y2="200" stroke="url(#neural)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="120" y1="60" x2="256" y2="150" stroke="url(#neural)" stroke-width="1" stroke-linecap="round"/>
+    <!-- Top-right to center connections -->
+    <line x1="432" y1="100" x2="312" y2="200" stroke="url(#neural)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="392" y1="60" x2="256" y2="150" stroke="url(#neural)" stroke-width="1" stroke-linecap="round"/>
+    <!-- Bottom connections -->
+    <line x1="100" y1="440" x2="180" y2="360" stroke="url(#neural)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="412" y1="440" x2="332" y2="360" stroke="url(#neural)" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Neural network nodes (small circles) -->
+  <g clip-path="url(#clip)" opacity="0.5">
+    <circle cx="80" cy="100" r="5" fill="#FF4D00"/>
+    <circle cx="120" cy="60" r="3.5" fill="#FF6B2B"/>
+    <circle cx="432" cy="100" r="5" fill="#FF4D00"/>
+    <circle cx="392" cy="60" r="3.5" fill="#FF6B2B"/>
+    <circle cx="100" cy="440" r="5" fill="#FF4D00"/>
+    <circle cx="412" cy="440" r="5" fill="#FF4D00"/>
+    <circle cx="256" cy="48" r="4" fill="#FF8C42"/>
+    <circle cx="460" cy="256" r="4" fill="#FF8C42"/>
+    <circle cx="52" cy="256" r="4" fill="#FF8C42"/>
+  </g>
+
+  <!-- The letter A — geometric, futuristic style -->
+  <g filter="url(#innerGlow)">
+    <!-- Main A shape built from geometric paths -->
+    <path d="
+      M 256 88
+      L 148 400
+      L 186 400
+      L 214 324
+      L 298 324
+      L 326 400
+      L 364 400
+      L 256 88
+      Z
+      M 226 290
+      L 256 206
+      L 286 290
+      L 226 290
+      Z
+    " fill="url(#glow)" fill-rule="evenodd"/>
+  </g>
+
+  <!-- Stylized dot / AI eye — pulsing node at the apex of A -->
+  <circle cx="256" cy="88" r="0" fill="transparent"/>
+  
+  <!-- Corner accent — bottom-right signature element -->
+  <g>
+    <!-- Small diamond -->
+    <path d="M 410 410 L 420 398 L 430 410 L 420 422 Z" fill="#FF4D00" opacity="0.7"/>
+    <!-- Connecting micro-line -->
+    <line x1="430" y1="410" x2="452" y2="410" stroke="#FF4D00" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+    <circle cx="456" cy="410" r="3" fill="#FF4D00" opacity="0.5"/>
+  </g>
+
+  <!-- Top accent — orbiting dot -->
+  <circle cx="256" cy="72" r="6" fill="none" stroke="#FF4D00" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="256" cy="72" r="2.5" fill="#FF6B2B" opacity="0.9"/>
+
+  <!-- Subtle border glow -->
+  <rect width="512" height="512" rx="96" fill="none" stroke="#FF4D00" stroke-width="1.5" opacity="0.15"/>
 </svg>
