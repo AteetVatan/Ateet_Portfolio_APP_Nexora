@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import PageLayout from '../components/layout/PageLayout';
@@ -80,81 +80,6 @@ const familyImages = [
     { src: '/hobbies/family4.jpg', caption: 'Everything I do is for them.' },
 ];
 
-// ── Animated Counter Hook ──
-function useAnimatedCounter(target: number, duration = 2000, startOnView = true) {
-    const [count, setCount] = useState(0);
-    const [hasStarted, setHasStarted] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!startOnView) return;
-        const el = ref.current;
-        if (!el) return;
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !hasStarted) {
-                    setHasStarted(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.5 }
-        );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, [startOnView, hasStarted]);
-
-    useEffect(() => {
-        if (!hasStarted) return;
-        let start = 0;
-        const step = target / (duration / 16);
-        const timer = setInterval(() => {
-            start += step;
-            if (start >= target) {
-                setCount(target);
-                clearInterval(timer);
-            } else {
-                setCount(Math.floor(start));
-            }
-        }, 16);
-        return () => clearInterval(timer);
-    }, [hasStarted, target, duration]);
-
-    return { count, ref };
-}
-
-// ── 3D Tilt Hook ──
-function useTilt3D(intensity = 8) {
-    const ref = useRef<HTMLDivElement>(null);
-
-    const handleMouseMove = useCallback((e: MouseEvent) => {
-        const el = ref.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        el.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale3d(1.02, 1.02, 1.02)`;
-    }, [intensity]);
-
-    const handleMouseLeave = useCallback(() => {
-        const el = ref.current;
-        if (!el) return;
-        el.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
-    }, []);
-
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        el.addEventListener('mousemove', handleMouseMove);
-        el.addEventListener('mouseleave', handleMouseLeave);
-        return () => {
-            el.removeEventListener('mousemove', handleMouseMove);
-            el.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, [handleMouseMove, handleMouseLeave]);
-
-    return ref;
-}
-
 // ── Scroll Reveal Hook ──
 function useScrollReveal() {
     const ref = useRef<HTMLDivElement>(null);
@@ -179,26 +104,76 @@ function useScrollReveal() {
     return ref;
 }
 
-// ── Animated Stat Card ──
+// ── Animated Stat Card (self-contained: counter + tilt + single ref) ──
 const StatCard: React.FC<{ value: string; label: string; delay: number }> = ({ value, label, delay }) => {
     const numericMatch = value.match(/^(\d+)/);
     const numericPart = numericMatch ? parseInt(numericMatch[1]) : 0;
     const suffix = value.replace(/^\d+/, '');
-    const { count, ref: counterRef } = useAnimatedCounter(numericPart, 2200);
-    const tiltRef = useTilt3D(10);
 
-    // Merge refs
-    const mergedRef = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
+    const [count, setCount] = useState(0);
+    const [hasStarted, setHasStarted] = useState(false);
+
+    // Intersection Observer — trigger counter on scroll into view
     useEffect(() => {
-        if (mergedRef.current) {
-            (counterRef as React.MutableRefObject<HTMLDivElement | null>).current = mergedRef.current;
-            (tiltRef as React.MutableRefObject<HTMLDivElement | null>).current = mergedRef.current;
-        }
-    });
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHasStarted(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.4 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    // Animate the count from 0 to target
+    useEffect(() => {
+        if (!hasStarted || numericPart === 0) return;
+        let current = 0;
+        const duration = 2200;
+        const step = numericPart / (duration / 16);
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= numericPart) {
+                setCount(numericPart);
+                clearInterval(timer);
+            } else {
+                setCount(Math.floor(current));
+            }
+        }, 16);
+        return () => clearInterval(timer);
+    }, [hasStarted, numericPart]);
+
+    // 3D tilt on mouse move
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const intensity = 10;
+        const onMove = (e: MouseEvent) => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            el.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale3d(1.02, 1.02, 1.02)`;
+        };
+        const onLeave = () => {
+            el.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+        };
+        el.addEventListener('mousemove', onMove);
+        el.addEventListener('mouseleave', onLeave);
+        return () => {
+            el.removeEventListener('mousemove', onMove);
+            el.removeEventListener('mouseleave', onLeave);
+        };
+    }, []);
 
     return (
         <div
-            ref={mergedRef}
+            ref={ref}
             className="btc-stat-card btc-reveal"
             style={{ transitionDelay: `${delay}ms` }}
         >
