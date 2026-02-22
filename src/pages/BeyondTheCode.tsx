@@ -73,10 +73,10 @@ const lifestyleImages = [
 ];
 
 const familyImages = [
+    { src: '/hobbies/family3.jpg', caption: 'Home is where the heart is.' },
     { src: '/hobbies/family.jpg', caption: 'The reason behind every finish line.' },
     { src: '/hobbies/famlily1.jpg', caption: 'My unwavering support crew.' },
     { src: '/hobbies/family2.jpg', caption: 'They make the miles worth it.' },
-    { src: '/hobbies/family3.jpg', caption: 'Home is where the heart is.' },
     { src: '/hobbies/family4.jpg', caption: 'Everything I do is for them.' },
 ];
 
