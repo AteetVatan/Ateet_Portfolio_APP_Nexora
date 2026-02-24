@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
           <GithubLogo className="w-4 h-4" weight="light" />
         </a>
         <a
-          href="https://www.linkedin.com/in/ateet-vatan-62a4b4172"
+          href="https://www.linkedin.com/in/ateet-vatan-bahmani/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
